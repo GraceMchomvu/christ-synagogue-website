@@ -1,7 +1,15 @@
 // Admin Panel JavaScript
 
-// Data storage (in a real app, this would be a database)
+// Enhanced Admin System with Password Management
 let adminData = {
+  // Admin settings
+  adminSettings: {
+    username: 'admin',
+    password: 'admin123', // Will be hashed in production
+    email: 'admin@christsynagogue.com',
+    lastLogin: null,
+    passwordChanged: false
+  },
   sermons: [
     {
       id: 1,
@@ -142,6 +150,24 @@ function initializeAdmin() {
   const isAuthenticated = localStorage.getItem('admin_authenticated');
   if (!isAuthenticated) {
     showLoginModal();
+  } else {
+    // Update user display
+    updateUserDisplay();
+  }
+}
+
+// Update user display in header
+function updateUserDisplay() {
+  const currentUser = localStorage.getItem('admin_user') || 'admin';
+  const userDisplay = document.getElementById('current-user-display');
+  if (userDisplay) {
+    userDisplay.textContent = `Welcome, ${currentUser}`;
+  }
+  
+  // Update current user in settings
+  const currentUserInput = document.getElementById('current-user');
+  if (currentUserInput) {
+    currentUserInput.value = currentUser;
   }
 }
 
@@ -873,7 +899,254 @@ function loadData() {
 
 function logout() {
   localStorage.removeItem('admin_authenticated');
+  localStorage.removeItem('admin_user');
   window.location.reload();
+}
+
+// Password Management Functions
+function showChangePasswordModal() {
+  document.getElementById('modal-title').textContent = 'Change Password';
+  document.getElementById('modal-body').innerHTML = `
+    <form id="change-password-form">
+      <div class="form-group">
+        <label>Current Password</label>
+        <input type="password" id="current-password" required placeholder="Enter current password">
+      </div>
+      <div class="form-group">
+        <label>New Password</label>
+        <input type="password" id="new-password" required placeholder="Enter new password" minlength="6">
+        <small class="form-help">Password must be at least 6 characters long</small>
+      </div>
+      <div class="form-group">
+        <label>Confirm New Password</label>
+        <input type="password" id="confirm-password" required placeholder="Confirm new password">
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+        <button type="submit" class="btn btn-primary">Change Password</button>
+      </div>
+    </form>
+  `;
+  
+  document.getElementById('modal-overlay').classList.add('active');
+  
+  document.getElementById('change-password-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    changePassword();
+  });
+}
+
+function changePassword() {
+  const currentPassword = document.getElementById('current-password').value;
+  const newPassword = document.getElementById('new-password').value;
+  const confirmPassword = document.getElementById('confirm-password').value;
+  
+  // Validation
+  if (newPassword.length < 6) {
+    showMessage('Password must be at least 6 characters long!', 'error');
+    return;
+  }
+  
+  if (newPassword !== confirmPassword) {
+    showMessage('New passwords do not match!', 'error');
+    return;
+  }
+  
+  // Load current admin settings
+  const savedAdminSettings = localStorage.getItem('admin_settings');
+  const adminSettings = savedAdminSettings ? JSON.parse(savedAdminSettings) : adminData.adminSettings;
+  
+  // Verify current password
+  if (currentPassword !== adminSettings.password) {
+    showMessage('Current password is incorrect!', 'error');
+    return;
+  }
+  
+  // Update password
+  adminSettings.password = newPassword;
+  adminSettings.passwordChanged = true;
+  adminSettings.lastPasswordChange = new Date().toISOString();
+  
+  // Save updated settings
+  localStorage.setItem('admin_settings', JSON.stringify(adminSettings));
+  
+  closeModal();
+  showMessage('Password changed successfully!', 'success');
+}
+
+// User Profile Management
+function showUserProfileModal() {
+  const savedAdminSettings = localStorage.getItem('admin_settings');
+  const adminSettings = savedAdminSettings ? JSON.parse(savedAdminSettings) : adminData.adminSettings;
+  
+  document.getElementById('modal-title').textContent = 'User Profile';
+  document.getElementById('modal-body').innerHTML = `
+    <form id="user-profile-form">
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" id="profile-username" value="${adminSettings.username}" required>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="profile-email" value="${adminSettings.email}" required>
+      </div>
+      <div class="form-group">
+        <label>Last Login</label>
+        <input type="text" value="${adminSettings.lastLogin ? new Date(adminSettings.lastLogin).toLocaleString() : 'Never'}" readonly>
+      </div>
+      <div class="form-group">
+        <label>Password Changed</label>
+        <input type="text" value="${adminSettings.passwordChanged ? 'Yes' : 'No'}" readonly>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+        <button type="submit" class="btn btn-primary">Update Profile</button>
+        <button type="button" class="btn btn-warning" onclick="showChangePasswordModal()">Change Password</button>
+      </div>
+    </form>
+  `;
+  
+  document.getElementById('modal-overlay').classList.add('active');
+  
+  document.getElementById('user-profile-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    updateUserProfile();
+  });
+}
+
+function updateUserProfile() {
+  const username = document.getElementById('profile-username').value;
+  const email = document.getElementById('profile-email').value;
+  
+  // Load current admin settings
+  const savedAdminSettings = localStorage.getItem('admin_settings');
+  const adminSettings = savedAdminSettings ? JSON.parse(savedAdminSettings) : adminData.adminSettings;
+  
+  // Update profile
+  adminSettings.username = username;
+  adminSettings.email = email;
+  adminSettings.lastUpdated = new Date().toISOString();
+  
+  // Save updated settings
+  localStorage.setItem('admin_settings', JSON.stringify(adminSettings));
+  
+  closeModal();
+  showMessage('Profile updated successfully!', 'success');
+}
+
+// Backup and Restore Functions
+function showBackupModal() {
+  document.getElementById('modal-title').textContent = 'Backup & Restore';
+  document.getElementById('modal-body').innerHTML = `
+    <div class="backup-section">
+      <h4>Backup Data</h4>
+      <p>Download a backup of all your website data</p>
+      <button class="btn btn-primary" onclick="downloadBackup()">Download Backup</button>
+    </div>
+    
+    <div class="backup-section">
+      <h4>Restore Data</h4>
+      <p>Upload a backup file to restore your data</p>
+      <input type="file" id="backup-file" accept=".json" style="margin-bottom: 1rem;">
+      <button class="btn btn-warning" onclick="restoreBackup()">Restore Backup</button>
+    </div>
+    
+    <div class="backup-section">
+      <h4>Reset to Default</h4>
+      <p>Reset all data to default values (this cannot be undone!)</p>
+      <button class="btn btn-danger" onclick="resetToDefault()">Reset All Data</button>
+    </div>
+    
+    <div class="form-actions">
+      <button type="button" class="btn btn-secondary" onclick="closeModal()">Close</button>
+    </div>
+  `;
+  
+  document.getElementById('modal-overlay').classList.add('active');
+}
+
+function downloadBackup() {
+  const backupData = {
+    adminSettings: JSON.parse(localStorage.getItem('admin_settings') || '{}'),
+    adminData: JSON.parse(localStorage.getItem('admin_data') || '{}'),
+    contactForms: JSON.parse(localStorage.getItem('contactForms') || '[]'),
+    prayerForms: JSON.parse(localStorage.getItem('prayerForms') || '[]'),
+    testimonies: JSON.parse(localStorage.getItem('testimonies') || '[]'),
+    visitors: JSON.parse(localStorage.getItem('visitors') || '[]'),
+    timestamp: new Date().toISOString()
+  };
+  
+  const dataStr = JSON.stringify(backupData, null, 2);
+  const dataBlob = new Blob([dataStr], {type: 'application/json'});
+  
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(dataBlob);
+  link.download = `csm-backup-${new Date().toISOString().split('T')[0]}.json`;
+  link.click();
+  
+  showMessage('Backup downloaded successfully!', 'success');
+}
+
+function restoreBackup() {
+  const fileInput = document.getElementById('backup-file');
+  const file = fileInput.files[0];
+  
+  if (!file) {
+    showMessage('Please select a backup file!', 'error');
+    return;
+  }
+  
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const backupData = JSON.parse(e.target.result);
+      
+      // Restore data
+      if (backupData.adminSettings) localStorage.setItem('admin_settings', JSON.stringify(backupData.adminSettings));
+      if (backupData.adminData) localStorage.setItem('admin_data', JSON.stringify(backupData.adminData));
+      if (backupData.contactForms) localStorage.setItem('contactForms', JSON.stringify(backupData.contactForms));
+      if (backupData.prayerForms) localStorage.setItem('prayerForms', JSON.stringify(backupData.prayerForms));
+      if (backupData.testimonies) localStorage.setItem('testimonies', JSON.stringify(backupData.testimonies));
+      if (backupData.visitors) localStorage.setItem('visitors', JSON.stringify(backupData.visitors));
+      
+      showMessage('Backup restored successfully! Page will reload.', 'success');
+      setTimeout(() => window.location.reload(), 2000);
+    } catch (error) {
+      showMessage('Invalid backup file!', 'error');
+    }
+  };
+  reader.readAsText(file);
+}
+
+function resetToDefault() {
+  if (confirm('Are you sure you want to reset all data? This action cannot be undone!')) {
+    if (confirm('This will delete ALL your data. Are you absolutely sure?')) {
+      localStorage.clear();
+      showMessage('Data reset successfully! Page will reload.', 'success');
+      setTimeout(() => window.location.reload(), 2000);
+    }
+  }
+}
+
+// Reset Admin Password Function
+function resetAdminPassword() {
+  if (confirm('This will reset the admin password to default (admin123). Continue?')) {
+    // Reset admin settings to default
+    const defaultAdminSettings = {
+      username: 'admin',
+      password: 'admin123',
+      email: 'admin@christsynagogue.com',
+      lastLogin: null,
+      passwordChanged: false
+    };
+    
+    localStorage.setItem('admin_settings', JSON.stringify(defaultAdminSettings));
+    localStorage.removeItem('admin_authenticated');
+    localStorage.removeItem('admin_user');
+    
+    showMessage('Admin password reset to default (admin123). Please login again.', 'success');
+    setTimeout(() => window.location.reload(), 2000);
+  }
 }
 
 function showLoginModal() {
@@ -882,19 +1155,23 @@ function showLoginModal() {
     <form id="login-form">
       <div class="form-group">
         <label>Username</label>
-        <input type="text" id="login-username" required>
+        <input type="text" id="login-username" required placeholder="Enter username">
       </div>
       <div class="form-group">
         <label>Password</label>
-        <input type="password" id="login-password" required>
+        <input type="password" id="login-password" required placeholder="Enter password">
       </div>
       <div class="form-actions">
         <button type="submit" class="btn btn-primary">Login</button>
       </div>
     </form>
-    <p style="margin-top: 1rem; color: #6b7280; font-size: 0.9rem;">
-      Default credentials: admin / admin123
-    </p>
+    <div class="login-help">
+      <p><strong>Default credentials:</strong> admin / admin123</p>
+      <p><small>Change your password after first login for security</small></p>
+      <button type="button" class="btn btn-warning btn-small" onclick="resetAdminPassword()" style="margin-top: 0.5rem;">
+        Reset Password to Default
+      </button>
+    </div>
   `;
   
   document.getElementById('modal-overlay').classList.add('active');
@@ -904,14 +1181,24 @@ function showLoginModal() {
     const username = document.getElementById('login-username').value;
     const password = document.getElementById('login-password').value;
     
-    if (username === 'admin' && password === 'admin123') {
+    // Load admin settings
+    const savedAdminSettings = localStorage.getItem('admin_settings');
+    const adminSettings = savedAdminSettings ? JSON.parse(savedAdminSettings) : adminData.adminSettings;
+    
+    if (username === adminSettings.username && password === adminSettings.password) {
+      // Update last login
+      adminSettings.lastLogin = new Date().toISOString();
+      localStorage.setItem('admin_settings', JSON.stringify(adminSettings));
+      
       localStorage.setItem('admin_authenticated', 'true');
+      localStorage.setItem('admin_user', username);
       closeModal();
       loadData();
       loadDashboardStats();
       loadAllContent();
+      showMessage('Welcome back, ' + username + '!', 'success');
     } else {
-      showMessage('Invalid credentials!', 'error');
+      showMessage('Invalid credentials! Please try again.', 'error');
     }
   });
 }
