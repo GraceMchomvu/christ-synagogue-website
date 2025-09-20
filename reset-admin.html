@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Password Reset</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
+        .container { max-width: 400px; margin: 50px auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        button { background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin: 10px 0; }
+        button:hover { background: #0056b3; }
+        .success { color: green; font-weight: bold; }
+        .info { background: #e7f3ff; padding: 15px; border-radius: 5px; margin: 15px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Admin Password Reset Tool</h2>
+        <div class="info">
+            <strong>Current Issue:</strong> You're getting "Invalid password" error<br>
+            <strong>Solution:</strong> Reset admin credentials to default
+        </div>
+        
+        <button onclick="resetPassword()">Reset Admin Password to Default</button>
+        <button onclick="clearAllData()">Clear All Admin Data</button>
+        <button onclick="goToAdmin()">Go to Admin Panel</button>
+        
+        <div id="result"></div>
+        
+        <div class="info">
+            <strong>After Reset:</strong><br>
+            Username: <code>admin</code><br>
+            Password: <code>admin123</code>
+        </div>
+    </div>
+
+    <script>
+        function resetPassword() {
+            const defaultSettings = {
+                username: 'admin',
+                password: 'admin123',
+                email: 'admin@christsynagogue.com',
+                lastLogin: null,
+                passwordChanged: false
+            };
+            
+            localStorage.setItem('admin_settings', JSON.stringify(defaultSettings));
+            localStorage.removeItem('admin_authenticated');
+            localStorage.removeItem('admin_user');
+            
+            document.getElementById('result').innerHTML = '<div class="success">✅ Password reset successfully!<br>Username: admin<br>Password: admin123</div>';
+        }
+        
+        function clearAllData() {
+            if (confirm('This will clear ALL admin data. Continue?')) {
+                localStorage.clear();
+                document.getElementById('result').innerHTML = '<div class="success">✅ All data cleared! Admin panel will use default settings.</div>';
+            }
+        }
+        
+        function goToAdmin() {
+            window.location.href = 'admin/index.html';
+        }
+    </script>
+</body>
+</html>
