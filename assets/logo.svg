@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Cross and Bible logo">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#4f46e5"/>
+      <stop offset="1" stop-color="#22d3ee"/>
+    </linearGradient>
+  </defs>
+  <rect x="6" y="10" width="52" height="44" rx="8" fill="none" stroke="url(#g)" stroke-width="3"/>
+  <path d="M32 16v32M22 26h20" stroke="url(#g)" stroke-width="4" stroke-linecap="round"/>
+  <path d="M16 20c8 4 24 4 32 0" stroke="#93c5fd" stroke-opacity=".6" stroke-width="2" fill="none"/>
+</svg>
+
+
+

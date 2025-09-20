@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Disallow admin panel from search engines
+Disallow: /admin/
+
+# Sitemap location
+Sitemap: https://christsynagogueministries.com/sitemap.xml
+
+# Crawl delay (optional)
+Crawl-delay: 1

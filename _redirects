@@ -1,0 +1,10 @@
+# Netlify redirects file
+# This file handles redirects and rewrites for the site
+
+# Admin panel redirect (optional - you can remove this if you want admin accessible)
+/admin/* /admin/index.html 200
+
+# SPA fallback - redirect all unmatched routes to index.html
+/* /index.html 200
+
+

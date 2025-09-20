@@ -1,0 +1,174 @@
+/* Footer Social Media Icons - Enhanced Visibility */
+
+.site-footer .social {
+  display: flex !important;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 2rem 0 1.5rem 0;
+  padding: 0;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.site-footer .social-link {
+  display: inline-flex !important;
+  width: 48px;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid rgba(99, 102, 241, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.site-footer .social-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, var(--brand-500) 0%, var(--accent) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.site-footer .social-link:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+  border-color: rgba(99, 102, 241, 0.4);
+}
+
+.site-footer .social-link:hover::before {
+  opacity: 1;
+}
+
+.site-footer .social-link svg {
+  width: 24px !important;
+  height: 24px !important;
+  color: var(--brand-500) !important;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+  fill: currentColor !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.site-footer .social-link:hover svg {
+  color: white;
+  transform: scale(1.1);
+}
+
+/* Specific icon colors */
+.site-footer .social-link[aria-label="Facebook"] svg {
+  color: #1877F2;
+}
+
+.site-footer .social-link[aria-label="YouTube"] svg {
+  color: #FF0000;
+}
+
+.site-footer .social-link[aria-label="TikTok"] svg {
+  color: #000000;
+}
+
+[data-theme="dark"] .site-footer .social-link[aria-label="TikTok"] svg {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .site-footer .social-link {
+  background: rgba(31, 41, 55, 0.9);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.site-footer .social-link:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+}
+
+.site-footer .social-link:hover svg {
+  color: white !important;
+}
+
+/* Ensure footer layout is proper */
+.site-footer .footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+}
+
+.site-footer .footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-footer .footer-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.site-footer .footer-links a:hover {
+  color: var(--brand-500);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .site-footer .social {
+    gap: 0.8rem;
+    margin: 1rem 0;
+  }
+  
+  .site-footer .social-link {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .site-footer .social-link svg {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .site-footer .footer-links {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-footer .social {
+    gap: 0.6rem;
+  }
+  
+  .site-footer .social-link {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .site-footer .social-link svg {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .site-footer .footer-links {
+    gap: 0.8rem;
+    font-size: 0.9rem;
+  }
+}

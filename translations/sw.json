@@ -1,0 +1,145 @@
+{
+  "nav": {
+    "about": "Kuhusu",
+    "ministries": "Huduma", 
+    "sermons": "Mahubiri",
+    "testimonies": "Ushuhuda",
+    "events": "Matukio",
+    "give": "Toa",
+    "contact": "Mawasiliano"
+  },
+  "hero": {
+    "welcome": "Karibu",
+    "title": "Christ Synagogue",
+    "ministries": "Huduma",
+    "description": "Huduma ya unabii inayoongozwa na Nabii Baraka David Ogillo huko Arusha, Tanzania—inayosisitiza uongozi wa unabii, ukombozi, na ibada iliyojaa Roho.",
+    "planVisit": "Panga Ziara Yako",
+    "watchSermon": "Tazama Mahubiri",
+    "liveNow": "Moja kwa Moja",
+    "serviceTimes": "Muda wa Huduma"
+  },
+  "services": {
+    "sunday": "Jumapili",
+    "tuesday": "Jumanne", 
+    "thursday": "Alhamisi",
+    "saturday": "Jumamosi",
+    "worship": "Ibada na Ujumbe wa Unabii",
+    "prayer": "Sala na Uchunguzi wa Biblia",
+    "deliverance": "Ukombozi na Uamsho",
+    "special": "Huduma ya Kipekee"
+  },
+  "about": {
+    "title": "Kuhusu Sisi",
+    "description": "Christ Synagogue Ministries ni huduma ya unabii iliyoko Arusha, Tanzania, inayoongozwa na Nabii Baraka David Ogillo. Tunajitolea kubadilisha maisha kupitia uongozi wa unabii, ukombozi, na ibada iliyojaa Roho."
+  },
+  "ministries": {
+    "title": "Huduma",
+    "prophetic": "Huduma ya Unabii",
+    "propheticDesc": "Kutoa ufahamu wa unabii na uongozi wa kimungu kupitia nguvu ya Roho Mtakatifu.",
+    "prayer": "Sala na Ukombozi", 
+    "prayerDesc": "Kuvunja minyororo ya kiroho na kukuza uhuru wa kiroho kupitia huduma za sala na ukombozi.",
+    "online": "Ufikiaji wa Mtandaoni",
+    "onlineDesc": "Kutangaza maudhui kwenye YouTube, Facebook, na TikTok ili kufikia hadhira ya kimataifa."
+  },
+  "sermons": {
+    "title": "Mahubiri",
+    "browseAll": "Tazama Yote",
+    "latest": "Huduma ya Unabii ya Hivi Karibuni",
+    "deliverance": "Huduma ya Ukombozi na Sala", 
+    "worship": "Ibada Iliyojaa Roho"
+  },
+  "gallery": {
+    "title": "Picha za Kanisa",
+    "subtitle": "Kukumbuka nyakati za ibada, ushirika, na huduma",
+    "prophet": "Nabii Baraka David Ogillo",
+    "prophetDesc": "Mwanzilishi na kiongozi wa Christ Synagogue Ministries",
+    "propheticMinistry": "Huduma ya Unabii",
+    "propheticMinistryDesc": "Uongozi wa kimungu na uvumbuzi wa kiroho",
+    "sundayWorship": "Ibada ya Jumapili",
+    "sundayWorshipDesc": "Ibada iliyojaa Roho na sifa",
+    "prayerMinistry": "Huduma ya Sala", 
+    "prayerMinistryDesc": "Kuvunja minyororo ya kiroho",
+    "fellowship": "Ushirika",
+    "fellowshipDesc": "Jumuiya na ukuaji wa kiroho",
+    "ministryEvent": "Tukio la Huduma",
+    "ministryEventDesc": "Kusambaza ujumbe wa injili"
+  },
+  "testimonies": {
+    "title": "Ushuhuda wa Huduma",
+    "subtitle": "Sikia jinsi Mungu anavyobadilisha maisha kupitia huduma yetu",
+    "deliverance": "Ushuhuda wa Ukombozi",
+    "deliveranceDesc": "Sarah anashiriki jinsi sala na ukombozi vilivyovunja minyororo ya kiroho katika maisha yake.",
+    "prophetic": "Uongozi wa Unabii", 
+    "propheticDesc": "John anashuhudia juu ya kupokea uongozi wa kimungu uliobadilisha njia ya kazi yake.",
+    "healing": "Ushuhuda wa Uponyaji",
+    "healingDesc": "Mary alipata uponyaji wa miujiza wakati wa huduma ya sala.",
+    "memberSince": "Mwanachama tangu"
+  },
+  "prayer": {
+    "title": "Panga Kipindi cha Sala",
+    "subtitle": "Panga kipindi cha sala binafsi na Nabii Baraka David Ogillo",
+    "fullName": "Jina Kamili",
+    "phone": "Nambari ya Simu", 
+    "date": "Tarehe ya Kupendelea",
+    "time": "Muda wa Kupendelea",
+    "selectTime": "Chagua Muda",
+    "request": "Ombi la Sala",
+    "placeholder": "Shiriki mahitaji yako ya sala...",
+    "book": "Panga Kipindi cha Sala",
+    "details": "Maelezo ya Kipindi cha Sala",
+    "session30": "Kipindi cha sala binafsi cha dakika 30",
+    "guidance": "Uongozi wa unabii na mwelekezo",
+    "deliverancePrayer": "Sala ya ukombozi ikiwa inahitajika",
+    "available": "Inapatikana Jumatatu-Ijumaa",
+    "whatsapp": "Wasiliana kupitia WhatsApp"
+  },
+  "events": {
+    "title": "Matukio Yanayokuja",
+    "viewCalendar": "Tazama Kalenda",
+    "conference": "Mkutano wa Unabii",
+    "upcoming": "Tukio la Hivi Karibuni",
+    "conferenceDesc": "Jiunge nasi kwa mkutano wa unabii wenye nguvu unaojumuisha uongozi wa kimungu na uvumbuzi wa kiroho.",
+    "register": "Jisajili",
+    "crusade": "Msafara wa Ukombozi",
+    "monthly": "Tukio la Kila Mwezi", 
+    "crusadeDesc": "Jifunze uhuru kutoka kwa utumwa wa kiroho kupitia huduma za sala, ukombozi, na kupaka mafuta.",
+    "attend": "Hudhuria"
+  },
+  "give": {
+    "title": "Tegemeza Huduma",
+    "description": "Msaada wako wa ukarimu unaturuhusu kuendelea kusambaza ujumbe wa unabii, huduma za ukombozi, na kufikia roho duniani kote kupitia mifumo yetu ya mtandaoni.",
+    "giveOnline": "Toa Mtandaoni",
+    "waysToGive": "Njia za Kutoa"
+  },
+  "visit": {
+    "title": "Tutembelee",
+    "subtitle": "Tutafute huko Majengo, Arusha, Tanzania",
+    "getDirections": "Pata Maelekezo",
+    "shareLocation": "Shiriki Mahali",
+    "location": "Mahali",
+    "openMaps": "Fungua katika Ramani",
+    "contactUs": "Wasiliana Nasi",
+    "sendMessage": "Tuma Ujumbe",
+    "prophet": "Nabii Baraka David Ogillo",
+    "prophetDesc": "Mwanzilishi na kiongozi wa Christ Synagogue Ministries, mwandishi wa vitabu na magazeti.",
+    "learnMore": "Jifunze Zaidi"
+  },
+  "contact": {
+    "title": "Wasiliana Nasi",
+    "description": "Tungependa kusikia kutoka kwako. Tuma ujumbe na timu yetu ya huduma itafuatilia.",
+    "name": "Jina",
+    "email": "Barua Pepe",
+    "message": "Ujumbe",
+    "sendMessage": "Tuma Ujumbe"
+  },
+  "footer": {
+    "copyright": "Christ Synagogue Ministries. Haki zote zimehifadhiwa."
+  },
+  "pwa": {
+    "install": "Sakinisha Programu ya Christ Synagogue Ministries",
+    "description": "Pata ufikiaji wa haraka wa mahubiri, matukio, na maombi ya sala",
+    "installBtn": "Sakinisha",
+    "offline": "Hauko mtandaoni. Baadhi ya vipengele vinaweza kutokuwa vinapatikana."
+  }
+}
+

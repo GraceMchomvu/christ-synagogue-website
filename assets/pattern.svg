@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" width="1200" height="600" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="a" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#4f46e5" stop-opacity="0.6"/>
+      <stop offset="1" stop-color="#22d3ee" stop-opacity="0.6"/>
+    </linearGradient>
+    <pattern id="cross" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M30 12v36M12 30h36" stroke="url(#a)" stroke-width="3" stroke-linecap="round"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="600" fill="url(#cross)"/>
+  <rect width="1200" height="600" fill="url(#a)" opacity="0.08"/>
+</svg>
+
+
+

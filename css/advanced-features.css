@@ -1,0 +1,480 @@
+/* Advanced Features CSS */
+
+/* Header Controls */
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.theme-toggle, .lang-toggle {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: rgba(0,0,0,0.04);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.theme-toggle:hover, .lang-toggle:hover {
+  background: rgba(0,0,0,0.08);
+  transform: translateY(-1px);
+}
+
+.theme-toggle svg {
+  width: 20px;
+  height: 20px;
+}
+
+.lang-text {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* Language Switcher */
+.lang-toggle {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.lang-toggle:hover {
+  background: var(--bg-alt);
+  border-color: var(--brand-500);
+}
+
+.lang-text {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Live Indicator */
+.live-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  border-radius: 20px;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 600;
+  animation: pulse 2s infinite;
+}
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  animation: blink 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0.3; }
+}
+
+/* Hero Video Background */
+.hero-bg video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,0,0,0.4), rgba(0,0,0,0.2));
+}
+
+/* Testimonies Section */
+.testimonies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.testimony-card {
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease;
+}
+
+.testimony-card:hover {
+  transform: translateY(-4px);
+}
+
+.testimony-video {
+  position: relative;
+  height: 200px;
+  background: linear-gradient(135deg, var(--brand-500), var(--brand-600));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-placeholder {
+  width: 32px;
+  height: 32px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.video-placeholder:hover {
+  background: rgba(255,255,255,0.3);
+  transform: scale(1.1);
+}
+
+.video-placeholder svg {
+  width: 12px;
+  height: 12px;
+  color: white;
+}
+
+.testimony-content {
+  padding: 1.5rem;
+}
+
+.testimony-content h3 {
+  margin: 0 0 0.8rem;
+  font-size: 1.2rem;
+  color: var(--text);
+}
+
+.testimony-author {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(0,0,0,0.08);
+}
+
+.testimony-author strong {
+  display: block;
+  color: var(--text);
+}
+
+.testimony-author span {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* Prayer Scheduler */
+.scheduler-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin-top: 2rem;
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--shadow);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.scheduler-info {
+  background: linear-gradient(135deg, rgba(99,102,241,0.08), rgba(8,145,178,0.06));
+  padding: 1.5rem;
+  border-radius: var(--radius);
+}
+
+.scheduler-info h3 {
+  margin: 0 0 1rem;
+  color: var(--text);
+}
+
+.scheduler-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+}
+
+.scheduler-info li {
+  padding: 0.5rem 0;
+  color: var(--muted);
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.scheduler-info li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--success);
+  font-weight: bold;
+}
+
+.whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.2rem;
+  background: #25d366;
+  color: white;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.whatsapp-btn:hover {
+  background: #128c7e;
+  transform: translateY(-2px);
+}
+
+.whatsapp-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Interactive Map */
+.visit-content {
+  display: grid;
+  gap: 2rem;
+}
+
+.map-container {
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.interactive-map {
+  position: relative;
+}
+
+.map-controls {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(0,0,0,0.02);
+}
+
+.map-btn {
+  padding: 0.6rem 1rem;
+  background: var(--brand-500);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.map-btn:hover {
+  background: var(--brand-600);
+  transform: translateY(-1px);
+}
+
+/* Voice Search */
+.voice-search {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--brand-500), var(--brand-600));
+  border: none;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(99,102,241,0.3);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.voice-search:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 32px rgba(99,102,241,0.4);
+}
+
+.voice-search svg {
+  width: 24px;
+  height: 24px;
+}
+
+.voice-search.listening {
+  animation: pulse 1s infinite;
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+/* Dark Theme - Use consistent variables from styles.css */
+[data-theme="dark"] {
+  /* Variables are defined in styles.css, just add specific overrides here */
+}
+
+[data-theme="dark"] .site-header {
+  background: linear-gradient(180deg, rgba(17,24,39,0.85), rgba(17,24,39,0.6));
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+[data-theme="dark"] .theme-toggle,
+[data-theme="dark"] .lang-toggle {
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  color: var(--text);
+}
+
+[data-theme="dark"] .theme-toggle:hover,
+[data-theme="dark"] .lang-toggle:hover {
+  background: rgba(255,255,255,0.12);
+}
+
+[data-theme="dark"] .cards .card,
+[data-theme="dark"] .testimony-card,
+[data-theme="dark"] .scheduler-card,
+[data-theme="dark"] .map-container {
+  background: var(--panel);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+[data-theme="dark"] .site-footer {
+  background: var(--panel);
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Language Toggle - DISABLED FOR NOW TO SHOW TEXT */
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .header-controls {
+    gap: 0.5rem;
+  }
+  
+  .theme-toggle, .lang-toggle {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .live-indicator {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.75rem;
+  }
+  
+  .testimonies-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .scheduler-card {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .visit-content {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 760px) {
+  .header-controls {
+    display: none;
+  }
+  
+  .voice-search {
+    bottom: 1rem;
+    right: 1rem;
+    width: 50px;
+    height: 50px;
+  }
+  
+  .voice-search svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* PWA Styles */
+.pwa-install-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--brand-600);
+  color: white;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  z-index: 1000;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.pwa-install-banner.show {
+  transform: translateY(0);
+}
+
+.pwa-install-banner button {
+  background: white;
+  color: var(--brand-600);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Offline Indicator */
+.offline-indicator {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #ef4444;
+  color: white;
+  text-align: center;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  z-index: 1001;
+  transform: translateY(-100%);
+  transition: transform 0.3s ease;
+}
+
+.offline-indicator.show {
+  transform: translateY(0);
+}

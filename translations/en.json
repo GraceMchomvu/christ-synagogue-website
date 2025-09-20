@@ -1,0 +1,145 @@
+{
+  "nav": {
+    "about": "About",
+    "ministries": "Ministries", 
+    "sermons": "Sermons",
+    "testimonies": "Testimonies",
+    "events": "Events",
+    "give": "Give",
+    "contact": "Contact"
+  },
+  "hero": {
+    "welcome": "Welcome to",
+    "title": "Christ Synagogue",
+    "ministries": "Ministries",
+    "description": "A prophetic ministry led by Prophet Baraka David Ogillo in Arusha, Tanzania—emphasizing prophetic guidance, deliverance, and Spirit-filled worship.",
+    "planVisit": "Plan Your Visit",
+    "watchSermon": "Watch a Sermon",
+    "liveNow": "Live Now",
+    "serviceTimes": "Service Times"
+  },
+  "services": {
+    "sunday": "Sunday",
+    "tuesday": "Tuesday", 
+    "thursday": "Thursday",
+    "saturday": "Saturday",
+    "worship": "Worship & Prophetic Message",
+    "prayer": "Prayer & Bible Study",
+    "deliverance": "Deliverance & Revival",
+    "special": "Special Service"
+  },
+  "about": {
+    "title": "About Us",
+    "description": "Christ Synagogue Ministries is a prophetic ministry in Arusha, Tanzania, led by Prophet Baraka David Ogillo. We're dedicated to transforming lives through prophetic guidance, deliverance, and Spirit-filled worship."
+  },
+  "ministries": {
+    "title": "Ministries",
+    "prophetic": "Prophetic Ministry",
+    "propheticDesc": "Delivering prophetic insight and divine direction through the power of the Holy Spirit.",
+    "prayer": "Prayer & Deliverance", 
+    "prayerDesc": "Breaking spiritual chains and promoting spiritual freedom through prayer and deliverance services.",
+    "online": "Online Outreach",
+    "onlineDesc": "Streaming content on YouTube, Facebook, and TikTok to reach a global audience."
+  },
+  "sermons": {
+    "title": "Sermons",
+    "browseAll": "Browse All",
+    "latest": "Latest Prophetic Service",
+    "deliverance": "Deliverance & Prayer Service", 
+    "worship": "Spirit-Filled Worship"
+  },
+  "gallery": {
+    "title": "Church Gallery",
+    "subtitle": "Capturing moments of worship, fellowship, and ministry",
+    "prophet": "Prophet Baraka David Ogillo",
+    "prophetDesc": "Founder and leader of Christ Synagogue Ministries",
+    "propheticMinistry": "Prophetic Ministry",
+    "propheticMinistryDesc": "Divine direction and spiritual breakthrough",
+    "sundayWorship": "Sunday Worship",
+    "sundayWorshipDesc": "Spirit-filled worship and praise",
+    "prayerMinistry": "Prayer Ministry", 
+    "prayerMinistryDesc": "Breaking spiritual chains",
+    "fellowship": "Fellowship",
+    "fellowshipDesc": "Community and spiritual growth",
+    "ministryEvent": "Ministry Event",
+    "ministryEventDesc": "Spreading the gospel message"
+  },
+  "testimonies": {
+    "title": "Ministry Testimonies",
+    "subtitle": "Hear how God is transforming lives through our ministry",
+    "deliverance": "Deliverance Testimony",
+    "deliveranceDesc": "Sarah shares how prayer and deliverance broke spiritual chains in her life.",
+    "prophetic": "Prophetic Direction", 
+    "propheticDesc": "John testifies about receiving divine direction that changed his career path.",
+    "healing": "Healing Testimony",
+    "healingDesc": "Mary experienced miraculous healing during a prayer service.",
+    "memberSince": "Member since"
+  },
+  "prayer": {
+    "title": "Book Prayer Session",
+    "subtitle": "Schedule a personal prayer session with Prophet Baraka David Ogillo",
+    "fullName": "Full Name",
+    "phone": "Phone Number", 
+    "date": "Preferred Date",
+    "time": "Preferred Time",
+    "selectTime": "Select Time",
+    "request": "Prayer Request",
+    "placeholder": "Share your prayer needs...",
+    "book": "Book Prayer Session",
+    "details": "Prayer Session Details",
+    "session30": "30-minute personal prayer session",
+    "guidance": "Prophetic guidance and direction",
+    "deliverancePrayer": "Deliverance prayer if needed",
+    "available": "Available Monday-Friday",
+    "whatsapp": "Contact via WhatsApp"
+  },
+  "events": {
+    "title": "Upcoming Events",
+    "viewCalendar": "View Calendar",
+    "conference": "Prophetic Conference",
+    "upcoming": "Upcoming Event",
+    "conferenceDesc": "Join us for a powerful prophetic conference featuring divine direction and spiritual breakthrough.",
+    "register": "Register",
+    "crusade": "Deliverance Crusade",
+    "monthly": "Monthly Event", 
+    "crusadeDesc": "Experience freedom from spiritual bondage through prayer, deliverance, and anointing services.",
+    "attend": "Attend"
+  },
+  "give": {
+    "title": "Support the Ministry",
+    "description": "Your generous support enables us to continue spreading prophetic messages, deliverance services, and reaching souls globally through our online platforms.",
+    "giveOnline": "Give Online",
+    "waysToGive": "Ways to Give"
+  },
+  "visit": {
+    "title": "Visit Us",
+    "subtitle": "Find us in Majengo, Arusha, Tanzania",
+    "getDirections": "Get Directions",
+    "shareLocation": "Share Location",
+    "location": "Location",
+    "openMaps": "Open in Maps",
+    "contactUs": "Contact Us",
+    "sendMessage": "Send Message",
+    "prophet": "Prophet Baraka David Ogillo",
+    "prophetDesc": "Founder and leader of Christ Synagogue Ministries, author of books and magazines.",
+    "learnMore": "Learn More"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "description": "We would love to hear from you. Send a message and our ministry team will follow up.",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "sendMessage": "Send Message"
+  },
+  "footer": {
+    "copyright": "Christ Synagogue Ministries. All rights reserved."
+  },
+  "pwa": {
+    "install": "Install Christ Synagogue Ministries App",
+    "description": "Get quick access to sermons, events, and prayer requests",
+    "installBtn": "Install",
+    "offline": "You're offline. Some features may not be available."
+  }
+}
+

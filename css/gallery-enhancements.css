@@ -1,0 +1,448 @@
+/* Beautiful Church Gallery - Continuous Video-like Sequence */
+
+/* Gallery Container */
+.photo-grid {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  min-height: 300px; /* Minimum height to ensure proper display */
+  max-height: 500px; /* Maximum height to prevent oversizing */
+  overflow: hidden;
+  border-radius: 20px;
+  margin-top: 2rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+}
+
+/* Photo Container - Horizontal Layout */
+.photo-sequence {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%; /* Double width for seamless looping */
+  height: 100%;
+  display: flex;
+  animation: slideSequence 50s linear infinite;
+  animation-fill-mode: both; /* Ensure smooth looping */
+  gap: 2rem; /* Increased gap for better breaks */
+  padding: 0 1rem; /* Add padding to prevent edge cutting */
+  will-change: transform; /* Optimize for smooth animation */
+}
+
+/* Individual Photo Items */
+.photo-item {
+  position: relative;
+  width: 4.545%; /* 100% / 22 photos (11 original + 11 duplicates) */
+  height: 100%;
+  min-width: 180px; /* Adjusted minimum width for more photos */
+  max-width: 250px; /* Adjusted maximum width for more photos */
+  flex-shrink: 0;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+  margin: 0 0.3rem; /* Adjusted margin for more photos */
+}
+
+/* Hover effect for better visibility */
+.photo-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+  z-index: 10;
+}
+
+.photo-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Changed from cover to contain for full display */
+  object-position: center;
+  display: block;
+  background: #f8f9fa; /* Background color for letterboxing */
+}
+
+/* Photo Overlay */
+.photo-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.3) 30%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+  color: white;
+  padding: 2rem 1.5rem 1.5rem;
+  backdrop-filter: blur(10px);
+}
+
+.photo-overlay h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  letter-spacing: -0.02em;
+}
+
+.photo-overlay p {
+  margin: 0;
+  font-size: 1.1rem;
+  opacity: 0.95;
+  line-height: 1.5;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Continuous Sliding Animation */
+@keyframes slideSequence {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%); /* Move exactly 11 photos to create perfect loop */
+  }
+}
+
+/* Pause on Hover */
+.photo-grid:hover .photo-sequence {
+  animation-play-state: paused;
+}
+
+/* Enhanced Section Head */
+.section-head {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-head h3 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Loading Animation */
+.photo-item img {
+  opacity: 0;
+  animation: imageLoad 0.6s ease-out forwards;
+}
+
+@keyframes imageLoad {
+  from {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Staggered Loading */
+.photo-item:nth-child(1) img { animation-delay: 0.1s; }
+.photo-item:nth-child(2) img { animation-delay: 0.2s; }
+.photo-item:nth-child(3) img { animation-delay: 0.3s; }
+.photo-item:nth-child(4) img { animation-delay: 0.4s; }
+.photo-item:nth-child(5) img { animation-delay: 0.5s; }
+.photo-item:nth-child(6) img { animation-delay: 0.6s; }
+.photo-item:nth-child(7) img { animation-delay: 0.7s; }
+
+/* Special Effects */
+.photo-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.1) 0%,
+    rgba(8, 145, 178, 0.1) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  z-index: 1;
+}
+
+.photo-grid:hover .photo-item::before {
+  opacity: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .photo-grid {
+    height: 400px;
+  }
+  
+  .photo-item {
+    min-width: 160px;
+    max-width: 220px;
+  }
+  
+  .photo-overlay h3 {
+    font-size: 1.5rem;
+  }
+  
+  .photo-overlay p {
+    font-size: 1rem;
+  }
+  
+  .section-head h2 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .photo-grid {
+    height: 380px;
+    border-radius: 20px;
+    margin-top: 1.5rem;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+  }
+  
+  .photo-sequence {
+    gap: 1.8rem;
+    padding: 0 1rem;
+  }
+  
+  .photo-item {
+    border-radius: 16px;
+    margin: 0 0.3rem;
+    min-width: 160px;
+    max-width: 200px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .photo-item:hover {
+    transform: scale(1.08);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  }
+  
+  .photo-overlay {
+    padding: 1.8rem 1.2rem 1.2rem;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.2) 20%,
+      rgba(0, 0, 0, 0.7) 100%
+    );
+  }
+  
+  .photo-overlay h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+  }
+  
+  .photo-overlay p {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    opacity: 0.95;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  }
+  
+  .section-head {
+    margin-bottom: 2rem;
+  }
+  
+  .section-head h2 {
+    font-size: 2rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  .section-subtitle {
+    font-size: 1.05rem;
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .photo-grid {
+    height: 320px;
+    border-radius: 16px;
+    margin-top: 1rem;
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+  }
+  
+  .photo-sequence {
+    gap: 1.2rem;
+    padding: 0 0.8rem;
+  }
+  
+  .photo-item {
+    border-radius: 14px;
+    margin: 0 0.2rem;
+    min-width: 140px;
+    max-width: 170px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .photo-item:hover {
+    transform: scale(1.06);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  .photo-overlay {
+    padding: 1.4rem 1rem 1rem;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.15) 15%,
+      rgba(0, 0, 0, 0.65) 100%
+    );
+  }
+  
+  .photo-overlay h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+    line-height: 1.3;
+  }
+  
+  .photo-overlay p {
+    font-size: 0.85rem;
+    line-height: 1.3;
+    opacity: 0.9;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  }
+  
+  .section-head {
+    margin-bottom: 1.5rem;
+  }
+  
+  .section-head h2 {
+    font-size: 1.7rem;
+    margin-bottom: 0.6rem;
+  }
+  
+  .section-subtitle {
+    font-size: 0.95rem;
+    padding: 0 0.8rem;
+    line-height: 1.5;
+  }
+}
+
+/* Smooth Entrance Animation */
+.photo-grid {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: galleryEntrance 1s ease-out 0.5s forwards;
+}
+
+@keyframes galleryEntrance {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Performance Optimization */
+.photo-sequence {
+  will-change: transform;
+}
+
+/* Mobile Touch Enhancements */
+@media (max-width: 768px) {
+  .photo-item {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .photo-item:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+  }
+  
+  /* Better touch targets */
+  .photo-overlay {
+    touch-action: manipulation;
+  }
+  
+  /* Improved animation for mobile */
+  .photo-sequence {
+    animation: slideSequence 45s linear infinite;
+  }
+  
+  /* Pause animation on touch */
+  .photo-grid:active .photo-sequence {
+    animation-play-state: paused;
+  }
+}
+
+@media (max-width: 480px) {
+  .photo-item:active {
+    transform: scale(0.97);
+  }
+  
+  .photo-sequence {
+    animation: slideSequence 40s linear infinite;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .photo-sequence {
+    animation: none;
+  }
+  
+  .photo-grid:hover .photo-sequence {
+    animation-play-state: running;
+  }
+  
+  .photo-item:hover {
+    transform: none;
+  }
+  
+  .photo-item:active {
+    transform: none;
+  }
+}
+
+/* Additional Mobile Improvements */
+@media (max-width: 768px) {
+  /* Better spacing for mobile */
+  .photo-grid {
+    margin-left: -1rem;
+    margin-right: -1rem;
+    width: calc(100% + 2rem);
+  }
+  
+  /* Enhanced visual feedback */
+  .photo-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(99, 102, 241, 0.05) 0%,
+      rgba(8, 145, 178, 0.05) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: inherit;
+    pointer-events: none;
+  }
+  
+  .photo-item:hover::after {
+    opacity: 1;
+  }
+}

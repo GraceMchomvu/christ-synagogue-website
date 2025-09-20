@@ -1,0 +1,2253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Christ Synagogue Ministries</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Admin Panel Styles */
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .login-form {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-form h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #1f2937;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 12px;
+            background: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-login:hover {
+            background: #4338ca;
+        }
+
+        .error-message {
+            color: #dc2626;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .admin-dashboard {
+            display: none;
+        }
+
+        .admin-header {
+            background: #1f2937;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .admin-header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .admin-nav {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .nav-btn {
+            padding: 8px 16px;
+            background: #374151;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background: #4f46e5;
+        }
+
+        .admin-content {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #1f2937;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: bold;
+            color: #4f46e5;
+        }
+
+        .stat-label {
+            color: #6b7280;
+            margin-top: 5px;
+        }
+
+        .form-list {
+            margin-top: 20px;
+        }
+
+        .form-item {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #4f46e5;
+        }
+
+        .form-item h4 {
+            margin: 0 0 10px 0;
+            color: #1f2937;
+        }
+
+        .form-item p {
+            margin: 5px 0;
+            color: #6b7280;
+        }
+
+        .form-item .date {
+            font-size: 12px;
+            color: #9ca3af;
+        }
+
+        .btn-action {
+            padding: 6px 12px;
+            margin: 5px 5px 0 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn-view {
+            background: #10b981;
+            color: white;
+        }
+
+        .btn-delete {
+            background: #ef4444;
+            color: white;
+        }
+
+        .btn-respond {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .content-editor {
+            margin-top: 20px;
+        }
+
+        .editor-group {
+            margin-bottom: 20px;
+        }
+
+        .editor-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .editor-group input,
+        .editor-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .editor-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .btn-save {
+            background: #10b981;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn-save:hover {
+            background: #059669;
+        }
+
+        .logout-btn {
+            background: #ef4444;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: auto;
+        }
+
+        .logout-btn:hover {
+            background: #dc2626;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #6b7280;
+        }
+
+        .empty-state svg {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        /* Photo Management Styles */
+        .photos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .photo-item-admin {
+            background: #f9fafb;
+            border-radius: 8px;
+            padding: 15px;
+            border: 1px solid #e5e7eb;
+            position: relative;
+        }
+
+        .photo-item-admin img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .photo-item-admin h4 {
+            margin: 0 0 5px 0;
+            font-size: 16px;
+            color: #1f2937;
+        }
+
+        .photo-item-admin p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        .photo-item-admin .photo-category {
+            background: #4f46e5;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            display: inline-block;
+            margin-top: 5px;
+        }
+
+        .photo-item-admin .photo-actions {
+            margin-top: 10px;
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .photo-item-admin .photo-actions button {
+            padding: 4px 8px;
+            font-size: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .photo-filters {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f3f4f6;
+            border-radius: 6px;
+        }
+
+        .photo-filters label {
+            margin-right: 10px;
+            font-weight: 500;
+        }
+
+        .photo-filters select {
+            padding: 8px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            background: white;
+        }
+
+        .bulk-operations {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .bulk-operations button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .photo-preview {
+            max-width: 200px;
+            max-height: 150px;
+            border-radius: 6px;
+            border: 2px solid #e5e7eb;
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #f59e0b;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        /* Testimonies Styles */
+        .testimonies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .testimony-item {
+            background: #f9fafb;
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid #e5e7eb;
+            position: relative;
+        }
+
+        .testimony-item h4 {
+            margin: 0 0 10px 0;
+            font-size: 18px;
+            color: #1f2937;
+        }
+
+        .testimony-item .testimony-person {
+            font-weight: bold;
+            color: #4f46e5;
+            margin-bottom: 5px;
+        }
+
+        .testimony-item .testimony-category {
+            background: #10b981;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            display: inline-block;
+            margin-top: 5px;
+        }
+
+        .testimony-filters {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f3f4f6;
+            border-radius: 6px;
+        }
+
+        /* Analytics Styles */
+        .analytics-charts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .chart-container {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .chart-container h4 {
+            margin: 0 0 15px 0;
+            color: #1f2937;
+        }
+
+        .simple-chart {
+            height: 200px;
+            display: flex;
+            align-items: end;
+            justify-content: space-around;
+            padding: 10px;
+            background: white;
+            border-radius: 6px;
+        }
+
+        .chart-bar {
+            background: #4f46e5;
+            width: 30px;
+            border-radius: 4px 4px 0 0;
+            margin: 0 2px;
+            position: relative;
+        }
+
+        .chart-bar::after {
+            content: attr(data-value);
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        .pages-list {
+            background: white;
+            border-radius: 6px;
+            padding: 10px;
+        }
+
+        .page-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .page-item:last-child {
+            border-bottom: none;
+        }
+
+        .visitor-details {
+            margin-top: 20px;
+        }
+
+        .visitor-filters {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f3f4f6;
+            border-radius: 6px;
+        }
+
+        .visitors-list {
+            max-height: 400px;
+            overflow-y: auto;
+            background: white;
+            border-radius: 6px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .visitor-item {
+            padding: 15px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .visitor-item:last-child {
+            border-bottom: none;
+        }
+
+        .visitor-info {
+            flex: 1;
+        }
+
+        .visitor-time {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .analytics-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Success Message System */
+        .success-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            z-index: 1000;
+            max-width: 400px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .success-message.show {
+            transform: translateX(0);
+        }
+
+        .success-message.success {
+            background: #10b981;
+        }
+
+        .success-message.error {
+            background: #ef4444;
+        }
+
+        .success-message.warning {
+            background: #f59e0b;
+        }
+
+        .success-message.info {
+            background: #3b82f6;
+        }
+
+        @media (max-width: 768px) {
+            .admin-container {
+                padding: 10px;
+            }
+            
+            .admin-nav {
+                flex-wrap: wrap;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .photos-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 15px;
+            }
+            
+            .bulk-operations {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Login Form -->
+        <div id="loginForm" class="login-form">
+            <h2>Admin Login</h2>
+            <form id="loginFormElement">
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit" class="btn-login">Login</button>
+                <div id="errorMessage" class="error-message"></div>
+            </form>
+        </div>
+
+        <!-- Admin Dashboard -->
+        <div id="adminDashboard" class="admin-dashboard">
+            <div class="admin-header">
+                <h1>Christ Synagogue Ministries - Admin Panel</h1>
+                <div style="display: flex; align-items: center;">
+                    <div class="admin-nav">
+                        <button class="nav-btn active" onclick="showSection('overview')">Overview</button>
+                        <button class="nav-btn" onclick="showSection('forms')">Form Requests</button>
+                        <button class="nav-btn" onclick="showSection('content')">Content Management</button>
+                        <button class="nav-btn" onclick="showSection('events')">Events</button>
+                        <button class="nav-btn" onclick="showSection('sermons')">Sermons</button>
+                        <button class="nav-btn" onclick="showSection('photos')">Photos</button>
+                        <button class="nav-btn" onclick="showSection('testimonies')">Testimonies</button>
+                        <button class="nav-btn" onclick="showSection('analytics')">Analytics</button>
+                        <button class="nav-btn" onclick="showSection('appearance')">Site Appearance</button>
+                    </div>
+                    <button class="logout-btn" onclick="logout()">Logout</button>
+                </div>
+            </div>
+
+            <div class="admin-content">
+                <!-- Overview Section -->
+                <div id="overview" class="content-section active">
+                    <h2 class="section-title">Dashboard Overview</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number" id="totalForms">0</div>
+                            <div class="stat-label">Total Form Submissions</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="pendingForms">0</div>
+                            <div class="stat-label">Pending Requests</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="totalEvents">0</div>
+                            <div class="stat-label">Upcoming Events</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="totalSermons">0</div>
+                            <div class="stat-label">Sermons Available</div>
+                        </div>
+                    </div>
+                    
+                    <h3>Recent Activity</h3>
+                    <div id="recentActivity" class="form-list">
+                        <!-- Recent activity will be populated here -->
+                    </div>
+                </div>
+
+                <!-- Forms Section -->
+                <div id="forms" class="content-section">
+                    <h2 class="section-title">Form Submissions & Requests</h2>
+                    
+                    <div class="content-editor">
+                        <h3>Contact Form Submissions</h3>
+                        <div id="contactForms" class="form-list">
+                            <!-- Contact forms will be populated here -->
+                        </div>
+                    </div>
+
+                    <div class="content-editor">
+                        <h3>Prayer Session Requests</h3>
+                        <div id="prayerForms" class="form-list">
+                            <!-- Prayer forms will be populated here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content Management Section -->
+                <div id="content" class="content-section">
+                    <h2 class="section-title">Content Management</h2>
+                    
+                    <div class="content-editor">
+                        <h3>About Section</h3>
+                        <div class="editor-group">
+                            <label for="aboutTitle">About Title</label>
+                            <input type="text" id="aboutTitle" value="About Christ Synagogue Ministries">
+                        </div>
+                        <div class="editor-group">
+                            <label for="aboutSubtitle">About Subtitle</label>
+                            <input type="text" id="aboutSubtitle" value="A Beacon of Hope and Transformation in Arusha, Tanzania">
+                        </div>
+                        <div class="editor-group">
+                            <label for="aboutStory">Our Story</label>
+                            <textarea id="aboutStory">Christ Synagogue Ministries was established in the heart of Arusha, Tanzania, as a prophetic ministry dedicated to spreading the transformative power of Jesus Christ...</textarea>
+                        </div>
+                        <div class="editor-group">
+                            <label for="aboutMission">Mission Statement</label>
+                            <textarea id="aboutMission">Our mission extends beyond traditional worship services. We are committed to breaking spiritual chains, providing prophetic direction...</textarea>
+                        </div>
+                        <button class="btn-save" onclick="saveContent('about')">Save About Content</button>
+                    </div>
+
+                    <div class="content-editor">
+                        <h3>Prophet Information</h3>
+                        <div class="editor-group">
+                            <label for="prophetName">Prophet Name</label>
+                            <input type="text" id="prophetName" value="Prophet Baraka David Ogillo">
+                        </div>
+                        <div class="editor-group">
+                            <label for="prophetTitle">Prophet Title</label>
+                            <input type="text" id="prophetTitle" value="Founder & Senior Prophet">
+                        </div>
+                        <div class="editor-group">
+                            <label for="prophetBio">Prophet Biography</label>
+                            <textarea id="prophetBio">Prophet Baraka David Ogillo is a dedicated servant of God with a profound calling to prophetic ministry...</textarea>
+                        </div>
+                        <button class="btn-save" onclick="saveContent('prophet')">Save Prophet Information</button>
+                    </div>
+
+                    <div class="content-editor">
+                        <h3>Service Times</h3>
+                        <div class="editor-group">
+                            <label for="sundayTime">Sunday Service Time</label>
+                            <input type="text" id="sundayTime" value="10:00 AM">
+                        </div>
+                        <div class="editor-group">
+                            <label for="tuesdayTime">Tuesday Service Time</label>
+                            <input type="text" id="tuesdayTime" value="6:00 PM">
+                        </div>
+                        <div class="editor-group">
+                            <label for="thursdayTime">Thursday Service Time</label>
+                            <input type="text" id="thursdayTime" value="6:00 PM">
+                        </div>
+                        <button class="btn-save" onclick="saveContent('services')">Save Service Times</button>
+                    </div>
+                </div>
+
+                <!-- Events Section -->
+                <div id="events" class="content-section">
+                    <h2 class="section-title">Events Management</h2>
+                    
+                    <div class="content-editor">
+                        <h3>Add New Event</h3>
+                        <div class="editor-group">
+                            <label for="eventTitle">Event Title</label>
+                            <input type="text" id="eventTitle" placeholder="e.g., Prophetic Conference">
+                        </div>
+                        <div class="editor-group">
+                            <label for="eventDate">Event Date</label>
+                            <input type="date" id="eventDate">
+                        </div>
+                        <div class="editor-group">
+                            <label for="eventTime">Event Time</label>
+                            <input type="time" id="eventTime">
+                        </div>
+                        <div class="editor-group">
+                            <label for="eventDescription">Event Description</label>
+                            <textarea id="eventDescription" placeholder="Describe the event..."></textarea>
+                        </div>
+                        <div class="editor-group">
+                            <label for="eventType">Event Type</label>
+                            <select id="eventType">
+                                <option value="conference">Conference</option>
+                                <option value="crusade">Crusade</option>
+                                <option value="prayer">Prayer Meeting</option>
+                                <option value="worship">Worship Service</option>
+                                <option value="outreach">Outreach</option>
+                            </select>
+                        </div>
+                        <button class="btn-save" onclick="addEvent()">Add Event</button>
+                    </div>
+
+                    <div class="content-editor">
+                        <h3>Current Events</h3>
+                        <div id="eventsList" class="form-list">
+                            <!-- Events will be populated here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sermons Section -->
+                <div id="sermons" class="content-section">
+                    <h2 class="section-title">Sermons Management</h2>
+                    
+                    <div class="content-editor">
+                        <h3>Add New Sermon</h3>
+                        <div class="editor-group">
+                            <label for="sermonTitle">Sermon Title</label>
+                            <input type="text" id="sermonTitle" placeholder="e.g., The Power of Prayer">
+                        </div>
+                        <div class="editor-group">
+                            <label for="sermonDate">Sermon Date</label>
+                            <input type="date" id="sermonDate">
+                        </div>
+                        <div class="editor-group">
+                            <label for="sermonSpeaker">Speaker</label>
+                            <input type="text" id="sermonSpeaker" value="Prophet Baraka David Ogillo">
+                        </div>
+                        <div class="editor-group">
+                            <label for="sermonDescription">Sermon Description</label>
+                            <textarea id="sermonDescription" placeholder="Brief description of the sermon..."></textarea>
+                        </div>
+                        <div class="editor-group">
+                            <label for="sermonVideoUrl">YouTube Video URL</label>
+                            <input type="url" id="sermonVideoUrl" placeholder="https://www.youtube.com/watch?v=...">
+                        </div>
+                        <div class="editor-group">
+                            <label for="sermonCategory">Category</label>
+                            <select id="sermonCategory">
+                                <option value="prophetic">Prophetic</option>
+                                <option value="deliverance">Deliverance</option>
+                                <option value="worship">Worship</option>
+                                <option value="teaching">Teaching</option>
+                                <option value="prayer">Prayer</option>
+                            </select>
+                        </div>
+                        <button class="btn-save" onclick="addSermon()">Add Sermon</button>
+                    </div>
+
+                    <div class="content-editor">
+                        <h3>Current Sermons</h3>
+                        <div id="sermonsList" class="form-list">
+                            <!-- Sermons will be populated here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photos Section -->
+                <div id="photos" class="content-section">
+                    <h2 class="section-title">Photo Gallery Management</h2>
+                    
+                    <div class="content-editor">
+                        <h3>Add New Photo</h3>
+                        <div class="editor-group">
+                            <label for="photoFile">Select Photo File</label>
+                            <input type="file" id="photoFile" accept="image/*" onchange="previewPhoto()">
+                            <div id="photoPreview" style="margin-top: 10px;"></div>
+                        </div>
+                        <div class="editor-group">
+                            <label for="photoTitle">Photo Title</label>
+                            <input type="text" id="photoTitle" placeholder="e.g., Sunday Worship Service">
+                        </div>
+                        <div class="editor-group">
+                            <label for="photoDescription">Photo Description</label>
+                            <textarea id="photoDescription" placeholder="Describe what's happening in the photo..."></textarea>
+                        </div>
+                        <div class="editor-group">
+                            <label for="photoCategory">Category</label>
+                            <select id="photoCategory">
+                                <option value="worship">Worship</option>
+                                <option value="prophet">Prophet</option>
+                                <option value="community">Community</option>
+                                <option value="prayer">Prayer</option>
+                                <option value="outreach">Outreach</option>
+                                <option value="ministry">Ministry</option>
+                                <option value="events">Events</option>
+                                <option value="fellowship">Fellowship</option>
+                            </select>
+                        </div>
+                        <div class="editor-group">
+                            <label for="photoAlt">Alt Text (for accessibility)</label>
+                            <input type="text" id="photoAlt" placeholder="Brief description for screen readers">
+                        </div>
+                        <div class="editor-group">
+                            <label for="photoFeatured">Featured Photo</label>
+                            <input type="checkbox" id="photoFeatured"> Mark as featured photo
+                        </div>
+                        <button class="btn-save" onclick="addPhoto()">Add Photo</button>
+                    </div>
+
+                    <div class="content-editor">
+                        <h3>Current Photos</h3>
+                        <div class="photo-management">
+                            <div class="photo-filters">
+                                <label for="categoryFilter">Filter by Category:</label>
+                                <select id="categoryFilter" onchange="filterPhotos()">
+                                    <option value="all">All Categories</option>
+                                    <option value="worship">Worship</option>
+                                    <option value="prophet">Prophet</option>
+                                    <option value="community">Community</option>
+                                    <option value="prayer">Prayer</option>
+                                    <option value="outreach">Outreach</option>
+                                    <option value="ministry">Ministry</option>
+                                    <option value="events">Events</option>
+                                    <option value="fellowship">Fellowship</option>
+                                </select>
+                            </div>
+                            <div id="photosGrid" class="photos-grid">
+                                <!-- Photos will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-editor">
+                        <h3>Bulk Photo Operations</h3>
+                        <div class="bulk-operations">
+                            <button class="btn-action btn-delete" onclick="deleteAllPhotos()">Delete All Photos</button>
+                            <button class="btn-action btn-respond" onclick="exportPhotos()">Export Photo List</button>
+                            <button class="btn-action btn-view" onclick="importPhotos()">Import Photos</button>
+                        </div>
+                        <div class="editor-group">
+                            <label for="photoImport">Import Photos (JSON format)</label>
+                            <textarea id="photoImport" rows="4" placeholder="Paste JSON data here..."></textarea>
+                            <button class="btn-save" onclick="processImport()">Process Import</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonies Section -->
+                <div id="testimonies" class="content-section">
+                    <h2 class="section-title">Testimonies Management</h2>
+                    
+                    <div class="content-editor">
+                        <h3>Add New Testimony</h3>
+                        <div class="editor-group">
+                            <label for="testimonyName">Person's Name</label>
+                            <input type="text" id="testimonyName" placeholder="e.g., Sarah M.">
+                        </div>
+                        <div class="editor-group">
+                            <label for="testimonyTitle">Testimony Title</label>
+                            <input type="text" id="testimonyTitle" placeholder="e.g., Healing Testimony">
+                        </div>
+                        <div class="editor-group">
+                            <label for="testimonyDescription">Testimony Description</label>
+                            <textarea id="testimonyDescription" placeholder="Describe the testimony..."></textarea>
+                        </div>
+                        <div class="editor-group">
+                            <label for="testimonyCategory">Category</label>
+                            <select id="testimonyCategory">
+                                <option value="healing">Healing</option>
+                                <option value="deliverance">Deliverance</option>
+                                <option value="prophetic">Prophetic Direction</option>
+                                <option value="salvation">Salvation</option>
+                                <option value="breakthrough">Breakthrough</option>
+                                <option value="provision">Provision</option>
+                                <option value="restoration">Restoration</option>
+                                <option value="miracles">Miracles</option>
+                            </select>
+                        </div>
+                        <div class="editor-group">
+                            <label for="testimonyDate">Date of Testimony</label>
+                            <input type="date" id="testimonyDate">
+                        </div>
+                        <div class="editor-group">
+                            <label for="testimonyVideoUrl">Video URL (Optional)</label>
+                            <input type="url" id="testimonyVideoUrl" placeholder="https://www.youtube.com/watch?v=...">
+                        </div>
+                        <div class="editor-group">
+                            <label for="testimonyFeatured">Featured Testimony</label>
+                            <input type="checkbox" id="testimonyFeatured"> Mark as featured testimony
+                        </div>
+                        <button class="btn-save" onclick="addTestimony()">Add Testimony</button>
+                    </div>
+
+                    <div class="content-editor">
+                        <h3>Current Testimonies</h3>
+                        <div class="testimony-management">
+                            <div class="testimony-filters">
+                                <label for="testimonyCategoryFilter">Filter by Category:</label>
+                                <select id="testimonyCategoryFilter" onchange="filterTestimonies()">
+                                    <option value="all">All Categories</option>
+                                    <option value="healing">Healing</option>
+                                    <option value="deliverance">Deliverance</option>
+                                    <option value="prophetic">Prophetic Direction</option>
+                                    <option value="salvation">Salvation</option>
+                                    <option value="breakthrough">Breakthrough</option>
+                                    <option value="provision">Provision</option>
+                                    <option value="restoration">Restoration</option>
+                                    <option value="miracles">Miracles</option>
+                                </select>
+                            </div>
+                            <div id="testimoniesList" class="testimonies-grid">
+                                <!-- Testimonies will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Analytics Section -->
+                <div id="analytics" class="content-section">
+                    <h2 class="section-title">Website Analytics</h2>
+                    
+                    <div class="analytics-overview">
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-number" id="totalVisitors">0</div>
+                                <div class="stat-label">Total Visitors</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number" id="uniqueVisitors">0</div>
+                                <div class="stat-label">Unique Visitors</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number" id="todayVisitors">0</div>
+                                <div class="stat-label">Today's Visitors</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number" id="thisWeekVisitors">0</div>
+                                <div class="stat-label">This Week</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-editor">
+                        <h3>Visitor Statistics</h3>
+                        <div class="analytics-charts">
+                            <div class="chart-container">
+                                <h4>Visitors by Day (Last 7 Days)</h4>
+                                <div id="visitorsChart" class="simple-chart">
+                                    <!-- Chart will be populated here -->
+                                </div>
+                            </div>
+                            <div class="chart-container">
+                                <h4>Most Visited Pages</h4>
+                                <div id="pagesChart" class="pages-list">
+                                    <!-- Pages will be populated here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-editor">
+                        <h3>Visitor Details</h3>
+                        <div class="visitor-details">
+                            <div class="visitor-filters">
+                                <label for="visitorDateFilter">Filter by Date:</label>
+                                <select id="visitorDateFilter" onchange="filterVisitors()">
+                                    <option value="today">Today</option>
+                                    <option value="week">This Week</option>
+                                    <option value="month">This Month</option>
+                                    <option value="all">All Time</option>
+                                </select>
+                            </div>
+                            <div id="visitorsList" class="visitors-list">
+                                <!-- Visitors will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-editor">
+                        <h3>Analytics Actions</h3>
+                        <div class="analytics-actions">
+                            <button class="btn-action btn-view" onclick="exportAnalytics()">Export Analytics</button>
+                            <button class="btn-action btn-delete" onclick="clearAnalytics()">Clear All Data</button>
+                            <button class="btn-action btn-respond" onclick="refreshAnalytics()">Refresh Data</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Site Appearance Section -->
+                <div id="appearance" class="content-section">
+                    <h2 class="section-title">Site Appearance Control</h2>
+                    
+                    <div class="content-editor">
+                        <h3>Hero Section Control</h3>
+                        <div class="editor-group">
+                            <label for="heroTitle">Main Hero Title</label>
+                            <input type="text" id="heroTitle" value="FIND A WAY">
+                        </div>
+                        <div class="editor-group">
+                            <label for="heroSubtitle">Hero Subtitle</label>
+                            <textarea id="heroSubtitle" rows="3">Led by Prophet Baraka David Ogillo in Arusha, Tanzania—dedicated to transforming lives through guidance, deliverance, and Spirit-filled worship.</textarea>
+                        </div>
+                        <div class="editor-group">
+                            <label for="heroButton1">Primary Button Text</label>
+                            <input type="text" id="heroButton1" value="VISIT US">
+                        </div>
+                        <div class="editor-group">
+                            <label for="heroButton2">Secondary Button Text</label>
+                            <input type="text" id="heroButton2" value="WATCH ONLINE">
+                        </div>
+                        <button class="btn-save" onclick="saveAppearance('hero')">Save Hero Settings</button>
+                    </div>
+
+                    <div class="content-editor">
+                        <h3>Color Scheme Control</h3>
+                        <div class="editor-group">
+                            <label for="primaryColor">Primary Color</label>
+                            <input type="color" id="primaryColor" value="#4f46e5">
+                        </div>
+                        <div class="editor-group">
+                            <label for="secondaryColor">Secondary Color</label>
+                            <input type="color" id="secondaryColor" value="#1f2937">
+                        </div>
+                        <div class="editor-group">
+                            <label for="accentColor">Accent Color</label>
+                            <input type="color" id="accentColor" value="#10b981">
+                        </div>
+                        <div class="editor-group">
+                            <label for="backgroundColor">Background Color</label>
+                            <input type="color" id="backgroundColor" value="#ffffff">
+                        </div>
+                        <button class="btn-save" onclick="saveAppearance('colors')">Save Color Scheme</button>
+                    </div>
+
+                    <div class="content-editor">
+                        <h3>Gallery Display Control</h3>
+                        <div class="editor-group">
+                            <label for="galleryLayout">Gallery Layout</label>
+                            <select id="galleryLayout">
+                                <option value="grid">Grid Layout</option>
+                                <option value="carousel">Carousel Layout</option>
+                                <option value="masonry">Masonry Layout</option>
+                            </select>
+                        </div>
+                        <div class="editor-group">
+                            <label for="photosPerRow">Photos Per Row</label>
+                            <select id="photosPerRow">
+                                <option value="2">2 Photos</option>
+                                <option value="3">3 Photos</option>
+                                <option value="4">4 Photos</option>
+                                <option value="5">5 Photos</option>
+                            </select>
+                        </div>
+                        <div class="editor-group">
+                            <label for="showPhotoTitles">Show Photo Titles</label>
+                            <input type="checkbox" id="showPhotoTitles" checked>
+                        </div>
+                        <div class="editor-group">
+                            <label for="showPhotoDescriptions">Show Photo Descriptions</label>
+                            <input type="checkbox" id="showPhotoDescriptions" checked>
+                        </div>
+                        <div class="editor-group">
+                            <label for="autoRotateGallery">Auto Rotate Gallery</label>
+                            <input type="checkbox" id="autoRotateGallery">
+                        </div>
+                        <button class="btn-save" onclick="saveAppearance('gallery')">Save Gallery Settings</button>
+                    </div>
+
+                    <div class="content-editor">
+                        <h3>Site Layout Control</h3>
+                        <div class="editor-group">
+                            <label for="siteWidth">Site Width</label>
+                            <select id="siteWidth">
+                                <option value="full">Full Width</option>
+                                <option value="container">Container Width</option>
+                                <option value="narrow">Narrow Width</option>
+                            </select>
+                        </div>
+                        <div class="editor-group">
+                            <label for="headerStyle">Header Style</label>
+                            <select id="headerStyle">
+                                <option value="fixed">Fixed Header</option>
+                                <option value="static">Static Header</option>
+                                <option value="transparent">Transparent Header</option>
+                            </select>
+                        </div>
+                        <div class="editor-group">
+                            <label for="footerStyle">Footer Style</label>
+                            <select id="footerStyle">
+                                <option value="dark">Dark Footer</option>
+                                <option value="light">Light Footer</option>
+                                <option value="minimal">Minimal Footer</option>
+                            </select>
+                        </div>
+                        <div class="editor-group">
+                            <label for="animationSpeed">Animation Speed</label>
+                            <select id="animationSpeed">
+                                <option value="slow">Slow</option>
+                                <option value="normal">Normal</option>
+                                <option value="fast">Fast</option>
+                            </select>
+                        </div>
+                        <button class="btn-save" onclick="saveAppearance('layout')">Save Layout Settings</button>
+                    </div>
+
+                    <div class="content-editor">
+                        <h3>Content Visibility Control</h3>
+                        <div class="editor-group">
+                            <label for="showTestimonies">Show Testimonies Section</label>
+                            <input type="checkbox" id="showTestimonies" checked>
+                        </div>
+                        <div class="editor-group">
+                            <label for="showEvents">Show Events Section</label>
+                            <input type="checkbox" id="showEvents" checked>
+                        </div>
+                        <div class="editor-group">
+                            <label for="showGallery">Show Gallery Section</label>
+                            <input type="checkbox" id="showGallery" checked>
+                        </div>
+                        <div class="editor-group">
+                            <label for="showGive">Show Give Section</label>
+                            <input type="checkbox" id="showGive" checked>
+                        </div>
+                        <div class="editor-group">
+                            <label for="showPrayerScheduler">Show Prayer Scheduler</label>
+                            <input type="checkbox" id="showPrayerScheduler" checked>
+                        </div>
+                        <button class="btn-save" onclick="saveAppearance('visibility')">Save Visibility Settings</button>
+                    </div>
+
+                    <div class="content-editor">
+                        <h3>Site Preview & Reset</h3>
+                        <div class="preview-actions">
+                            <button class="btn-action btn-view" onclick="previewSite()">Preview Changes</button>
+                            <button class="btn-action btn-respond" onclick="resetAppearance()">Reset to Default</button>
+                            <button class="btn-action btn-delete" onclick="exportAppearance()">Export Settings</button>
+                        </div>
+                        <div class="editor-group">
+                            <label for="appearanceImport">Import Appearance Settings (JSON)</label>
+                            <textarea id="appearanceImport" rows="4" placeholder="Paste appearance settings JSON here..."></textarea>
+                            <button class="btn-save" onclick="importAppearance()">Import Settings</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Admin Panel JavaScript
+        const ADMIN_PASSWORD = 'motoulao123';
+        let isLoggedIn = false;
+
+        // Check if user is already logged in
+        if (localStorage.getItem('adminLoggedIn') === 'true') {
+            showDashboard();
+        }
+
+        // Login form submission
+        document.getElementById('loginFormElement').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+
+            if (password === ADMIN_PASSWORD) {
+                localStorage.setItem('adminLoggedIn', 'true');
+                isLoggedIn = true;
+                showDashboard();
+            } else {
+                errorMessage.textContent = 'Invalid password. Please try again.';
+                errorMessage.style.display = 'block';
+            }
+        });
+
+        function showDashboard() {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('adminDashboard').style.display = 'block';
+            loadDashboardData();
+        }
+
+        function logout() {
+            localStorage.removeItem('adminLoggedIn');
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('adminDashboard').style.display = 'none';
+            document.getElementById('password').value = '';
+            document.getElementById('errorMessage').style.display = 'none';
+        }
+
+        function showSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all nav buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionName).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        function loadDashboardData() {
+            // Load form submissions
+            loadFormSubmissions();
+            loadEvents();
+            loadSermons();
+            loadPhotos();
+            loadTestimonies();
+            loadAnalytics();
+            loadAppearanceSettings();
+            updateStats();
+        }
+
+        function loadFormSubmissions() {
+            // Load contact forms
+            const contactForms = JSON.parse(localStorage.getItem('contactForms') || '[]');
+            const contactContainer = document.getElementById('contactForms');
+            
+            if (contactForms.length === 0) {
+                contactContainer.innerHTML = '<div class="empty-state"><p>No contact form submissions yet.</p></div>';
+            } else {
+                contactContainer.innerHTML = contactForms.map((form, index) => `
+                    <div class="form-item">
+                        <h4>Contact Request from ${form.name}</h4>
+                        <p><strong>Email:</strong> ${form.email}</p>
+                        <p><strong>Message:</strong> ${form.message}</p>
+                        <p class="date">Submitted: ${new Date(form.timestamp).toLocaleString()}</p>
+                        <button class="btn-action btn-respond" onclick="respondToContact(${index})">Mark as Responded</button>
+                        <button class="btn-action btn-delete" onclick="deleteContact(${index})">Delete</button>
+                    </div>
+                `).join('');
+            }
+
+            // Load prayer forms
+            const prayerForms = JSON.parse(localStorage.getItem('prayerForms') || '[]');
+            const prayerContainer = document.getElementById('prayerForms');
+            
+            if (prayerForms.length === 0) {
+                prayerContainer.innerHTML = '<div class="empty-state"><p>No prayer session requests yet.</p></div>';
+            } else {
+                prayerContainer.innerHTML = prayerForms.map((form, index) => `
+                    <div class="form-item">
+                        <h4>Prayer Request from ${form.name}</h4>
+                        <p><strong>Phone:</strong> ${form.phone}</p>
+                        <p><strong>Preferred Date:</strong> ${form.date}</p>
+                        <p><strong>Preferred Time:</strong> ${form.time}</p>
+                        <p><strong>Prayer Request:</strong> ${form.request}</p>
+                        <p class="date">Submitted: ${new Date(form.timestamp).toLocaleString()}</p>
+                        <button class="btn-action btn-respond" onclick="respondToPrayer(${index})">Mark as Responded</button>
+                        <button class="btn-action btn-delete" onclick="deletePrayer(${index})">Delete</button>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function loadEvents() {
+            const events = JSON.parse(localStorage.getItem('events') || '[]');
+            const eventsContainer = document.getElementById('eventsList');
+            
+            if (events.length === 0) {
+                eventsContainer.innerHTML = '<div class="empty-state"><p>No events added yet.</p></div>';
+            } else {
+                eventsContainer.innerHTML = events.map((event, index) => `
+                    <div class="form-item">
+                        <h4>${event.title}</h4>
+                        <p><strong>Date:</strong> ${event.date}</p>
+                        <p><strong>Time:</strong> ${event.time}</p>
+                        <p><strong>Type:</strong> ${event.type}</p>
+                        <p><strong>Description:</strong> ${event.description}</p>
+                        <button class="btn-action btn-delete" onclick="deleteEvent(${index})">Delete</button>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function loadSermons() {
+            const sermons = JSON.parse(localStorage.getItem('sermons') || '[]');
+            const sermonsContainer = document.getElementById('sermonsList');
+            
+            if (sermons.length === 0) {
+                sermonsContainer.innerHTML = '<div class="empty-state"><p>No sermons added yet.</p></div>';
+            } else {
+                sermonsContainer.innerHTML = sermons.map((sermon, index) => `
+                    <div class="form-item">
+                        <h4>${sermon.title}</h4>
+                        <p><strong>Speaker:</strong> ${sermon.speaker}</p>
+                        <p><strong>Date:</strong> ${sermon.date}</p>
+                        <p><strong>Category:</strong> ${sermon.category}</p>
+                        <p><strong>Description:</strong> ${sermon.description}</p>
+                        <p><strong>Video URL:</strong> <a href="${sermon.videoUrl}" target="_blank">Watch Video</a></p>
+                        <button class="btn-action btn-delete" onclick="deleteSermon(${index})">Delete</button>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function updateStats() {
+            const contactForms = JSON.parse(localStorage.getItem('contactForms') || '[]');
+            const prayerForms = JSON.parse(localStorage.getItem('prayerForms') || '[]');
+            const events = JSON.parse(localStorage.getItem('events') || '[]');
+            const sermons = JSON.parse(localStorage.getItem('sermons') || '[]');
+            
+            document.getElementById('totalForms').textContent = contactForms.length + prayerForms.length;
+            document.getElementById('pendingForms').textContent = contactForms.length + prayerForms.length;
+            document.getElementById('totalEvents').textContent = events.length;
+            document.getElementById('totalSermons').textContent = sermons.length;
+        }
+
+        function saveContent(type) {
+            let data = {};
+            
+            if (type === 'about') {
+                data = {
+                    title: document.getElementById('aboutTitle').value,
+                    subtitle: document.getElementById('aboutSubtitle').value,
+                    story: document.getElementById('aboutStory').value,
+                    mission: document.getElementById('aboutMission').value
+                };
+            } else if (type === 'prophet') {
+                data = {
+                    name: document.getElementById('prophetName').value,
+                    title: document.getElementById('prophetTitle').value,
+                    bio: document.getElementById('prophetBio').value
+                };
+            } else if (type === 'services') {
+                data = {
+                    sunday: document.getElementById('sundayTime').value,
+                    tuesday: document.getElementById('tuesdayTime').value,
+                    thursday: document.getElementById('thursdayTime').value
+                };
+            }
+            
+            localStorage.setItem(type + 'Content', JSON.stringify(data));
+            showSuccessMessage(`${type.charAt(0).toUpperCase() + type.slice(1)} content saved successfully!`, 'success');
+        }
+
+        function addEvent() {
+            const event = {
+                title: document.getElementById('eventTitle').value,
+                date: document.getElementById('eventDate').value,
+                time: document.getElementById('eventTime').value,
+                description: document.getElementById('eventDescription').value,
+                type: document.getElementById('eventType').value,
+                timestamp: new Date().toISOString()
+            };
+            
+            if (!event.title || !event.date || !event.time) {
+                showSuccessMessage('Please fill in all required fields.', 'error');
+                return;
+            }
+            
+            const events = JSON.parse(localStorage.getItem('events') || '[]');
+            events.push(event);
+            localStorage.setItem('events', JSON.stringify(events));
+            
+            // Clear form
+            document.getElementById('eventTitle').value = '';
+            document.getElementById('eventDate').value = '';
+            document.getElementById('eventTime').value = '';
+            document.getElementById('eventDescription').value = '';
+            
+            loadEvents();
+            updateStats();
+            showSuccessMessage('Event added successfully!', 'success');
+        }
+
+        function addSermon() {
+            const sermon = {
+                title: document.getElementById('sermonTitle').value,
+                date: document.getElementById('sermonDate').value,
+                speaker: document.getElementById('sermonSpeaker').value,
+                description: document.getElementById('sermonDescription').value,
+                videoUrl: document.getElementById('sermonVideoUrl').value,
+                category: document.getElementById('sermonCategory').value,
+                timestamp: new Date().toISOString()
+            };
+            
+            if (!sermon.title || !sermon.date || !sermon.speaker) {
+                showSuccessMessage('Please fill in all required fields.', 'error');
+                return;
+            }
+            
+            const sermons = JSON.parse(localStorage.getItem('sermons') || '[]');
+            sermons.push(sermon);
+            localStorage.setItem('sermons', JSON.stringify(sermons));
+            
+            // Clear form
+            document.getElementById('sermonTitle').value = '';
+            document.getElementById('sermonDate').value = '';
+            document.getElementById('sermonDescription').value = '';
+            document.getElementById('sermonVideoUrl').value = '';
+            
+            loadSermons();
+            updateStats();
+            showSuccessMessage('Sermon added successfully!', 'success');
+        }
+
+        function deleteContact(index) {
+            if (confirm('Are you sure you want to delete this contact submission?')) {
+                const forms = JSON.parse(localStorage.getItem('contactForms') || '[]');
+                forms.splice(index, 1);
+                localStorage.setItem('contactForms', JSON.stringify(forms));
+                loadFormSubmissions();
+                updateStats();
+                showSuccessMessage('Contact submission deleted successfully!', 'success');
+            }
+        }
+
+        function deletePrayer(index) {
+            if (confirm('Are you sure you want to delete this prayer request?')) {
+                const forms = JSON.parse(localStorage.getItem('prayerForms') || '[]');
+                forms.splice(index, 1);
+                localStorage.setItem('prayerForms', JSON.stringify(forms));
+                loadFormSubmissions();
+                updateStats();
+                showSuccessMessage('Prayer request deleted successfully!', 'success');
+            }
+        }
+
+        function deleteEvent(index) {
+            if (confirm('Are you sure you want to delete this event?')) {
+                const events = JSON.parse(localStorage.getItem('events') || '[]');
+                events.splice(index, 1);
+                localStorage.setItem('events', JSON.stringify(events));
+                loadEvents();
+                updateStats();
+                showSuccessMessage('Event deleted successfully!', 'success');
+            }
+        }
+
+        function deleteSermon(index) {
+            if (confirm('Are you sure you want to delete this sermon?')) {
+                const sermons = JSON.parse(localStorage.getItem('sermons') || '[]');
+                sermons.splice(index, 1);
+                localStorage.setItem('sermons', JSON.stringify(sermons));
+                loadSermons();
+                updateStats();
+                showSuccessMessage('Sermon deleted successfully!', 'success');
+            }
+        }
+
+        function respondToContact(index) {
+            showSuccessMessage('Contact marked as responded. You can follow up via email.', 'success');
+        }
+
+        function respondToPrayer(index) {
+            showSuccessMessage('Prayer request marked as responded. You can follow up via phone or WhatsApp.', 'success');
+        }
+
+        // Photo Management Functions
+        function loadPhotos() {
+            const photos = JSON.parse(localStorage.getItem('photos') || '[]');
+            const photosContainer = document.getElementById('photosGrid');
+            
+            if (photos.length === 0) {
+                photosContainer.innerHTML = '<div class="empty-state"><p>No photos added yet.</p></div>';
+            } else {
+                photosContainer.innerHTML = photos.map((photo, index) => `
+                    <div class="photo-item-admin">
+                        ${photo.featured ? '<div class="featured-badge">FEATURED</div>' : ''}
+                        <img src="${photo.url}" alt="${photo.alt}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjE1MCIgdmlld0JveD0iMCAwIDIwMCAxNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMTUwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik04MCA2MEgxMjBWOTBIODBWNjBaIiBmaWxsPSIjOUNBMUFFIi8+CjxwYXRoIGQ9Ik05MCA3MEgxMTBWODBIOTBWNzBaIiBmaWxsPSIjRjNGNEY2Ii8+Cjx0ZXh0IHg9IjEwMCIgeT0iMTEwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjOUNBMUFFIiBmb250LXNpemU9IjEyIj5JbWFnZSBub3QgZm91bmQ8L3RleHQ+Cjwvc3ZnPgo='">
+                        <h4>${photo.title}</h4>
+                        <p>${photo.description}</p>
+                        <p><strong>Category:</strong> <span class="photo-category">${photo.category}</span></p>
+                        <p><strong>Added:</strong> ${new Date(photo.timestamp).toLocaleDateString()}</p>
+                        <div class="photo-actions">
+                            <button class="btn-action btn-view" onclick="editPhoto(${index})">Edit</button>
+                            <button class="btn-action btn-respond" onclick="toggleFeatured(${index})">${photo.featured ? 'Unfeature' : 'Feature'}</button>
+                            <button class="btn-action btn-delete" onclick="deletePhoto(${index})">Delete</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function previewPhoto() {
+            const fileInput = document.getElementById('photoFile');
+            const preview = document.getElementById('photoPreview');
+            
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.innerHTML = `<img src="${e.target.result}" class="photo-preview" alt="Preview">`;
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            }
+        }
+
+        function addPhoto() {
+            const fileInput = document.getElementById('photoFile');
+            const title = document.getElementById('photoTitle').value;
+            const description = document.getElementById('photoDescription').value;
+            const category = document.getElementById('photoCategory').value;
+            const alt = document.getElementById('photoAlt').value;
+            const featured = document.getElementById('photoFeatured').checked;
+            
+            if (!fileInput.files[0] || !title) {
+                showSuccessMessage('Please select a photo file and enter a title.', 'error');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const photo = {
+                    url: e.target.result,
+                    title: title,
+                    description: description,
+                    category: category,
+                    alt: alt || title,
+                    featured: featured,
+                    timestamp: new Date().toISOString()
+                };
+                
+                const photos = JSON.parse(localStorage.getItem('photos') || '[]');
+                photos.push(photo);
+                localStorage.setItem('photos', JSON.stringify(photos));
+                
+                // Clear form
+                document.getElementById('photoFile').value = '';
+                document.getElementById('photoTitle').value = '';
+                document.getElementById('photoDescription').value = '';
+                document.getElementById('photoAlt').value = '';
+                document.getElementById('photoFeatured').checked = false;
+                document.getElementById('photoPreview').innerHTML = '';
+                
+                loadPhotos();
+                showSuccessMessage('Photo added successfully!', 'success');
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+
+        function editPhoto(index) {
+            const photos = JSON.parse(localStorage.getItem('photos') || '[]');
+            const photo = photos[index];
+            
+            const newTitle = prompt('Edit photo title:', photo.title);
+            if (newTitle !== null) {
+                const newDescription = prompt('Edit photo description:', photo.description);
+                if (newDescription !== null) {
+                    const newAlt = prompt('Edit alt text:', photo.alt);
+                    if (newAlt !== null) {
+                        photos[index].title = newTitle;
+                        photos[index].description = newDescription;
+                        photos[index].alt = newAlt;
+                        localStorage.setItem('photos', JSON.stringify(photos));
+                        loadPhotos();
+                        showSuccessMessage('Photo updated successfully!', 'success');
+                    }
+                }
+            }
+        }
+
+        function deletePhoto(index) {
+            if (confirm('Are you sure you want to delete this photo?')) {
+                const photos = JSON.parse(localStorage.getItem('photos') || '[]');
+                photos.splice(index, 1);
+                localStorage.setItem('photos', JSON.stringify(photos));
+                loadPhotos();
+                showSuccessMessage('Photo deleted successfully!', 'success');
+            }
+        }
+
+        function toggleFeatured(index) {
+            const photos = JSON.parse(localStorage.getItem('photos') || '[]');
+            photos[index].featured = !photos[index].featured;
+            localStorage.setItem('photos', JSON.stringify(photos));
+            loadPhotos();
+            const message = photos[index].featured ? 'Photo featured successfully!' : 'Photo unfeatured successfully!';
+            showSuccessMessage(message, 'success');
+        }
+
+        function filterPhotos() {
+            const category = document.getElementById('categoryFilter').value;
+            const photos = JSON.parse(localStorage.getItem('photos') || '[]');
+            const photosContainer = document.getElementById('photosGrid');
+            
+            let filteredPhotos = photos;
+            if (category !== 'all') {
+                filteredPhotos = photos.filter(photo => photo.category === category);
+            }
+            
+            if (filteredPhotos.length === 0) {
+                photosContainer.innerHTML = '<div class="empty-state"><p>No photos found in this category.</p></div>';
+            } else {
+                photosContainer.innerHTML = filteredPhotos.map((photo, index) => {
+                    const originalIndex = photos.findIndex(p => p.timestamp === photo.timestamp);
+                    return `
+                        <div class="photo-item-admin">
+                            ${photo.featured ? '<div class="featured-badge">FEATURED</div>' : ''}
+                            <img src="${photo.url}" alt="${photo.alt}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjE1MCIgdmlld0JveD0iMCAwIDIwMCAxNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMTUwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik04MCA2MEgxMjBWOTBIODBWNjBaIiBmaWxsPSIjOUNBMUFFIi8+CjxwYXRoIGQ9Ik05MCA3MEgxMTBWODBIOTBWNzBaIiBmaWxsPSIjRjNGNEY2Ii8+Cjx0ZXh0IHg9IjEwMCIgeT0iMTEwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjOUNBMUFFIiBmb250LXNpemU9IjEyIj5JbWFnZSBub3QgZm91bmQ8L3RleHQ+Cjwvc3ZnPgo='">
+                            <h4>${photo.title}</h4>
+                            <p>${photo.description}</p>
+                            <p><strong>Category:</strong> <span class="photo-category">${photo.category}</span></p>
+                            <p><strong>Added:</strong> ${new Date(photo.timestamp).toLocaleDateString()}</p>
+                            <div class="photo-actions">
+                                <button class="btn-action btn-view" onclick="editPhoto(${originalIndex})">Edit</button>
+                                <button class="btn-action btn-respond" onclick="toggleFeatured(${originalIndex})">${photo.featured ? 'Unfeature' : 'Feature'}</button>
+                                <button class="btn-action btn-delete" onclick="deletePhoto(${originalIndex})">Delete</button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+        }
+
+        function deleteAllPhotos() {
+            if (confirm('Are you sure you want to delete ALL photos? This action cannot be undone.')) {
+                localStorage.removeItem('photos');
+                loadPhotos();
+                showSuccessMessage('All photos have been deleted successfully!', 'success');
+            }
+        }
+
+        function exportPhotos() {
+            const photos = JSON.parse(localStorage.getItem('photos') || '[]');
+            const exportData = {
+                photos: photos,
+                exportDate: new Date().toISOString(),
+                totalPhotos: photos.length
+            };
+            
+            const dataStr = JSON.stringify(exportData, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(dataBlob);
+            link.download = 'church-photos-export.json';
+            link.click();
+            
+            showSuccessMessage(`Photos exported successfully! (${photos.length} photos)`, 'success');
+        }
+
+        function importPhotos() {
+            document.getElementById('photoImport').style.display = 'block';
+            showSuccessMessage('Import form opened. Paste your JSON data.', 'info');
+        }
+
+        function processImport() {
+            const importData = document.getElementById('photoImport').value;
+            
+            try {
+                const parsedData = JSON.parse(importData);
+                if (parsedData.photos && Array.isArray(parsedData.photos)) {
+                    const existingPhotos = JSON.parse(localStorage.getItem('photos') || '[]');
+                    const mergedPhotos = [...existingPhotos, ...parsedData.photos];
+                    localStorage.setItem('photos', JSON.stringify(mergedPhotos));
+                    loadPhotos();
+                    showSuccessMessage(`Successfully imported ${parsedData.photos.length} photos!`, 'success');
+                    document.getElementById('photoImport').value = '';
+                } else {
+                    showSuccessMessage('Invalid import format. Please check your JSON data.', 'error');
+                }
+            } catch (error) {
+                showSuccessMessage('Error parsing JSON data. Please check your format.', 'error');
+            }
+        }
+
+        // Success Message System
+        function showSuccessMessage(message, type = 'success') {
+            // Remove existing messages
+            const existingMessages = document.querySelectorAll('.success-message');
+            existingMessages.forEach(msg => msg.remove());
+            
+            // Create new message
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `success-message ${type}`;
+            messageDiv.textContent = message;
+            
+            // Add to page
+            document.body.appendChild(messageDiv);
+            
+            // Show message
+            setTimeout(() => {
+                messageDiv.classList.add('show');
+            }, 100);
+            
+            // Auto-hide after 4 seconds
+            setTimeout(() => {
+                messageDiv.classList.remove('show');
+                setTimeout(() => {
+                    messageDiv.remove();
+                }, 300);
+            }, 4000);
+        }
+
+        // Testimonies Management Functions
+        function loadTestimonies() {
+            const testimonies = JSON.parse(localStorage.getItem('testimonies') || '[]');
+            const testimoniesContainer = document.getElementById('testimoniesList');
+            
+            if (testimonies.length === 0) {
+                testimoniesContainer.innerHTML = '<div class="empty-state"><p>No testimonies added yet.</p></div>';
+            } else {
+                testimoniesContainer.innerHTML = testimonies.map((testimony, index) => `
+                    <div class="testimony-item">
+                        ${testimony.featured ? '<div class="featured-badge">FEATURED</div>' : ''}
+                        <h4>${testimony.title}</h4>
+                        <div class="testimony-person">${testimony.name}</div>
+                        <p>${testimony.description}</p>
+                        <p><strong>Category:</strong> <span class="testimony-category">${testimony.category}</span></p>
+                        <p><strong>Date:</strong> ${new Date(testimony.date).toLocaleDateString()}</p>
+                        ${testimony.videoUrl ? `<p><strong>Video:</strong> <a href="${testimony.videoUrl}" target="_blank">Watch Video</a></p>` : ''}
+                        <p><strong>Added:</strong> ${new Date(testimony.timestamp).toLocaleDateString()}</p>
+                        <div class="photo-actions">
+                            <button class="btn-action btn-view" onclick="editTestimony(${index})">Edit</button>
+                            <button class="btn-action btn-respond" onclick="toggleTestimonyFeatured(${index})">${testimony.featured ? 'Unfeature' : 'Feature'}</button>
+                            <button class="btn-action btn-delete" onclick="deleteTestimony(${index})">Delete</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function addTestimony() {
+            const name = document.getElementById('testimonyName').value;
+            const title = document.getElementById('testimonyTitle').value;
+            const description = document.getElementById('testimonyDescription').value;
+            const category = document.getElementById('testimonyCategory').value;
+            const date = document.getElementById('testimonyDate').value;
+            const videoUrl = document.getElementById('testimonyVideoUrl').value;
+            const featured = document.getElementById('testimonyFeatured').checked;
+            
+            if (!name || !title || !description) {
+                showSuccessMessage('Please fill in all required fields (Name, Title, Description).', 'error');
+                return;
+            }
+            
+            const testimony = {
+                name: name,
+                title: title,
+                description: description,
+                category: category,
+                date: date || new Date().toISOString().split('T')[0],
+                videoUrl: videoUrl,
+                featured: featured,
+                timestamp: new Date().toISOString()
+            };
+            
+            const testimonies = JSON.parse(localStorage.getItem('testimonies') || '[]');
+            testimonies.push(testimony);
+            localStorage.setItem('testimonies', JSON.stringify(testimonies));
+            
+            // Clear form
+            document.getElementById('testimonyName').value = '';
+            document.getElementById('testimonyTitle').value = '';
+            document.getElementById('testimonyDescription').value = '';
+            document.getElementById('testimonyDate').value = '';
+            document.getElementById('testimonyVideoUrl').value = '';
+            document.getElementById('testimonyFeatured').checked = false;
+            
+            loadTestimonies();
+            showSuccessMessage('Testimony added successfully!', 'success');
+        }
+
+        function editTestimony(index) {
+            const testimonies = JSON.parse(localStorage.getItem('testimonies') || '[]');
+            const testimony = testimonies[index];
+            
+            const newName = prompt('Edit person\'s name:', testimony.name);
+            if (newName !== null) {
+                const newTitle = prompt('Edit testimony title:', testimony.title);
+                if (newTitle !== null) {
+                    const newDescription = prompt('Edit testimony description:', testimony.description);
+                    if (newDescription !== null) {
+                        testimonies[index].name = newName;
+                        testimonies[index].title = newTitle;
+                        testimonies[index].description = newDescription;
+                        localStorage.setItem('testimonies', JSON.stringify(testimonies));
+                        loadTestimonies();
+                        showSuccessMessage('Testimony updated successfully!', 'success');
+                    }
+                }
+            }
+        }
+
+        function deleteTestimony(index) {
+            if (confirm('Are you sure you want to delete this testimony?')) {
+                const testimonies = JSON.parse(localStorage.getItem('testimonies') || '[]');
+                testimonies.splice(index, 1);
+                localStorage.setItem('testimonies', JSON.stringify(testimonies));
+                loadTestimonies();
+                showSuccessMessage('Testimony deleted successfully!', 'success');
+            }
+        }
+
+        function toggleTestimonyFeatured(index) {
+            const testimonies = JSON.parse(localStorage.getItem('testimonies') || '[]');
+            testimonies[index].featured = !testimonies[index].featured;
+            localStorage.setItem('testimonies', JSON.stringify(testimonies));
+            loadTestimonies();
+            const message = testimonies[index].featured ? 'Testimony featured successfully!' : 'Testimony unfeatured successfully!';
+            showSuccessMessage(message, 'success');
+        }
+
+        function filterTestimonies() {
+            const category = document.getElementById('testimonyCategoryFilter').value;
+            const testimonies = JSON.parse(localStorage.getItem('testimonies') || '[]');
+            const testimoniesContainer = document.getElementById('testimoniesList');
+            
+            let filteredTestimonies = testimonies;
+            if (category !== 'all') {
+                filteredTestimonies = testimonies.filter(testimony => testimony.category === category);
+            }
+            
+            if (filteredTestimonies.length === 0) {
+                testimoniesContainer.innerHTML = '<div class="empty-state"><p>No testimonies found in this category.</p></div>';
+            } else {
+                testimoniesContainer.innerHTML = filteredTestimonies.map((testimony, index) => {
+                    const originalIndex = testimonies.findIndex(t => t.timestamp === testimony.timestamp);
+                    return `
+                        <div class="testimony-item">
+                            ${testimony.featured ? '<div class="featured-badge">FEATURED</div>' : ''}
+                            <h4>${testimony.title}</h4>
+                            <div class="testimony-person">${testimony.name}</div>
+                            <p>${testimony.description}</p>
+                            <p><strong>Category:</strong> <span class="testimony-category">${testimony.category}</span></p>
+                            <p><strong>Date:</strong> ${new Date(testimony.date).toLocaleDateString()}</p>
+                            ${testimony.videoUrl ? `<p><strong>Video:</strong> <a href="${testimony.videoUrl}" target="_blank">Watch Video</a></p>` : ''}
+                            <p><strong>Added:</strong> ${new Date(testimony.timestamp).toLocaleDateString()}</p>
+                            <div class="photo-actions">
+                                <button class="btn-action btn-view" onclick="editTestimony(${originalIndex})">Edit</button>
+                                <button class="btn-action btn-respond" onclick="toggleTestimonyFeatured(${originalIndex})">${testimony.featured ? 'Unfeature' : 'Feature'}</button>
+                                <button class="btn-action btn-delete" onclick="deleteTestimony(${originalIndex})">Delete</button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+        }
+
+        // Analytics Functions
+        function loadAnalytics() {
+            updateVisitorStats();
+            loadVisitorChart();
+            loadPagesChart();
+            loadVisitorsList();
+        }
+
+        function updateVisitorStats() {
+            const visitors = JSON.parse(localStorage.getItem('visitors') || '[]');
+            const today = new Date().toDateString();
+            const thisWeek = getWeekStart();
+            
+            const totalVisitors = visitors.length;
+            const uniqueVisitors = new Set(visitors.map(v => v.sessionId)).size;
+            const todayVisitors = visitors.filter(v => new Date(v.timestamp).toDateString() === today).length;
+            const thisWeekVisitors = visitors.filter(v => new Date(v.timestamp) >= thisWeek).length;
+            
+            document.getElementById('totalVisitors').textContent = totalVisitors;
+            document.getElementById('uniqueVisitors').textContent = uniqueVisitors;
+            document.getElementById('todayVisitors').textContent = todayVisitors;
+            document.getElementById('thisWeekVisitors').textContent = thisWeekVisitors;
+        }
+
+        function loadVisitorChart() {
+            const visitors = JSON.parse(localStorage.getItem('visitors') || '[]');
+            const last7Days = getLast7Days();
+            const chartData = last7Days.map(day => {
+                const dayVisitors = visitors.filter(v => new Date(v.timestamp).toDateString() === day.toDateString()).length;
+                return { day: day.toLocaleDateString('en-US', { weekday: 'short' }), count: dayVisitors };
+            });
+            
+            const chartContainer = document.getElementById('visitorsChart');
+            const maxCount = Math.max(...chartData.map(d => d.count));
+            
+            chartContainer.innerHTML = chartData.map(data => `
+                <div class="chart-bar" style="height: ${(data.count / maxCount) * 100}%" data-value="${data.count}" title="${data.day}: ${data.count} visitors"></div>
+            `).join('');
+        }
+
+        function loadPagesChart() {
+            const visitors = JSON.parse(localStorage.getItem('visitors') || '[]');
+            const pageCounts = {};
+            
+            visitors.forEach(visitor => {
+                const page = visitor.page || 'Home';
+                pageCounts[page] = (pageCounts[page] || 0) + 1;
+            });
+            
+            const sortedPages = Object.entries(pageCounts)
+                .sort(([,a], [,b]) => b - a)
+                .slice(0, 5);
+            
+            const pagesContainer = document.getElementById('pagesChart');
+            pagesContainer.innerHTML = sortedPages.map(([page, count]) => `
+                <div class="page-item">
+                    <span>${page}</span>
+                    <span>${count} visits</span>
+                </div>
+            `).join('');
+        }
+
+        function loadVisitorsList() {
+            const visitors = JSON.parse(localStorage.getItem('visitors') || '[]');
+            const visitorsContainer = document.getElementById('visitorsList');
+            
+            if (visitors.length === 0) {
+                visitorsContainer.innerHTML = '<div class="empty-state"><p>No visitor data available.</p></div>';
+            } else {
+                const sortedVisitors = visitors.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+                visitorsContainer.innerHTML = sortedVisitors.slice(0, 50).map(visitor => `
+                    <div class="visitor-item">
+                        <div class="visitor-info">
+                            <div><strong>Page:</strong> ${visitor.page || 'Home'}</div>
+                            <div><strong>Session:</strong> ${visitor.sessionId.substring(0, 8)}...</div>
+                        </div>
+                        <div class="visitor-time">${new Date(visitor.timestamp).toLocaleString()}</div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function filterVisitors() {
+            const filter = document.getElementById('visitorDateFilter').value;
+            const visitors = JSON.parse(localStorage.getItem('visitors') || '[]');
+            const visitorsContainer = document.getElementById('visitorsList');
+            
+            let filteredVisitors = visitors;
+            const now = new Date();
+            
+            switch (filter) {
+                case 'today':
+                    filteredVisitors = visitors.filter(v => new Date(v.timestamp).toDateString() === now.toDateString());
+                    break;
+                case 'week':
+                    const weekStart = getWeekStart();
+                    filteredVisitors = visitors.filter(v => new Date(v.timestamp) >= weekStart);
+                    break;
+                case 'month':
+                    const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+                    filteredVisitors = visitors.filter(v => new Date(v.timestamp) >= monthStart);
+                    break;
+            }
+            
+            if (filteredVisitors.length === 0) {
+                visitorsContainer.innerHTML = '<div class="empty-state"><p>No visitors found for the selected period.</p></div>';
+            } else {
+                const sortedVisitors = filteredVisitors.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+                visitorsContainer.innerHTML = sortedVisitors.slice(0, 50).map(visitor => `
+                    <div class="visitor-item">
+                        <div class="visitor-info">
+                            <div><strong>Page:</strong> ${visitor.page || 'Home'}</div>
+                            <div><strong>Session:</strong> ${visitor.sessionId.substring(0, 8)}...</div>
+                        </div>
+                        <div class="visitor-time">${new Date(visitor.timestamp).toLocaleString()}</div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function exportAnalytics() {
+            const visitors = JSON.parse(localStorage.getItem('visitors') || '[]');
+            const exportData = {
+                visitors: visitors,
+                exportDate: new Date().toISOString(),
+                totalVisitors: visitors.length,
+                uniqueVisitors: new Set(visitors.map(v => v.sessionId)).size
+            };
+            
+            const dataStr = JSON.stringify(exportData, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(dataBlob);
+            link.download = 'church-analytics-export.json';
+            link.click();
+        }
+
+        function clearAnalytics() {
+            if (confirm('Are you sure you want to clear ALL analytics data? This action cannot be undone.')) {
+                localStorage.removeItem('visitors');
+                loadAnalytics();
+                alert('All analytics data has been cleared.');
+            }
+        }
+
+        function refreshAnalytics() {
+            loadAnalytics();
+            alert('Analytics data refreshed!');
+        }
+
+        // Helper functions
+        function getLast7Days() {
+            const days = [];
+            for (let i = 6; i >= 0; i--) {
+                const date = new Date();
+                date.setDate(date.getDate() - i);
+                days.push(date);
+            }
+            return days;
+        }
+
+        function getWeekStart() {
+            const now = new Date();
+            const dayOfWeek = now.getDay();
+            const weekStart = new Date(now);
+            weekStart.setDate(now.getDate() - dayOfWeek);
+            weekStart.setHours(0, 0, 0, 0);
+            return weekStart;
+        }
+
+        // Load saved content on page load
+        window.addEventListener('load', function() {
+            if (isLoggedIn) {
+                const aboutContent = JSON.parse(localStorage.getItem('aboutContent') || '{}');
+                if (aboutContent.title) document.getElementById('aboutTitle').value = aboutContent.title;
+                if (aboutContent.subtitle) document.getElementById('aboutSubtitle').value = aboutContent.subtitle;
+                if (aboutContent.story) document.getElementById('aboutStory').value = aboutContent.story;
+                if (aboutContent.mission) document.getElementById('aboutMission').value = aboutContent.mission;
+                
+                const prophetContent = JSON.parse(localStorage.getItem('prophetContent') || '{}');
+                if (prophetContent.name) document.getElementById('prophetName').value = prophetContent.name;
+                if (prophetContent.title) document.getElementById('prophetTitle').value = prophetContent.title;
+                if (prophetContent.bio) document.getElementById('prophetBio').value = prophetContent.bio;
+                
+                const servicesContent = JSON.parse(localStorage.getItem('servicesContent') || '{}');
+                if (servicesContent.sunday) document.getElementById('sundayTime').value = servicesContent.sunday;
+                if (servicesContent.tuesday) document.getElementById('tuesdayTime').value = servicesContent.tuesday;
+                if (servicesContent.thursday) document.getElementById('thursdayTime').value = servicesContent.thursday;
+            }
+        });
+
+        // Appearance Control Functions
+        function loadAppearanceSettings() {
+            const settings = JSON.parse(localStorage.getItem('appearanceSettings') || '{}');
+            
+            // Load hero settings
+            if (settings.hero) {
+                document.getElementById('heroTitle').value = settings.hero.title || 'FIND A WAY';
+                document.getElementById('heroSubtitle').value = settings.hero.subtitle || 'Led by Prophet Baraka David Ogillo in Arusha, Tanzania—dedicated to transforming lives through guidance, deliverance, and Spirit-filled worship.';
+                document.getElementById('heroButton1').value = settings.hero.button1 || 'VISIT US';
+                document.getElementById('heroButton2').value = settings.hero.button2 || 'WATCH ONLINE';
+            }
+            
+            // Load color settings
+            if (settings.colors) {
+                document.getElementById('primaryColor').value = settings.colors.primary || '#4f46e5';
+                document.getElementById('secondaryColor').value = settings.colors.secondary || '#1f2937';
+                document.getElementById('accentColor').value = settings.colors.accent || '#10b981';
+                document.getElementById('backgroundColor').value = settings.colors.background || '#ffffff';
+            }
+            
+            // Load gallery settings
+            if (settings.gallery) {
+                document.getElementById('galleryLayout').value = settings.gallery.layout || 'grid';
+                document.getElementById('photosPerRow').value = settings.gallery.photosPerRow || '3';
+                document.getElementById('showPhotoTitles').checked = settings.gallery.showTitles !== false;
+                document.getElementById('showPhotoDescriptions').checked = settings.gallery.showDescriptions !== false;
+                document.getElementById('autoRotateGallery').checked = settings.gallery.autoRotate || false;
+            }
+            
+            // Load layout settings
+            if (settings.layout) {
+                document.getElementById('siteWidth').value = settings.layout.width || 'container';
+                document.getElementById('headerStyle').value = settings.layout.header || 'fixed';
+                document.getElementById('footerStyle').value = settings.layout.footer || 'dark';
+                document.getElementById('animationSpeed').value = settings.layout.animation || 'normal';
+            }
+            
+            // Load visibility settings
+            if (settings.visibility) {
+                document.getElementById('showTestimonies').checked = settings.visibility.testimonies !== false;
+                document.getElementById('showEvents').checked = settings.visibility.events !== false;
+                document.getElementById('showGallery').checked = settings.visibility.gallery !== false;
+                document.getElementById('showGive').checked = settings.visibility.give !== false;
+                document.getElementById('showPrayerScheduler').checked = settings.visibility.prayerScheduler !== false;
+            }
+        }
+
+        function saveAppearance(type) {
+            const settings = JSON.parse(localStorage.getItem('appearanceSettings') || '{}');
+            
+            switch (type) {
+                case 'hero':
+                    settings.hero = {
+                        title: document.getElementById('heroTitle').value,
+                        subtitle: document.getElementById('heroSubtitle').value,
+                        button1: document.getElementById('heroButton1').value,
+                        button2: document.getElementById('heroButton2').value
+                    };
+                    break;
+                case 'colors':
+                    settings.colors = {
+                        primary: document.getElementById('primaryColor').value,
+                        secondary: document.getElementById('secondaryColor').value,
+                        accent: document.getElementById('accentColor').value,
+                        background: document.getElementById('backgroundColor').value
+                    };
+                    break;
+                case 'gallery':
+                    settings.gallery = {
+                        layout: document.getElementById('galleryLayout').value,
+                        photosPerRow: document.getElementById('photosPerRow').value,
+                        showTitles: document.getElementById('showPhotoTitles').checked,
+                        showDescriptions: document.getElementById('showPhotoDescriptions').checked,
+                        autoRotate: document.getElementById('autoRotateGallery').checked
+                    };
+                    break;
+                case 'layout':
+                    settings.layout = {
+                        width: document.getElementById('siteWidth').value,
+                        header: document.getElementById('headerStyle').value,
+                        footer: document.getElementById('footerStyle').value,
+                        animation: document.getElementById('animationSpeed').value
+                    };
+                    break;
+                case 'visibility':
+                    settings.visibility = {
+                        testimonies: document.getElementById('showTestimonies').checked,
+                        events: document.getElementById('showEvents').checked,
+                        gallery: document.getElementById('showGallery').checked,
+                        give: document.getElementById('showGive').checked,
+                        prayerScheduler: document.getElementById('showPrayerScheduler').checked
+                    };
+                    break;
+            }
+            
+            localStorage.setItem('appearanceSettings', JSON.stringify(settings));
+            showSuccessMessage(`${type.charAt(0).toUpperCase() + type.slice(1)} settings saved successfully!`, 'success');
+        }
+
+        function previewSite() {
+            showSuccessMessage('Opening site preview in new tab...', 'info');
+            window.open('index.html', '_blank');
+        }
+
+        function resetAppearance() {
+            if (confirm('Are you sure you want to reset all appearance settings to default?')) {
+                localStorage.removeItem('appearanceSettings');
+                loadAppearanceSettings();
+                showSuccessMessage('Appearance settings reset to default successfully!', 'success');
+            }
+        }
+
+        function exportAppearance() {
+            const settings = JSON.parse(localStorage.getItem('appearanceSettings') || '{}');
+            const exportData = {
+                appearanceSettings: settings,
+                exportDate: new Date().toISOString(),
+                version: '1.0'
+            };
+            
+            const dataStr = JSON.stringify(exportData, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(dataBlob);
+            link.download = 'church-appearance-settings.json';
+            link.click();
+            
+            showSuccessMessage('Appearance settings exported successfully!', 'success');
+        }
+
+        function importAppearance() {
+            const importData = document.getElementById('appearanceImport').value;
+            
+            try {
+                const parsedData = JSON.parse(importData);
+                if (parsedData.appearanceSettings) {
+                    localStorage.setItem('appearanceSettings', JSON.stringify(parsedData.appearanceSettings));
+                    loadAppearanceSettings();
+                    showSuccessMessage('Appearance settings imported successfully!', 'success');
+                    document.getElementById('appearanceImport').value = '';
+                } else {
+                    showSuccessMessage('Invalid import format. Please check your JSON data.', 'error');
+                }
+            } catch (error) {
+                showSuccessMessage('Error parsing JSON data. Please check your format.', 'error');
+            }
+        }
+    </script>
+</body>
+</html>

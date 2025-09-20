@@ -1,0 +1,134 @@
+/* Service Times Section - Clean Design */
+.service-times-section {
+  background: var(--bg);
+  padding: 3rem 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+[data-theme="dark"] .service-times-section {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.service-times-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--primary) 50%, transparent 100%);
+}
+
+.service-times-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--primary) 50%, transparent 100%);
+}
+
+.service-times-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.service-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1;
+}
+
+.service-day {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.service-time {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.service-divider {
+  width: 1px;
+  height: 50px;
+  background: linear-gradient(180deg, transparent 0%, var(--primary) 50%, transparent 100%);
+  opacity: 0.4;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .service-times-section {
+    padding: 2.5rem 0;
+  }
+  
+  .service-times-content {
+    gap: 2rem;
+  }
+  
+  .service-day {
+    font-size: 0.9rem;
+  }
+  
+  .service-time {
+    font-size: 1.1rem;
+  }
+  
+  .service-divider {
+    height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .service-times-section {
+    padding: 2rem 0;
+  }
+  
+  .service-times-content {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .service-item {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .service-item:last-child {
+    border-bottom: none;
+  }
+  
+  .service-day {
+    font-size: 1rem;
+    margin-bottom: 0;
+  }
+  
+  .service-time {
+    font-size: 1.1rem;
+  }
+  
+  .service-divider {
+    display: none;
+  }
+}

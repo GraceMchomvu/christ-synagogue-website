@@ -1,0 +1,2011 @@
+/* Mobile-First Design - Beautiful Mobile Experience */
+
+/* Mobile-First Base Styles */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+body {
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Mobile Header */
+.site-header {
+  padding: 0.75rem 0;
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.95);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.header-inner {
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.brand img {
+  width: 24px;
+  height: 24px;
+}
+
+.brand span {
+  font-size: 0.9rem;
+}
+
+/* Mobile Navigation */
+.nav-toggle {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.nav-toggle span {
+  width: 20px;
+  height: 2px;
+  background: var(--brand-500);
+  border-radius: 1px;
+  transition: all 0.3s ease;
+}
+
+.nav-toggle.open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.nav-toggle.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+
+.nav-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  transform: translateX(-100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-menu.open {
+  transform: translateX(0);
+}
+
+.nav-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  text-align: center;
+}
+
+.nav-menu a {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  display: block;
+}
+
+.nav-menu a:hover {
+  background: linear-gradient(135deg, var(--brand-500) 0%, var(--accent) 100%);
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Mobile Hero Section */
+.hero {
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, var(--bg) 0%, var(--bg-alt) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -30%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.hero-text {
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.church-name span {
+  font-size: 1.4rem;
+  font-weight: 800;
+  line-height: 1.2;
+  background: linear-gradient(135deg, var(--brand-500) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.church-abbreviation span {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.hero-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 2rem;
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+.title-line {
+  background: linear-gradient(135deg, var(--brand-500) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+}
+
+.title-line::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--brand-500) 0%, var(--accent) 100%);
+  border-radius: 2px;
+}
+
+.hero-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.btn {
+  padding: 0.875rem 2rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 200px;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--brand-500) 0%, var(--brand-600) 100%);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(79, 70, 229, 0.4);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--brand-500);
+  border: 2px solid var(--brand-500);
+}
+
+.btn-secondary:hover {
+  background: var(--brand-500);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Mobile Moving Photos */
+.moving-photos {
+  padding: 2rem 0;
+  background: linear-gradient(135deg, var(--bg-alt) 0%, var(--bg) 100%);
+  overflow: hidden;
+}
+
+.photos-container {
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+}
+
+.photo-stream {
+  display: flex;
+  gap: 1rem;
+  animation: slidePhotos 25s linear infinite;
+  height: 100%;
+}
+
+.photo-item {
+  flex: 0 0 auto;
+  width: 120px;
+  height: 150px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.photo-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.photo-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+  color: white;
+  padding: 0.75rem;
+  text-align: center;
+}
+
+.photo-overlay h3 {
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem 0;
+}
+
+.photo-overlay p {
+  font-size: 0.7rem;
+  margin: 0;
+  opacity: 0.9;
+}
+
+@keyframes slidePhotos {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Mobile Service Times */
+.service-times-section {
+  padding: 2rem 0;
+  background: linear-gradient(135deg, var(--bg) 0%, var(--bg-alt) 100%);
+  position: relative;
+}
+
+.service-times-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--brand-500) 0%, var(--accent) 100%);
+}
+
+.service-times-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.service-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 300px;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.service-day {
+  font-weight: 600;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.service-time {
+  font-weight: 700;
+  color: var(--brand-500);
+  font-size: 1rem;
+}
+
+/* Mobile About Section */
+#about {
+  padding: 3rem 0;
+  background: linear-gradient(135deg, var(--bg-alt) 0%, var(--bg) 100%);
+}
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 0 1rem;
+}
+
+.about-text h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  background: linear-gradient(135deg, var(--brand-500) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: center;
+}
+
+.about-text .lead {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--muted);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.about-values {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.value-statement {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(99, 102, 241, 0.15);
+  border-radius: 16px;
+  padding: 1.5rem;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.value-statement::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--brand-500) 0%, var(--accent) 100%);
+  border-radius: 16px 16px 0 0;
+}
+
+.value-statement h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--brand-600);
+  margin: 0 0 0.75rem 0;
+}
+
+.value-statement p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--text);
+  margin: 0;
+}
+
+.about-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+/* Mobile Prophet Image */
+.about-visual {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.prophet-image-container {
+  width: 100%;
+  max-width: 280px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.prophet-image-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.2);
+}
+
+.prophet-image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.prophet-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  padding: 1.5rem;
+  color: white;
+  text-align: center;
+}
+
+.prophet-overlay h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+}
+
+.prophet-overlay p {
+  font-size: 0.9rem;
+  margin: 0;
+  opacity: 0.9;
+}
+
+/* Mobile Payment Methods */
+.payment-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 0 1rem;
+}
+
+.payment-card {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(99, 102, 241, 0.15);
+  border-radius: 20px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.payment-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  border-radius: 20px 20px 0 0;
+}
+
+.mpesa-card::before {
+  background: linear-gradient(90deg, #E31837 0%, #FF1744 100%);
+}
+
+.crdb-card::before {
+  background: linear-gradient(90deg, #00A651 0%, #00C853 100%);
+}
+
+.payment-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.payment-logo svg {
+  width: 100px;
+  height: 40px;
+  border-radius: 8px;
+}
+
+.payment-details h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 0.5rem 0;
+  text-align: center;
+}
+
+.payment-details p {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin: 0 0 1rem 0;
+  text-align: center;
+}
+
+.payment-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.payment-label {
+  font-weight: 600;
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+.payment-value {
+  font-family: 'Courier New', monospace;
+  font-weight: 700;
+  color: var(--brand-600);
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+}
+
+.copy-btn {
+  background: linear-gradient(135deg, var(--brand-500) 0%, var(--brand-600) 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 0.5rem;
+  width: 100%;
+}
+
+.copy-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+}
+
+/* Mobile Footer */
+.site-footer {
+  background: linear-gradient(135deg, var(--bg-alt) 0%, var(--bg) 100%);
+  padding: 2rem 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--brand-500);
+}
+
+.social {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.social-link {
+  display: inline-flex;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(99, 102, 241, 0.08) 100%);
+  border: 2px solid rgba(99, 102, 241, 0.25);
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.social-link:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+}
+
+.social-link svg {
+  width: 20px;
+  height: 20px;
+  color: var(--brand-500);
+  transition: all 0.3s ease;
+}
+
+.social-link:hover svg {
+  color: white;
+  transform: scale(1.1);
+}
+
+/* Mobile Header Controls */
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.theme-toggle svg {
+  width: 20px;
+  height: 20px;
+  color: var(--brand-500);
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover svg {
+  color: var(--brand-600);
+  transform: scale(1.1);
+}
+
+.lang-toggle {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(99, 102, 241, 0.05) 100%);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 8px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--brand-500);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.lang-toggle:hover {
+  background: var(--brand-500);
+  color: white;
+  transform: translateY(-1px);
+}
+
+/* Mobile Sermons Section */
+#sermons {
+  padding: 3rem 0;
+  background: linear-gradient(135deg, var(--bg) 0%, var(--bg-alt) 100%);
+}
+
+.sermons-content {
+  padding: 0 1rem;
+}
+
+.sermons-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.sermon-card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.sermon-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+}
+
+.sermon-video {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  background: #000;
+}
+
+.sermon-video iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.sermon-info {
+  padding: 1.5rem;
+}
+
+.sermon-info h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 0.5rem 0;
+}
+
+.sermon-info p {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* Mobile Prayer Scheduler */
+#prayer-scheduler {
+  padding: 3rem 0;
+  background: linear-gradient(135deg, var(--bg-alt) 0%, var(--bg) 100%);
+}
+
+.prayer-content {
+  padding: 0 1rem;
+}
+
+.prayer-form {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  margin-top: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid rgba(99, 102, 241, 0.2);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--brand-500);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.form-group textarea {
+  height: 120px;
+  resize: vertical;
+}
+
+/* Mobile Gallery */
+#gallery {
+  padding: 3rem 0;
+  background: linear-gradient(135deg, var(--bg) 0%, var(--bg-alt) 100%);
+}
+
+.gallery-content {
+  padding: 0 1rem;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.gallery-item {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.gallery-item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.gallery-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+.gallery-overlay h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem 0;
+}
+
+.gallery-overlay p {
+  font-size: 0.75rem;
+  margin: 0;
+  opacity: 0.9;
+}
+
+/* Mobile Visit Section */
+#visit {
+  padding: 3rem 0;
+  background: linear-gradient(135deg, var(--bg-alt) 0%, var(--bg) 100%);
+}
+
+.visit-content {
+  padding: 0 1rem;
+}
+
+.visit-info {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  margin-top: 2rem;
+}
+
+.visit-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 12px;
+  border: 1px solid rgba(99, 102, 241, 0.15);
+}
+
+.visit-item:last-child {
+  margin-bottom: 0;
+}
+
+.visit-icon {
+  flex: 0 0 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--brand-500) 0%, var(--accent) 100%);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.visit-icon svg {
+  width: 20px;
+  height: 20px;
+  color: white;
+}
+
+.visit-details h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 0.25rem 0;
+}
+
+.visit-details p {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* Mobile Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-text,
+.about-text,
+.value-statement,
+.payment-card,
+.sermon-card,
+.prayer-form,
+.gallery-item,
+.visit-info {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.value-statement:nth-child(2),
+.payment-card:nth-child(2),
+.sermon-card:nth-child(2),
+.gallery-item:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.sermon-card:nth-child(3),
+.gallery-item:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.gallery-item:nth-child(4) {
+  animation-delay: 0.6s;
+}
+
+/* Touch-friendly interactions */
+@media (hover: none) and (pointer: coarse) {
+  .btn:hover,
+  .payment-card:hover,
+  .value-statement:hover,
+  .social-link:hover {
+    transform: none;
+  }
+  
+  .btn:active,
+  .payment-card:active,
+  .value-statement:active,
+  .social-link:active {
+    transform: scale(0.98);
+  }
+}
+
+/* Tablet Styles (768px and up) */
+@media (min-width: 768px) {
+  /* Header */
+  .site-header {
+    padding: 1rem 0;
+  }
+  
+  .header-inner {
+    padding: 0 2rem;
+  }
+  
+  .brand {
+    font-size: 1.1rem;
+  }
+  
+  .brand img {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .brand span {
+    font-size: 1rem;
+  }
+  
+  /* Hide mobile nav toggle, show desktop nav */
+  .nav-toggle {
+    display: none;
+  }
+  
+  .nav-menu {
+    position: static;
+    background: none;
+    backdrop-filter: none;
+    transform: none;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding: 0;
+  }
+  
+  .nav-menu ul {
+    flex-direction: row;
+    gap: 2rem;
+  }
+  
+  .nav-menu a {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+  }
+  
+  /* Hero Section */
+  .hero {
+    padding: 0;
+  }
+  
+  .hero-text {
+    padding: 0 2rem;
+  }
+  
+  .church-name span {
+    font-size: 1.6rem;
+  }
+  
+  .church-abbreviation span {
+    font-size: 1.1rem;
+  }
+  
+  .hero-title {
+    font-size: 2.2rem;
+  }
+  
+  .hero-actions {
+    flex-direction: row;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+  
+  .btn {
+    min-width: 180px;
+  }
+  
+  /* Moving Photos */
+  .moving-photos {
+    padding: 3rem 0;
+  }
+  
+  .photos-container {
+    height: 250px;
+  }
+  
+  .photo-item {
+    width: 150px;
+    height: 180px;
+  }
+  
+  .photo-overlay h3 {
+    font-size: 0.9rem;
+  }
+  
+  .photo-overlay p {
+    font-size: 0.75rem;
+  }
+  
+  /* Service Times */
+  .service-times-section {
+    padding: 3rem 0;
+  }
+  
+  .service-times-content {
+    flex-direction: row;
+    justify-content: center;
+    gap: 2rem;
+    padding: 0 2rem;
+  }
+  
+  .service-item {
+    max-width: 200px;
+    padding: 1.25rem;
+  }
+  
+  .service-day {
+    font-size: 1.1rem;
+  }
+  
+  .service-time {
+    font-size: 1.1rem;
+  }
+  
+  /* About Section */
+  #about {
+    padding: 4rem 0;
+  }
+  
+  .about-content {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 3rem;
+    padding: 0 2rem;
+  }
+  
+  .about-text {
+    flex: 1;
+  }
+  
+  .about-text h2 {
+    font-size: 2.5rem;
+    text-align: left;
+  }
+  
+  .about-text .lead {
+    font-size: 1.1rem;
+    text-align: left;
+  }
+  
+  .about-values {
+    gap: 2rem;
+  }
+  
+  .value-statement {
+    padding: 2rem;
+  }
+  
+  .value-statement h3 {
+    font-size: 1.3rem;
+  }
+  
+  .value-statement p {
+    font-size: 1rem;
+  }
+  
+  .about-visual {
+    flex: 0 0 300px;
+    margin-top: 0;
+  }
+  
+  .prophet-image-container {
+    max-width: 300px;
+  }
+  
+  .prophet-image {
+    height: 350px;
+  }
+  
+  .prophet-overlay h3 {
+    font-size: 1.3rem;
+  }
+  
+  .prophet-overlay p {
+    font-size: 1rem;
+  }
+  
+  /* Payment Methods */
+  .payment-methods {
+    flex-direction: row;
+    justify-content: center;
+    gap: 2rem;
+    padding: 0 2rem;
+  }
+  
+  .payment-card {
+    flex: 1;
+    max-width: 350px;
+    padding: 2rem;
+  }
+  
+  .payment-logo svg {
+    width: 120px;
+    height: 50px;
+  }
+  
+  .payment-details h3 {
+    font-size: 1.3rem;
+  }
+  
+  .payment-details p {
+    font-size: 1rem;
+  }
+  
+  .payment-info {
+    padding: 1.25rem;
+  }
+  
+  .payment-label {
+    font-size: 1rem;
+  }
+  
+  .payment-value {
+    font-size: 1.1rem;
+  }
+  
+  .copy-btn {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.25rem;
+  }
+  
+  /* Footer */
+  .site-footer {
+    padding: 3rem 0;
+  }
+  
+  .footer-inner {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0 2rem;
+    text-align: left;
+  }
+  
+  .footer-links {
+    justify-content: flex-start;
+    gap: 2rem;
+  }
+  
+  .footer-links a {
+    font-size: 1rem;
+  }
+  
+  .social {
+    justify-content: flex-end;
+  }
+  
+  .social-link {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .social-link svg {
+    width: 22px;
+    height: 22px;
+  }
+  
+  /* Header Controls */
+  .header-controls {
+    gap: 1rem;
+  }
+  
+  .theme-toggle {
+    padding: 0.6rem;
+  }
+  
+  .theme-toggle svg {
+    width: 22px;
+    height: 22px;
+  }
+  
+  .lang-toggle {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  /* Tablet Sermons */
+  .sermons-content {
+    padding: 0 2rem;
+  }
+  
+  .sermons-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+  
+  .sermon-video {
+    height: 220px;
+  }
+  
+  .sermon-info {
+    padding: 2rem;
+  }
+  
+  .sermon-info h3 {
+    font-size: 1.3rem;
+  }
+  
+  .sermon-info p {
+    font-size: 1rem;
+  }
+  
+  /* Tablet Prayer Scheduler */
+  .prayer-content {
+    padding: 0 2rem;
+  }
+  
+  .prayer-form {
+    padding: 2.5rem;
+  }
+  
+  .form-group label {
+    font-size: 1rem;
+  }
+  
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    padding: 1rem;
+    font-size: 1.1rem;
+  }
+  
+  .form-group textarea {
+    height: 140px;
+  }
+  
+  /* Tablet Gallery */
+  .gallery-content {
+    padding: 0 2rem;
+  }
+  
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  
+  .gallery-item img {
+    height: 180px;
+  }
+  
+  .gallery-overlay h3 {
+    font-size: 1rem;
+  }
+  
+  .gallery-overlay p {
+    font-size: 0.8rem;
+  }
+  
+  /* Tablet Visit */
+  .visit-content {
+    padding: 0 2rem;
+  }
+  
+  .visit-info {
+    padding: 2.5rem;
+  }
+  
+  .visit-item {
+    padding: 1.25rem;
+  }
+  
+  .visit-icon {
+    flex: 0 0 48px;
+    height: 48px;
+  }
+  
+  .visit-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .visit-details h4 {
+    font-size: 1.1rem;
+  }
+  
+  .visit-details p {
+    font-size: 1rem;
+  }
+}
+
+/* Desktop Styles (1024px and up) */
+@media (min-width: 1024px) {
+  /* Header */
+  .site-header {
+    padding: 1.25rem 0;
+  }
+  
+  .header-inner {
+    padding: 0 3rem;
+  }
+  
+  .brand {
+    font-size: 1.2rem;
+  }
+  
+  .brand img {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .brand span {
+    font-size: 1.1rem;
+  }
+  
+  .nav-menu ul {
+    gap: 2.5rem;
+  }
+  
+  .nav-menu a {
+    font-size: 1.1rem;
+    padding: 0.6rem 1.25rem;
+  }
+  
+  /* Hero Section */
+  .hero {
+    padding: 0;
+  }
+  
+  .hero-text {
+    padding: 0 3rem;
+  }
+  
+  .church-name span {
+    font-size: 1.8rem;
+  }
+  
+  .church-abbreviation span {
+    font-size: 1.2rem;
+  }
+  
+  .hero-title {
+    font-size: 2.8rem;
+  }
+  
+  .hero-actions {
+    gap: 2rem;
+  }
+  
+  .btn {
+    min-width: 200px;
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+  }
+  
+  /* Moving Photos */
+  .moving-photos {
+    padding: 4rem 0;
+  }
+  
+  .photos-container {
+    height: 300px;
+  }
+  
+  .photo-item {
+    width: 180px;
+    height: 220px;
+  }
+  
+  .photo-overlay h3 {
+    font-size: 1rem;
+  }
+  
+  .photo-overlay p {
+    font-size: 0.8rem;
+  }
+  
+  /* Service Times */
+  .service-times-section {
+    padding: 4rem 0;
+  }
+  
+  .service-times-content {
+    gap: 3rem;
+    padding: 0 3rem;
+  }
+  
+  .service-item {
+    max-width: 250px;
+    padding: 1.5rem;
+  }
+  
+  .service-day {
+    font-size: 1.2rem;
+  }
+  
+  .service-time {
+    font-size: 1.2rem;
+  }
+  
+  /* About Section */
+  #about {
+    padding: 5rem 0;
+  }
+  
+  .about-content {
+    gap: 4rem;
+    padding: 0 3rem;
+  }
+  
+  .about-text h2 {
+    font-size: 3rem;
+  }
+  
+  .about-text .lead {
+    font-size: 1.2rem;
+  }
+  
+  .about-values {
+    gap: 2.5rem;
+  }
+  
+  .value-statement {
+    padding: 2.5rem;
+  }
+  
+  .value-statement h3 {
+    font-size: 1.4rem;
+  }
+  
+  .value-statement p {
+    font-size: 1.1rem;
+  }
+  
+  .about-visual {
+    flex: 0 0 350px;
+  }
+  
+  .prophet-image-container {
+    max-width: 350px;
+  }
+  
+  .prophet-image {
+    height: 400px;
+  }
+  
+  .prophet-overlay h3 {
+    font-size: 1.4rem;
+  }
+  
+  .prophet-overlay p {
+    font-size: 1.1rem;
+  }
+  
+  /* Payment Methods */
+  .payment-methods {
+    gap: 3rem;
+    padding: 0 3rem;
+  }
+  
+  .payment-card {
+    max-width: 400px;
+    padding: 2.5rem;
+  }
+  
+  .payment-logo svg {
+    width: 140px;
+    height: 60px;
+  }
+  
+  .payment-details h3 {
+    font-size: 1.4rem;
+  }
+  
+  .payment-details p {
+    font-size: 1.1rem;
+  }
+  
+  .payment-info {
+    padding: 1.5rem;
+  }
+  
+  .payment-label {
+    font-size: 1.1rem;
+  }
+  
+  .payment-value {
+    font-size: 1.2rem;
+  }
+  
+  .copy-btn {
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+  }
+  
+  /* Footer */
+  .site-footer {
+    padding: 4rem 0;
+  }
+  
+  .footer-inner {
+    padding: 0 3rem;
+  }
+  
+  .footer-links {
+    gap: 2.5rem;
+  }
+  
+  .footer-links a {
+    font-size: 1.1rem;
+  }
+  
+  .social-link {
+    width: 52px;
+    height: 52px;
+  }
+  
+  .social-link svg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  /* Header Controls */
+  .header-controls {
+    gap: 1.25rem;
+  }
+  
+  .theme-toggle {
+    padding: 0.75rem;
+  }
+  
+  .theme-toggle svg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .lang-toggle {
+    padding: 0.6rem 1.25rem;
+    font-size: 1rem;
+  }
+  
+  /* Desktop Sermons */
+  .sermons-content {
+    padding: 0 3rem;
+  }
+  
+  .sermons-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+  
+  .sermon-video {
+    height: 250px;
+  }
+  
+  .sermon-info {
+    padding: 2.5rem;
+  }
+  
+  .sermon-info h3 {
+    font-size: 1.4rem;
+  }
+  
+  .sermon-info p {
+    font-size: 1.1rem;
+  }
+  
+  /* Desktop Prayer Scheduler */
+  .prayer-content {
+    padding: 0 3rem;
+  }
+  
+  .prayer-form {
+    padding: 3rem;
+    max-width: 600px;
+    margin: 2rem auto 0;
+  }
+  
+  .form-group label {
+    font-size: 1.1rem;
+  }
+  
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    padding: 1.25rem;
+    font-size: 1.2rem;
+  }
+  
+  .form-group textarea {
+    height: 160px;
+  }
+  
+  /* Desktop Gallery */
+  .gallery-content {
+    padding: 0 3rem;
+  }
+  
+  .gallery-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+  
+  .gallery-item img {
+    height: 220px;
+  }
+  
+  .gallery-overlay h3 {
+    font-size: 1.1rem;
+  }
+  
+  .gallery-overlay p {
+    font-size: 0.9rem;
+  }
+  
+  /* Desktop Visit */
+  .visit-content {
+    padding: 0 3rem;
+  }
+  
+  .visit-info {
+    padding: 3rem;
+    max-width: 800px;
+    margin: 2rem auto 0;
+  }
+  
+  .visit-item {
+    padding: 1.5rem;
+  }
+  
+  .visit-icon {
+    flex: 0 0 56px;
+    height: 56px;
+  }
+  
+  .visit-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .visit-details h4 {
+    font-size: 1.2rem;
+  }
+  
+  .visit-details p {
+    font-size: 1.1rem;
+  }
+}
+
+/* Large Desktop Styles (1440px and up) */
+@media (min-width: 1440px) {
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .header-inner,
+  .hero-text,
+  .service-times-content,
+  .about-content,
+  .payment-methods,
+  .footer-inner,
+  .sermons-content,
+  .prayer-content,
+  .gallery-content,
+  .visit-content {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  
+  /* Hero Section */
+  .hero-title {
+    font-size: 3.2rem;
+  }
+  
+  .church-name span {
+    font-size: 2rem;
+  }
+  
+  .church-abbreviation span {
+    font-size: 1.3rem;
+  }
+  
+  /* About Section */
+  .about-text h2 {
+    font-size: 3.5rem;
+  }
+  
+  .about-text .lead {
+    font-size: 1.3rem;
+  }
+  
+  /* Payment Methods */
+  .payment-methods {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .payment-card {
+    max-width: 450px;
+  }
+  
+  /* Footer */
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+/* Ultra-wide Desktop Styles (1920px and up) */
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1400px;
+  }
+  
+  .header-inner,
+  .hero-text,
+  .service-times-content,
+  .about-content,
+  .payment-methods,
+  .footer-inner,
+  .sermons-content,
+  .prayer-content,
+  .gallery-content,
+  .visit-content {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  /* Hero Section */
+  .hero-title {
+    font-size: 3.8rem;
+  }
+  
+  .church-name span {
+    font-size: 2.2rem;
+  }
+  
+  .church-abbreviation span {
+    font-size: 1.4rem;
+  }
+  
+  /* About Section */
+  .about-text h2 {
+    font-size: 4rem;
+  }
+  
+  .about-text .lead {
+    font-size: 1.4rem;
+  }
+  
+  /* Payment Methods */
+  .payment-methods {
+    max-width: 1200px;
+  }
+  
+  .payment-card {
+    max-width: 500px;
+  }
+  
+  /* Ultra-wide Sermons */
+  .sermons-grid {
+    max-width: 1200px;
+    margin: 2rem auto 0;
+  }
+  
+  /* Ultra-wide Gallery */
+  .gallery-grid {
+    max-width: 1400px;
+    margin: 2rem auto 0;
+  }
+  
+  /* Ultra-wide Prayer Form */
+  .prayer-form {
+    max-width: 700px;
+  }
+  
+  /* Ultra-wide Visit Info */
+  .visit-info {
+    max-width: 900px;
+  }
+}
+
+/* Additional Responsive Enhancements */
+
+/* Landscape Mobile Optimization */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero {
+    min-height: auto;
+    padding: 0;
+  }
+  
+  .hero-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .hero-actions {
+    margin-top: 1rem;
+  }
+  
+  .nav-menu {
+    gap: 1rem;
+  }
+  
+  .nav-menu a {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+/* High DPI Displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .brand img,
+  .theme-toggle svg,
+  .social-link svg,
+  .visit-icon svg {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .photo-stream {
+    animation: none;
+  }
+  
+  .hero-text,
+  .about-text,
+  .value-statement,
+  .payment-card,
+  .sermon-card,
+  .prayer-form,
+  .gallery-item,
+  .visit-info {
+    animation: none;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .site-header,
+  .nav-toggle,
+  .theme-toggle,
+  .lang-toggle,
+  .hero-actions,
+  .btn,
+  .social,
+  .site-footer {
+    display: none !important;
+  }
+  
+  .hero,
+  .section {
+    page-break-inside: avoid;
+  }
+  
+  .hero-title,
+  .about-text h2,
+  .section-head h2 {
+    color: #000 !important;
+  }
+  
+  .hero-subtitle p,
+  .about-text .lead,
+  .section-subtitle {
+    color: #333 !important;
+  }
+}

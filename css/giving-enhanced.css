@@ -1,0 +1,314 @@
+/* Enhanced Giving Section - M-Pesa & CRDB Payment Methods */
+
+#give {
+  position: relative;
+  overflow: hidden;
+}
+
+#give::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+#give .container {
+  position: relative;
+  z-index: 1;
+}
+
+.section-head {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-head h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, var(--brand-500) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  color: var(--muted);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Payment Methods Grid */
+.payment-methods {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+/* Payment Cards */
+.payment-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(99, 102, 241, 0.05) 100%);
+  border: 1px solid rgba(99, 102, 241, 0.15);
+  border-radius: 20px;
+  padding: 2rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.payment-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
+  border-color: rgba(99, 102, 241, 0.25);
+}
+
+.payment-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  border-radius: 20px 20px 0 0;
+}
+
+.mpesa-card::before {
+  background: linear-gradient(90deg, #E31837 0%, #FF1744 100%);
+}
+
+.crdb-card::before {
+  background: linear-gradient(90deg, #00A651 0%, #00C853 100%);
+}
+
+/* Payment Logo */
+.payment-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.payment-logo svg {
+  width: 120px;
+  height: 48px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Payment Details */
+.payment-details h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 0.5rem 0;
+  text-align: center;
+}
+
+.payment-details p {
+  font-size: 1rem;
+  color: var(--muted);
+  margin: 0 0 1.5rem 0;
+  text-align: center;
+}
+
+/* Payment Info */
+.payment-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  transition: all 0.2s ease;
+}
+
+.payment-info:hover {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(99, 102, 241, 0.2);
+}
+
+.payment-label {
+  font-weight: 600;
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+.payment-value {
+  font-family: 'Courier New', monospace;
+  font-weight: 700;
+  color: var(--brand-600);
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+}
+
+.copy-btn {
+  background: linear-gradient(135deg, var(--brand-500) 0%, var(--brand-600) 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3);
+}
+
+.copy-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+}
+
+.copy-btn:active {
+  transform: translateY(0);
+}
+
+/* Scripture Card */
+.scripture-card {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(8, 145, 178, 0.05) 100%);
+  border: 1px solid rgba(99, 102, 241, 0.15);
+  border-radius: 20px;
+  padding: 2.5rem;
+  text-align: center;
+  position: relative;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.scripture-icon {
+  width: 48px;
+  height: 48px;
+  color: var(--brand-500);
+  margin: 0 auto 1.5rem auto;
+  display: block;
+}
+
+.scripture-card blockquote {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 1rem 0;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.scripture-card figcaption {
+  font-size: 1rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .payment-methods {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .payment-card {
+    padding: 1.5rem;
+  }
+  
+  .payment-details h3 {
+    font-size: 1.2rem;
+  }
+  
+  .payment-info {
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: center;
+  }
+  
+  .payment-value {
+    font-size: 0.9rem;
+  }
+  
+  .copy-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+  
+  .scripture-card {
+    padding: 2rem;
+  }
+  
+  .scripture-card blockquote {
+    font-size: 1.1rem;
+  }
+  
+  .section-head h2 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .payment-card {
+    padding: 1.25rem;
+  }
+  
+  .payment-logo svg {
+    width: 100px;
+    height: 40px;
+  }
+  
+  .payment-details h3 {
+    font-size: 1.1rem;
+  }
+  
+  .payment-details p {
+    font-size: 0.9rem;
+  }
+  
+  .payment-info {
+    padding: 0.75rem;
+  }
+  
+  .payment-label {
+    font-size: 0.8rem;
+  }
+  
+  .payment-value {
+    font-size: 0.85rem;
+  }
+  
+  .scripture-card {
+    padding: 1.5rem;
+  }
+  
+  .scripture-card blockquote {
+    font-size: 1rem;
+  }
+  
+  .section-head h2 {
+    font-size: 1.8rem;
+  }
+  
+  .section-subtitle {
+    font-size: 1rem;
+  }
+}
+
+/* Copy Success Animation */
+@keyframes copySuccess {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); background: var(--success); }
+  100% { transform: scale(1); }
+}
+
+.copy-btn.copied {
+  animation: copySuccess 0.3s ease;
+}
