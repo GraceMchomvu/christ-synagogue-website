@@ -5,8 +5,10 @@
   publish = "."
   
 [build.environment]
-  # Disable Node.js detection
+  # Disable Node.js detection completely
   NODE_VERSION = ""
+  NPM_FLAGS = ""
+  NODE_ENV = "production"
   
 # Redirect rules
 [[redirects]]

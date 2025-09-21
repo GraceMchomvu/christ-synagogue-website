@@ -1,16 +1,19 @@
 {
   "name": "christ-synagogue-website",
   "version": "1.0.0",
-  "description": "Christ Synagogue Ministries - Static HTML Website",
+  "description": "Christ Synagogue Ministries - Static HTML Website (No Build Required)",
   "main": "index.html",
   "scripts": {
-    "build": "echo 'No build step needed for static site'",
-    "start": "echo 'Static HTML site - no server needed'"
+    "build": "echo 'Static HTML site - no build required' && exit 0",
+    "start": "echo 'Static HTML site - no server needed' && exit 0",
+    "install": "echo 'No dependencies to install for static site' && exit 0"
   },
-  "keywords": ["church", "ministry", "static", "html"],
+  "keywords": ["church", "ministry", "static", "html", "no-build"],
   "author": "Christ Synagogue Ministries",
   "license": "MIT",
   "private": true,
+  "dependencies": {},
+  "devDependencies": {},
   "engines": {
     "node": ">=14.0.0"
   }
