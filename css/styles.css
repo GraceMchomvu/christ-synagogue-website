@@ -1018,11 +1018,49 @@ input:focus, textarea:focus {
 }
 
 /* Responsive */
+@media (max-width: 1200px) {
+  .grid.three.visit { 
+    grid-template-columns: repeat(2, minmax(0,1fr)); 
+    gap: 1.5rem;
+  }
+}
+
 @media (max-width: 900px) {
   .grid.two { grid-template-columns: 1fr; }
   .grid.three { grid-template-columns: 1fr; }
-  .grid.three.visit { grid-template-columns: 1fr; }
+  .grid.three.visit { 
+    grid-template-columns: 1fr; 
+    gap: 1rem;
+  }
   .section-head { flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 600px) {
+  .grid.three.visit { 
+    gap: 0.8rem;
+  }
+  .visit-info .card {
+    padding: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+  .visit-info .card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+  .visit-info .card p {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+  }
+  .btn-small {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    width: 100%;
+    text-align: center;
+  }
+  .visit-content {
+    padding: 0 1rem;
+  }
 }
 
 @media (max-width: 760px) {
