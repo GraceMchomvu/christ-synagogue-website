@@ -1149,6 +1149,28 @@ function resetAdminPassword() {
   }
 }
 
+// Force Reset Admin Password Function (for emergency use)
+function forceResetAdminPassword() {
+  // Clear all admin-related localStorage data
+  localStorage.removeItem('admin_settings');
+  localStorage.removeItem('admin_authenticated');
+  localStorage.removeItem('admin_user');
+  localStorage.removeItem('admin_data');
+  
+  // Reset to default admin settings
+  const defaultAdminSettings = {
+    username: 'admin',
+    password: 'admin123',
+    email: 'admin@christsynagogue.com',
+    lastLogin: null,
+    passwordChanged: false
+  };
+  
+  localStorage.setItem('admin_settings', JSON.stringify(defaultAdminSettings));
+  
+  alert('Admin password has been reset to default credentials:\nUsername: admin\nPassword: admin123\n\nPlease refresh the page and login.');
+}
+
 function showLoginModal() {
   document.getElementById('modal-title').textContent = 'Admin Login';
   document.getElementById('modal-body').innerHTML = `
@@ -1168,9 +1190,14 @@ function showLoginModal() {
     <div class="login-help">
       <p><strong>Default credentials:</strong> admin / admin123</p>
       <p><small>Change your password after first login for security</small></p>
-      <button type="button" class="btn btn-warning btn-small" onclick="resetAdminPassword()" style="margin-top: 0.5rem;">
-        Reset Password to Default
-      </button>
+      <div class="reset-buttons" style="margin-top: 0.5rem;">
+        <button type="button" class="btn btn-warning btn-small" onclick="resetAdminPassword()">
+          Reset Password to Default
+        </button>
+        <button type="button" class="btn btn-danger btn-small" onclick="forceResetAdminPassword()" style="margin-left: 0.5rem;">
+          Force Reset (Emergency)
+        </button>
+      </div>
     </div>
   `;
   
