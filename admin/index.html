@@ -82,6 +82,12 @@
           <path fill="currentColor" d="M12,2L2,7L12,12L22,7L12,2M2,17L12,22L22,17M2,12L12,17L22,12"/>
         </svg>
         Ministries
+      </button>        
+      <button class="nav-item" data-section="news">
+        <svg viewBox="0 0 24 24" width="20" height="20">
+          <path fill="currentColor" d="M4,6H20V8H4V6M4,11H20V13H4V11M4,16H20V18H4V16Z"/>
+        </svg>
+        News
       </button>
       <button class="nav-item" data-section="settings">
         <svg viewBox="0 0 24 24" width="20" height="20">
@@ -263,6 +269,95 @@
       <div class="content-grid">
         <div class="ministries-list" id="ministries-list">
           <!-- Ministries will be loaded here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- News Section -->
+    <section id="news-section" class="admin-section">
+      <div class="section-header">
+        <h2>News & Updates Management</h2>
+        <p>Manage the latest news, sermons, and updates that appear on the main website</p>
+      </div>
+      
+      <div class="news-preview">
+        <h3>News Section Preview</h3>
+        <div class="preview-container">
+          <div class="preview-news-grid">
+            <div class="preview-category">
+              <h4>📺 Latest Sermons</h4>
+              <div class="preview-items" id="preview-sermons">
+                <p class="preview-text">Latest 3 sermons will appear here</p>
+              </div>
+            </div>
+            <div class="preview-category">
+              <h4>📅 Upcoming Events</h4>
+              <div class="preview-items" id="preview-events">
+                <p class="preview-text">Upcoming events will appear here</p>
+              </div>
+            </div>
+            <div class="preview-category">
+              <h4>🙏 Recent Testimonies</h4>
+              <div class="preview-items" id="preview-testimonies">
+                <p class="preview-text">Recent testimonies will appear here</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="news-management">
+        <div class="management-card">
+          <h3>News Section Settings</h3>
+          <p>The News section automatically displays the latest content from your sermons, events, and testimonies. No additional management is needed - it updates automatically when you add new content.</p>
+          
+          <div class="news-stats">
+            <div class="stat-item">
+              <span class="stat-number" id="news-sermons-count">0</span>
+              <span class="stat-label">Sermons Available</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number" id="news-events-count">0</span>
+              <span class="stat-label">Upcoming Events</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number" id="news-testimonies-count">0</span>
+              <span class="stat-label">Testimonies Available</span>
+            </div>
+          </div>
+          
+          <div class="news-actions">
+            <button class="btn btn-primary" onclick="showSection('sermons')">
+              Manage Sermons
+            </button>
+            <button class="btn btn-primary" onclick="showSection('events')">
+              Manage Events
+            </button>
+            <button class="btn btn-primary" onclick="showSection('testimonies')">
+              Manage Testimonies
+            </button>
+          </div>
+        </div>
+        
+        <div class="management-card">
+          <h3>How News Section Works</h3>
+          <ul class="news-info-list">
+            <li><strong>Latest Sermons:</strong> Shows the 3 most recent sermons by date</li>
+            <li><strong>Upcoming Events:</strong> Shows the 3 nearest future events by date</li>
+            <li><strong>Recent Testimonies:</strong> Shows the 3 most recent testimonies by date</li>
+            <li><strong>Auto-Update:</strong> Content updates automatically when you add new items</li>
+            <li><strong>Clickable:</strong> Each news item links to the relevant section</li>
+          </ul>
+          
+          <div class="news-tips">
+            <h4>💡 Tips for Better News Section:</h4>
+            <ul>
+              <li>Add thumbnails to sermons for better visual appeal</li>
+              <li>Use descriptive titles and descriptions</li>
+              <li>Keep event dates current and accurate</li>
+              <li>Add member testimonies regularly</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>

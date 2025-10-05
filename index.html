@@ -54,6 +54,7 @@
 <link rel="preload" href="css/creative-layouts.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <link rel="preload" href="js/main.js" as="script">
 <link rel="preload" href="js/translations.js" as="script">
+<link rel="preload" href="js/admin-data-loader.js" as="script">
 <meta name="theme-color" content="#1f2937" id="theme-color-meta">
 <link rel="manifest" href="manifest.json">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -85,6 +86,7 @@ body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,
     <nav class="site-nav nav-menu" aria-label="Primary navigation">
       <ul>
         <li><a href="#about" data-translate="nav.about">About</a></li>
+        <li><a href="#news">News</a></li>
         <li><a href="#sermons" data-translate="nav.sermons">Sermons</a></li>
         <li><a href="#testimonies" data-translate="nav.testimonies">Testimonies</a></li>
         <li><a href="#prayer-scheduler" data-translate="nav.prayer">Prayer</a></li>
@@ -94,6 +96,7 @@ body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,
         <li><a href="#visit" data-translate="nav.visit">Visit</a></li>
         <li><a href="#give" class="btn btn-small" data-translate="nav.give">Give</a></li>
         <li><a href="#contact" data-translate="nav.contact">Contact</a></li>
+        <li><a href="admin/index.html" class="admin-link" title="Admin Panel">⚙️</a></li>
       </ul>
     </nav>
     
@@ -270,6 +273,53 @@ body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,
       </div>
     </section>
 
+    <!-- News Section - Latest Updates -->
+    <section id="news" class="section alt">
+      <div class="container">
+        <div class="section-head">
+          <h2>Latest News & Updates</h2>
+          <p class="section-subtitle">Stay connected with the latest sermons, events, and ministry updates</p>
+        </div>
+        <div class="news-grid">
+          <!-- Latest Sermons -->
+          <div class="news-category">
+            <h3>📺 Latest Sermons</h3>
+            <div class="news-items" id="latest-sermons">
+              <div class="loading-placeholder">
+                <p>Loading latest sermons...</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Recent Events -->
+          <div class="news-category">
+            <h3>📅 Upcoming Events</h3>
+            <div class="news-items" id="upcoming-events">
+              <div class="loading-placeholder">
+                <p>Loading upcoming events...</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Latest Testimonies -->
+          <div class="news-category">
+            <h3>🙏 Recent Testimonies</h3>
+            <div class="news-items" id="recent-testimonies">
+              <div class="loading-placeholder">
+                <p>Loading recent testimonies...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="news-cta">
+          <a href="#sermons" class="btn btn-primary">View All Sermons</a>
+          <a href="#events" class="btn btn-secondary">View All Events</a>
+          <a href="#testimonies" class="btn btn-secondary">View All Testimonies</a>
+        </div>
+      </div>
+    </section>
+
     <!-- Sermons Section - Watch Content -->
     <section id="sermons" class="section">
       <div class="container">
@@ -278,23 +328,9 @@ body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,
           <a class="btn btn-small" href="https://www.youtube.com/@ogillob" target="_blank" rel="noopener" aria-label="Browse all sermons" data-translate="sermons.browseAll">Browse All</a>
         </div>
         <div class="sermons-grid">
-          <div class="sermon-video">
-            <h3 data-translate="sermons.latest">Latest Prophetic Service</h3>
-            <div class="video-wrapper">
-              <iframe src="https://www.youtube.com/embed/KiEn5ZFb1yA" title="Latest Prophetic Service" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            </div>
-          </div>
-          <div class="sermon-video">
-            <h3 data-translate="sermons.deliverance">Deliverance & Prayer Service</h3>
-            <div class="video-wrapper">
-              <iframe src="https://www.youtube.com/embed/OKFPX4s0BSg" title="Deliverance & Prayer Service" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            </div>
-          </div>
-          <div class="sermon-video">
-            <h3 data-translate="sermons.worship">Spirit-Filled Worship</h3>
-            <div class="video-wrapper">
-              <iframe src="https://www.youtube.com/embed/Ylv-yPbpkCU" title="Spirit-Filled Worship" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            </div>
+          <!-- Sermons will be loaded dynamically from admin panel -->
+          <div class="loading-placeholder">
+            <p>Loading sermons...</p>
           </div>
         </div>
       </div>
@@ -304,70 +340,9 @@ body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,
     <section id="testimonies" class="testimonies-section">
       <div class="container">
         <div class="testimonies-sequential">
-          <div class="testimony-card">
-            <div class="testimony-content">
-              <div class="quote-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z" fill="currentColor"/>
-                </svg>
-              </div>
-              <blockquote class="testimony-quote">
-                "Through Prophet Baraka's ministry, I found deliverance from years of spiritual bondage. The prophetic word spoken over my life has brought breakthrough and restoration I never thought possible."
-              </blockquote>
-              <div class="testimony-author">
-                <div class="author-photo">
-                  <img src="images/IMG_0570.JPG" alt="Sarah M." style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
-                </div>
-                <div class="author-info">
-                  <h4>Sarah M.</h4>
-                  <p>Deliverance Ministry</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="testimony-card">
-            <div class="testimony-content">
-              <div class="quote-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z" fill="currentColor"/>
-                </svg>
-              </div>
-              <blockquote class="testimony-quote">
-                "The healing power of God manifested in my life during a service. What doctors couldn't fix, God healed completely. I'm forever grateful for this ministry."
-              </blockquote>
-              <div class="testimony-author">
-                <div class="author-photo">
-                  <img src="images/IMG_0588.JPG" alt="John K." style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
-                </div>
-                <div class="author-info">
-                  <h4>John K.</h4>
-                  <p>Healing Ministry</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="testimony-card">
-            <div class="testimony-content">
-              <div class="quote-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z" fill="currentColor"/>
-                </svg>
-              </div>
-              <blockquote class="testimony-quote">
-                "The prophetic guidance I received has transformed my business and family life. God's word through this ministry has been a lamp to my feet and a light to my path."
-              </blockquote>
-              <div class="testimony-author">
-                <div class="author-photo">
-                  <img src="images/IMG_0812.JPG" alt="Mary W." style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
-                </div>
-                <div class="author-info">
-                  <h4>Mary W.</h4>
-                  <p>Prophetic Ministry</p>
-                </div>
-              </div>
-            </div>
+          <!-- Testimonies will be loaded dynamically from admin panel -->
+          <div class="loading-placeholder">
+            <p>Loading testimonies...</p>
           </div>
         </div>
       </div>
@@ -467,164 +442,9 @@ body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,
           <p class="section-subtitle" data-translate="gallery.subtitle">Capturing moments of worship, fellowship, and ministry</p>
         </div>
         <div class="photo-grid">
-          <div class="photo-sequence">
-            <!-- Complete set of all photos for seamless loop -->
-            <div class="photo-item">
-              <img src="images/PROPHET1.jpg" alt="Prophet Baraka David Ogillo leading worship" loading="lazy">
-              <div class="photo-overlay">
-                <h3 data-translate="gallery.prophet">Prophet Baraka David Ogillo</h3>
-                <p data-translate="gallery.prophetDesc">Founder and leader of Christ Synagogue Ministries</p>
-              </div>
-            </div>
-            <div class="photo-item">
-              <img src="images/PROPHET2.jpg" alt="Prophet ministering to congregation" loading="lazy">
-              <div class="photo-overlay">
-                <h3 data-translate="gallery.propheticMinistry">Prophetic Ministry</h3>
-                <p data-translate="gallery.propheticMinistryDesc">Divine direction and spiritual breakthrough</p>
-              </div>
-            </div>
-            <div class="photo-item">
-              <img src="images/IMG_0812.JPG" alt="Church worship service" loading="lazy">
-              <div class="photo-overlay">
-                <h3 data-translate="gallery.sundayWorship">Sunday Worship</h3>
-                <p data-translate="gallery.sundayWorshipDesc">Spirit-filled worship and praise</p>
-              </div>
-            </div>
-            <div class="photo-item">
-              <img src="images/IMG_1527.JPG" alt="Prayer and deliverance session" loading="lazy">
-              <div class="photo-overlay">
-                <h3 data-translate="gallery.prayerMinistry">Prayer Ministry</h3>
-                <p data-translate="gallery.prayerMinistryDesc">Breaking spiritual chains</p>
-              </div>
-            </div>
-            <div class="photo-item">
-              <img src="images/IMG_1530.JPG" alt="Church congregation gathering" loading="lazy">
-              <div class="photo-overlay">
-                <h3 data-translate="gallery.fellowship">Fellowship</h3>
-                <p data-translate="gallery.fellowshipDesc">Community and spiritual growth</p>
-              </div>
-            </div>
-            <div class="photo-item">
-              <img src="images/IMG_2136.JPG" alt="Ministry event" loading="lazy">
-              <div class="photo-overlay">
-                <h3 data-translate="gallery.ministryEvent">Ministry Event</h3>
-                <p data-translate="gallery.ministryEventDesc">Spreading the gospel message</p>
-              </div>
-            </div>
-            <div class="photo-item">
-              <img src="images/IMG_0570.JPG" alt="Church service and worship" loading="lazy">
-              <div class="photo-overlay">
-                <h3 data-translate="gallery.churchService">Church Service</h3>
-                <p data-translate="gallery.churchServiceDesc">Gathering in worship and fellowship</p>
-              </div>
-            </div>
-            <div class="photo-item">
-              <img src="images/IMG_0588.JPG" alt="Ministry and prayer" loading="lazy">
-              <div class="photo-overlay">
-                <h3 data-translate="gallery.ministryPrayer">Ministry Prayer</h3>
-                <p data-translate="gallery.ministryPrayerDesc">Seeking God's guidance and blessing</p>
-              </div>
-            </div>
-            <div class="photo-item">
-              <img src="images/IMG_1016.JPG" alt="Church community gathering" loading="lazy">
-              <div class="photo-overlay">
-                <h3 data-translate="gallery.communityGathering">Community Gathering</h3>
-                <p data-translate="gallery.communityGatheringDesc">Building strong relationships in Christ</p>
-              </div>
-            </div>
-            <div class="photo-item">
-              <img src="images/IMG_1539.JPG" alt="Worship and praise" loading="lazy">
-              <div class="photo-overlay">
-                <h3 data-translate="gallery.worshipPraise">Worship & Praise</h3>
-                <p data-translate="gallery.worshipPraiseDesc">Lifting voices in joyful worship</p>
-              </div>
-            </div>
-            <div class="photo-item">
-              <img src="images/IMG_1542.JPG" alt="Ministry outreach" loading="lazy">
-              <div class="photo-overlay">
-                <h3 data-translate="gallery.ministryOutreach">Ministry Outreach</h3>
-                <p data-translate="gallery.ministryOutreachDesc">Reaching out to the community</p>
-              </div>
-            </div>
-            
-            <!-- Duplicate set for seamless loop -->
-            <div class="photo-item">
-              <img src="images/PROPHET1.jpg" alt="Prophet Baraka David Ogillo leading worship" loading="lazy">
-              <div class="photo-overlay">
-                <h3 data-translate="gallery.prophet">Prophet Baraka David Ogillo</h3>
-                <p data-translate="gallery.prophetDesc">Founder and leader of Christ Synagogue Ministries</p>
-              </div>
-            </div>
-            <div class="photo-item">
-              <img src="images/PROPHET2.jpg" alt="Prophet ministering to congregation" loading="lazy">
-              <div class="photo-overlay">
-                <h3 data-translate="gallery.propheticMinistry">Prophetic Ministry</h3>
-                <p data-translate="gallery.propheticMinistryDesc">Divine direction and spiritual breakthrough</p>
-              </div>
-            </div>
-            <div class="photo-item">
-              <img src="images/IMG_0812.JPG" alt="Church worship service" loading="lazy">
-              <div class="photo-overlay">
-                <h3 data-translate="gallery.sundayWorship">Sunday Worship</h3>
-                <p data-translate="gallery.sundayWorshipDesc">Spirit-filled worship and praise</p>
-              </div>
-            </div>
-            <div class="photo-item">
-              <img src="images/IMG_1527.JPG" alt="Prayer and deliverance session" loading="lazy">
-              <div class="photo-overlay">
-                <h3 data-translate="gallery.prayerMinistry">Prayer Ministry</h3>
-                <p data-translate="gallery.prayerMinistryDesc">Breaking spiritual chains</p>
-              </div>
-            </div>
-            <div class="photo-item">
-              <img src="images/IMG_1530.JPG" alt="Church congregation gathering" loading="lazy">
-              <div class="photo-overlay">
-                <h3 data-translate="gallery.fellowship">Fellowship</h3>
-                <p data-translate="gallery.fellowshipDesc">Community and spiritual growth</p>
-              </div>
-            </div>
-            <div class="photo-item">
-              <img src="images/IMG_2136.JPG" alt="Ministry event" loading="lazy">
-              <div class="photo-overlay">
-                <h3 data-translate="gallery.ministryEvent">Ministry Event</h3>
-                <p data-translate="gallery.ministryEventDesc">Spreading the gospel message</p>
-              </div>
-            </div>
-            <div class="photo-item">
-              <img src="images/IMG_0570.JPG" alt="Church service and worship" loading="lazy">
-              <div class="photo-overlay">
-                <h3 data-translate="gallery.churchService">Church Service</h3>
-                <p data-translate="gallery.churchServiceDesc">Gathering in worship and fellowship</p>
-              </div>
-            </div>
-            <div class="photo-item">
-              <img src="images/IMG_0588.JPG" alt="Ministry and prayer" loading="lazy">
-              <div class="photo-overlay">
-                <h3 data-translate="gallery.ministryPrayer">Ministry Prayer</h3>
-                <p data-translate="gallery.ministryPrayerDesc">Seeking God's guidance and blessing</p>
-              </div>
-            </div>
-            <div class="photo-item">
-              <img src="images/IMG_1016.JPG" alt="Church community gathering" loading="lazy">
-              <div class="photo-overlay">
-                <h3 data-translate="gallery.communityGathering">Community Gathering</h3>
-                <p data-translate="gallery.communityGatheringDesc">Building strong relationships in Christ</p>
-              </div>
-            </div>
-            <div class="photo-item">
-              <img src="images/IMG_1539.JPG" alt="Worship and praise" loading="lazy">
-              <div class="photo-overlay">
-                <h3 data-translate="gallery.worshipPraise">Worship & Praise</h3>
-                <p data-translate="gallery.worshipPraiseDesc">Lifting voices in joyful worship</p>
-              </div>
-            </div>
-            <div class="photo-item">
-              <img src="images/IMG_1542.JPG" alt="Ministry outreach" loading="lazy">
-              <div class="photo-overlay">
-                <h3 data-translate="gallery.ministryOutreach">Ministry Outreach</h3>
-                <p data-translate="gallery.ministryOutreachDesc">Reaching out to the community</p>
-              </div>
-            </div>
+          <!-- Gallery images will be loaded dynamically from admin panel -->
+          <div class="loading-placeholder">
+            <p>Loading gallery...</p>
           </div>
         </div>
       </div>
@@ -636,19 +456,11 @@ body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,
           <h2 data-translate="events.title">Upcoming Events</h2>
           <a class="btn btn-small" href="#" aria-label="View calendar" data-translate="events.viewCalendar">View Calendar</a>
         </div>
-        <div class="grid two cards">
-          <article class="card event">
-            <h3 data-translate="events.conference">Prophetic Conference</h3>
-            <p class="muted" data-translate="events.upcoming">Upcoming Event</p>
-            <p data-translate="events.conferenceDesc">Join us for a powerful prophetic conference featuring divine direction and spiritual breakthrough.</p>
-            <a class="btn btn-primary btn-small" href="#" data-translate="events.register">Register</a>
-          </article>
-          <article class="card event">
-            <h3 data-translate="events.crusade">Deliverance Crusade</h3>
-            <p class="muted" data-translate="events.monthly">Monthly Event</p>
-            <p data-translate="events.crusadeDesc">Experience freedom from spiritual bondage through prayer, deliverance, and anointing services.</p>
-            <a class="btn btn-primary btn-small" href="#" data-translate="events.attend">Attend</a>
-          </article>
+        <div class="events-list">
+          <!-- Events will be loaded dynamically from admin panel -->
+          <div class="loading-placeholder">
+            <p>Loading events...</p>
+          </div>
         </div>
       </div>
     </section>
@@ -824,6 +636,7 @@ body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,
   <script src="js/translations.js"></script>
   <script src="js/main.js"></script>
   <script src="js/gallery-enhancements.js"></script>
+  <script src="js/admin-data-loader.js"></script>
   
   <!-- Manual theme toggle for testing -->
   <script>

@@ -199,6 +199,9 @@ function showSection(sectionName) {
       case 'ministries':
         loadMinistries();
         break;
+      case 'news':
+        loadNewsSection();
+        break;
     }
   }
 }
@@ -218,6 +221,7 @@ function loadAllContent() {
   loadEvents();
   loadGallery();
   loadMinistries();
+  loadNewsSection();
   loadSettings();
 }
 
@@ -376,6 +380,92 @@ function loadMinistries() {
       </div>
     </div>
   `).join('');
+}
+
+// Load news section
+function loadNewsSection() {
+  // Update news statistics
+  updateNewsStats();
+  
+  // Update preview content
+  updateNewsPreview();
+}
+
+// Update news statistics
+function updateNewsStats() {
+  const sermonsCount = adminData.sermons.length;
+  const upcomingEvents = adminData.events.filter(event => new Date(event.date) >= new Date()).length;
+  const testimoniesCount = adminData.testimonies.length;
+  
+  const sermonsCountEl = document.getElementById('news-sermons-count');
+  const eventsCountEl = document.getElementById('news-events-count');
+  const testimoniesCountEl = document.getElementById('news-testimonies-count');
+  
+  if (sermonsCountEl) sermonsCountEl.textContent = sermonsCount;
+  if (eventsCountEl) eventsCountEl.textContent = upcomingEvents;
+  if (testimoniesCountEl) testimoniesCountEl.textContent = testimoniesCount;
+}
+
+// Update news preview
+function updateNewsPreview() {
+  // Get latest content
+  const latestSermons = adminData.sermons
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .slice(0, 3);
+  
+  const upcomingEvents = adminData.events
+    .filter(event => new Date(event.date) >= new Date())
+    .sort((a, b) => new Date(a.date) - new Date(b.date))
+    .slice(0, 3);
+  
+  const recentTestimonies = adminData.testimonies
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .slice(0, 3);
+  
+  // Update sermons preview
+  const sermonsPreview = document.getElementById('preview-sermons');
+  if (sermonsPreview) {
+    if (latestSermons.length > 0) {
+      sermonsPreview.innerHTML = latestSermons.map(sermon => `
+        <div style="margin-bottom: 0.5rem; font-size: 0.8rem;">
+          <strong>${sermon.title}</strong><br>
+          <span style="color: var(--admin-muted);">${formatDate(sermon.date)}</span>
+        </div>
+      `).join('');
+    } else {
+      sermonsPreview.innerHTML = '<p class="preview-text">No sermons available</p>';
+    }
+  }
+  
+  // Update events preview
+  const eventsPreview = document.getElementById('preview-events');
+  if (eventsPreview) {
+    if (upcomingEvents.length > 0) {
+      eventsPreview.innerHTML = upcomingEvents.map(event => `
+        <div style="margin-bottom: 0.5rem; font-size: 0.8rem;">
+          <strong>${event.title}</strong><br>
+          <span style="color: var(--admin-muted);">${formatDate(event.date)}</span>
+        </div>
+      `).join('');
+    } else {
+      eventsPreview.innerHTML = '<p class="preview-text">No upcoming events</p>';
+    }
+  }
+  
+  // Update testimonies preview
+  const testimoniesPreview = document.getElementById('preview-testimonies');
+  if (testimoniesPreview) {
+    if (recentTestimonies.length > 0) {
+      testimoniesPreview.innerHTML = recentTestimonies.map(testimony => `
+        <div style="margin-bottom: 0.5rem; font-size: 0.8rem;">
+          <strong>${testimony.title}</strong><br>
+          <span style="color: var(--admin-muted);">by ${testimony.author}</span>
+        </div>
+      `).join('');
+    } else {
+      testimoniesPreview.innerHTML = '<p class="preview-text">No testimonies available</p>';
+    }
+  }
 }
 
 // Load settings
@@ -886,8 +976,21 @@ function formatDate(dateString) {
 }
 
 function saveData() {
-  // In a real app, this would save to a database
+  // Save to localStorage for admin panel
   localStorage.setItem('admin_data', JSON.stringify(adminData));
+  
+  // Trigger a custom event to notify main website of changes
+  window.dispatchEvent(new CustomEvent('adminDataChanged', {
+    detail: { adminData: adminData }
+  }));
+  
+  // Also try to communicate with parent window if admin is in iframe
+  if (window.parent && window.parent !== window) {
+    window.parent.postMessage({
+      type: 'adminDataChanged',
+      data: adminData
+    }, '*');
+  }
 }
 
 function loadData() {

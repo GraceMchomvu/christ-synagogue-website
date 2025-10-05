@@ -1151,4 +1151,340 @@ input:focus, textarea:focus {
   .nav-toggle { display: inline-flex; }
 }
 
+/* Admin Data Loader Styles */
+.loading-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  background: var(--bg-alt);
+  border: 2px dashed var(--border);
+  border-radius: 8px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.loading-placeholder p {
+  margin: 0;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* Dynamic content styles */
+.sermon-info {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--bg-alt);
+  border-radius: 8px;
+}
+
+.sermon-info p {
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.sermon-info strong {
+  color: var(--text);
+}
+
+.event-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--panel);
+  border-radius: 8px;
+  border: 1px solid var(--border-light);
+  margin-bottom: 1rem;
+}
+
+.event-date {
+  text-align: center;
+  min-width: 60px;
+}
+
+.event-date .day {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--brand-600);
+}
+
+.event-date .month {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.event-details h3 {
+  margin: 0 0 0.5rem 0;
+  color: var(--text);
+}
+
+.event-time {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0.25rem 0;
+}
+
+.event-description {
+  margin: 0.5rem 0 0 0;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.ministry-info {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-light);
+}
+
+.ministry-info small {
+  display: block;
+  margin: 0.25rem 0;
+  color: var(--muted);
+}
+
+.member-since {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* Admin link styling */
+.admin-link {
+  font-size: 1.2rem;
+  text-decoration: none;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.admin-link:hover {
+  opacity: 1;
+}
+
+@media (max-width: 760px) {
+  .admin-link {
+    font-size: 1.1rem;
+  }
+}
+
+/* News Section Styles */
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.news-category {
+  background: var(--panel);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow);
+}
+
+.news-category h3 {
+  margin: 0 0 1.5rem 0;
+  color: var(--text);
+  font-size: 1.2rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.news-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.news-item {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--bg-alt);
+  border-radius: 8px;
+  border: 1px solid var(--border-light);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.news-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: var(--brand-300);
+}
+
+.news-item-thumbnail {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: var(--bg-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.news-item-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.news-item-thumbnail .default-thumbnail {
+  width: 40px;
+  height: 40px;
+  opacity: 0.5;
+}
+
+.news-item-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.news-item-title {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.news-item-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0.5rem 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.news-item-meta span {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.news-item-description {
+  margin: 0.5rem 0 0 0;
+  font-size: 0.9rem;
+  color: var(--text);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.news-cta {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.news-cta .btn {
+  min-width: 150px;
+}
+
+/* Event-specific styles for news */
+.news-item.event-item .news-item-thumbnail {
+  background: linear-gradient(135deg, var(--brand-500), var(--brand-600));
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.news-item.event-item .news-item-date {
+  background: var(--brand-100);
+  color: var(--brand-700);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* Sermon-specific styles for news */
+.news-item.sermon-item .news-item-thumbnail {
+  background: linear-gradient(135deg, var(--accent), #0891b2);
+  color: white;
+  font-size: 2rem;
+}
+
+/* Testimony-specific styles for news */
+.news-item.testimony-item .news-item-thumbnail {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  font-size: 2rem;
+}
+
+/* Responsive design for news section */
+@media (max-width: 768px) {
+  .news-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .news-category {
+    padding: 1rem;
+  }
+  
+  .news-item {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .news-item-thumbnail {
+    width: 100%;
+    height: 120px;
+    margin: 0 auto;
+  }
+  
+  .news-item-meta {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .news-cta {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .news-cta .btn {
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .news-item-thumbnail {
+    height: 100px;
+  }
+  
+  .news-item-thumbnail .default-thumbnail {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .news-item-title {
+    font-size: 0.9rem;
+  }
+  
+  .news-item-description {
+    font-size: 0.85rem;
+  }
+}
+
 
