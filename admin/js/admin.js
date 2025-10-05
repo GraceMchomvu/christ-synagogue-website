@@ -204,7 +204,7 @@ function showSection(sectionName) {
         break;
     }
   }
-}
+}        
 
 // Load dashboard statistics
 function loadDashboardStats() {
