@@ -1,10 +1,15 @@
 {
   "nav": {
+    "home": "Home",
+    "news": "News",
     "about": "About",
     "ministries": "Ministries", 
     "sermons": "Sermons",
     "testimonies": "Testimonies",
+    "prayer": "Prayer",
+    "gallery": "Gallery",
     "events": "Events",
+    "visit": "Visit",
     "give": "Give",
     "contact": "Contact"
   },
@@ -16,7 +21,31 @@
     "planVisit": "Plan Your Visit",
     "watchSermon": "Watch a Sermon",
     "liveNow": "Live Now",
-    "serviceTimes": "Service Times"
+    "serviceTimes": "Service Times",
+    "findWay": "KARIBU CSM",
+    "subtitle": "Led by Prophet Baraka David Ogillo in Arusha, Tanzania—dedicated to transforming lives through guidance, deliverance, and Spirit-filled worship."
+  },
+  "home": {
+    "latestSermon": "Latest Sermon",
+    "viewAll": "View All Sermons",
+    "sermonTitle": "Prophetic Word for This Season",
+    "sermonDesc": "Experience the transformative power of prophetic ministry as Prophet Baraka delivers a timely word from God for this season. Join us as we explore divine direction and spiritual breakthrough.",
+    "watchNow": "Watch on YouTube",
+    "offeringTitle": "Support God's Work",
+    "offeringDesc": "Your generous giving enables us to spread the gospel, deliver prophetic messages, and transform lives through the power of God. Every seed you sow is an investment in eternal purposes.",
+    "offeringVerse": "\"Give, and it will be given to you. A good measure, pressed down, shaken together and running over, will be poured into your lap.\" - Luke 6:38",
+    "giveNow": "Give Now",
+    "learnMore": "Learn More"
+  },
+  "serviceTimes": {
+    "sunday": "Sunday",
+    "sundayTime": "10:00 AM",
+    "tuesday": "Tuesday",
+    "tuesdayTime": "6:00 PM",
+    "thursday": "Thursday",
+    "thursdayTime": "6:00 PM",
+    "saturday": "Saturday",
+    "saturdayTime": "2:00 PM"
   },
   "services": {
     "sunday": "Sunday",
@@ -27,6 +56,14 @@
     "prayer": "Prayer & Bible Study",
     "deliverance": "Deliverance & Revival",
     "special": "Special Service"
+  },
+  "photos": {
+    "worship": "Worship",
+    "community": "Community",
+    "prayer": "Prayer",
+    "outreach": "Outreach",
+    "prophet": "Prophet",
+    "ministry": "Ministry"
   },
   "about": {
     "title": "About Us",
@@ -92,6 +129,11 @@
     "deliverancePrayer": "Deliverance prayer if needed",
     "available": "Available Monday-Friday",
     "whatsapp": "Contact via WhatsApp"
+  },
+  "news": {
+    "title": "News & Updates",
+    "subtitle": "Stay informed about the latest happenings in our ministry",
+    "latestUpdates": "Latest Updates"
   },
   "events": {
     "title": "Upcoming Events",

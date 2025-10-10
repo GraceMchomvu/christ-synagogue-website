@@ -1975,4 +1975,331 @@ input:focus, textarea:focus {
   }
 }
 
+/* Latest Sermon Section */
+.latest-sermon-section {
+  background: var(--bg);
+  padding: var(--spacing-2xl) 0;
+}
+
+.latest-sermon-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl);
+  margin-top: var(--spacing-xl);
+}
+
+.sermon-video {
+  width: 100%;
+}
+
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--bg-alt);
+}
+
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+}
+
+.sermon-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.sermon-title {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+
+.sermon-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+.sermon-separator {
+  color: var(--text-muted);
+}
+
+.sermon-description {
+  color: var(--text-muted);
+  line-height: 1.7;
+  font-size: var(--text-base);
+}
+
+/* Offering Section */
+.offering-section {
+  background: linear-gradient(135deg, var(--brand-500) 0%, var(--brand-600) 100%);
+  padding: var(--spacing-2xl) 0;
+  color: white;
+}
+
+.offering-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl);
+  align-items: center;
+}
+
+.offering-text h2 {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  margin: 0 0 var(--spacing-md);
+  color: white;
+}
+
+.offering-text p {
+  font-size: var(--text-base);
+  line-height: 1.7;
+  opacity: 0.95;
+  margin-bottom: var(--spacing-lg);
+}
+
+.offering-verse {
+  background: rgba(255, 255, 255, 0.1);
+  padding: var(--spacing-lg);
+  border-radius: 12px;
+  display: flex;
+  gap: var(--spacing-md);
+  margin: var(--spacing-lg) 0;
+  backdrop-filter: blur(10px);
+}
+
+.offering-verse svg {
+  flex-shrink: 0;
+  color: rgba(255, 255, 255, 0.9);
+  margin-top: 4px;
+}
+
+.offering-verse p {
+  margin: 0;
+  font-style: italic;
+  font-size: var(--text-sm);
+  line-height: 1.6;
+}
+
+.offering-buttons {
+  display: flex;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+  margin-top: var(--spacing-lg);
+}
+
+.btn-primary {
+  background: white;
+  color: var(--brand-600);
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.btn-outline {
+  background: transparent;
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  border: 2px solid white;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.btn-outline:hover {
+  background: white;
+  color: var(--brand-600);
+  transform: translateY(-2px);
+}
+
+.offering-image {
+  width: 100%;
+  height: 350px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.offering-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Payment Options */
+.payment-options {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl);
+  margin-top: var(--spacing-xl);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.payment-card {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: var(--spacing-xl);
+  backdrop-filter: blur(15px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.payment-header {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.payment-badge {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.mpesa-header .payment-badge {
+  background: #e53e3e;
+  color: white;
+}
+
+.bank-header .payment-badge {
+  background: #38a169;
+  color: white;
+}
+
+.payment-card h3 {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  margin: 0 0 var(--spacing-md);
+  color: white;
+  text-align: center;
+}
+
+.payment-card p {
+  font-size: var(--text-base);
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 var(--spacing-lg);
+  text-align: center;
+}
+
+.payment-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.payment-field {
+  background: rgba(255, 255, 255, 0.2);
+  padding: var(--spacing-lg);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  text-align: center;
+}
+
+.payment-field label {
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.payment-value {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: #93c5fd;
+  font-family: 'Courier New', monospace;
+  word-break: break-all;
+  padding: var(--spacing-sm);
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.copy-btn {
+  background: #8b5cf6;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: var(--text-base);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: center;
+  min-width: 120px;
+}
+
+.copy-btn:hover {
+  background: #7c3aed;
+  transform: translateY(-1px);
+}
+
+.copy-btn:active {
+  transform: translateY(0);
+}
+
+/* Responsive Design for New Sections */
+@media (min-width: 768px) {
+  .latest-sermon-content {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-2xl);
+  }
+  
+  .offering-content {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-2xl);
+  }
+  
+  .payment-options {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-2xl);
+    max-width: 1000px;
+  }
+  
+  .sermon-title {
+    font-size: var(--text-2xl);
+  }
+  
+  .offering-text h2 {
+    font-size: var(--text-3xl);
+  }
+}
+
+@media (min-width: 1024px) {
+  .latest-sermon-content {
+    grid-template-columns: 1.5fr 1fr;
+  }
+  
+  .offering-image {
+    height: 450px;
+  }
+}
+
 

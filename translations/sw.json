@@ -1,10 +1,15 @@
 {
   "nav": {
+    "home": "Nyumbani",
+    "news": "Habari",
     "about": "Kuhusu",
     "ministries": "Huduma", 
     "sermons": "Mahubiri",
     "testimonies": "Ushuhuda",
+    "prayer": "Sala",
+    "gallery": "Picha",
     "events": "Matukio",
+    "visit": "Tembelea",
     "give": "Toa",
     "contact": "Mawasiliano"
   },
@@ -16,7 +21,31 @@
     "planVisit": "Panga Ziara Yako",
     "watchSermon": "Tazama Mahubiri",
     "liveNow": "Moja kwa Moja",
-    "serviceTimes": "Muda wa Huduma"
+    "serviceTimes": "Muda wa Huduma",
+    "findWay": "KARIBU CSM",
+    "subtitle": "Inayoongozwa na Nabii Baraka David Ogillo huko Arusha, Tanzania—imejitolea kubadilisha maisha kupitia uongozi, ukombozi, na ibada iliyojaa Roho."
+  },
+  "home": {
+    "latestSermon": "Mahubiri ya Hivi Karibuni",
+    "viewAll": "Tazama Mahubiri Yote",
+    "sermonTitle": "Neno la Unabii kwa Msimu Huu",
+    "sermonDesc": "Jionee nguvu ya kubadilisha ya huduma ya unabii wakati Nabii Baraka anatoa neno la wakati kutoka kwa Mungu kwa msimu huu. Jiunge nasi tunapochunguza uongozi wa kimungu na uvumbuzi wa kiroho.",
+    "watchNow": "Tazama kwenye YouTube",
+    "offeringTitle": "Tegemeza Kazi ya Mungu",
+    "offeringDesc": "Kutoa kwako kwa ukarimu kunatuwezesha kusambaza injili, kutoa ujumbe wa unabii, na kubadilisha maisha kupitia nguvu ya Mungu. Kila mbegu unayopanda ni uwekezaji katika madhumuni ya milele.",
+    "offeringVerse": "\"Toeni, nanyi mtapewa. Kipimo kizuri, kiliobanwa, kiliotikiswa na kinachofurika kitatiririka ndani ya paja lenu.\" - Luka 6:38",
+    "giveNow": "Toa Sasa",
+    "learnMore": "Jifunze Zaidi"
+  },
+  "serviceTimes": {
+    "sunday": "Jumapili",
+    "sundayTime": "10:00 AM",
+    "tuesday": "Jumanne",
+    "tuesdayTime": "6:00 PM",
+    "thursday": "Alhamisi",
+    "thursdayTime": "6:00 PM",
+    "saturday": "Jumamosi",
+    "saturdayTime": "2:00 PM"
   },
   "services": {
     "sunday": "Jumapili",
@@ -27,6 +56,14 @@
     "prayer": "Sala na Uchunguzi wa Biblia",
     "deliverance": "Ukombozi na Uamsho",
     "special": "Huduma ya Kipekee"
+  },
+  "photos": {
+    "worship": "Ibada",
+    "community": "Jumuiya",
+    "prayer": "Sala",
+    "outreach": "Ufikiaji",
+    "prophet": "Nabii",
+    "ministry": "Huduma"
   },
   "about": {
     "title": "Kuhusu Sisi",
@@ -92,6 +129,11 @@
     "deliverancePrayer": "Sala ya ukombozi ikiwa inahitajika",
     "available": "Inapatikana Jumatatu-Ijumaa",
     "whatsapp": "Wasiliana kupitia WhatsApp"
+  },
+  "news": {
+    "title": "Habari na Sasisho",
+    "subtitle": "Fahamu juu ya matukio ya hivi karibuni katika huduma yetu",
+    "latestUpdates": "Sasisho la Hivi Karibuni"
   },
   "events": {
     "title": "Matukio Yanayokuja",

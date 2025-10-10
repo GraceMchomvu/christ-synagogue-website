@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Contact - Christ Synagogue Ministries</title>
-  <meta name="description" content="Contact Christ Synagogue Ministries in Arusha, Tanzania. Send us a message or call us.">
+  <title>News & Updates - Christ Synagogue Ministries</title>
+  <meta name="description" content="Latest news and updates from Christ Synagogue Ministries in Arusha, Tanzania.">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/header-enhanced.css">
@@ -60,41 +60,22 @@
 
 <div class="page-header">
   <div class="container">
-    <h1 data-translate="contact.title">Contact Us</h1>
-    <p data-translate="contact.description">We would love to hear from you. Send a message and our ministry team will follow up.</p>
+    <h1 data-translate="news.title">News & Updates</h1>
+    <p data-translate="news.subtitle">Stay informed about the latest happenings in our ministry</p>
   </div>
 </div>
 
 <main id="main">
   <section class="section">
-    <div class="container grid two">
-      <div>
-        <h2 data-translate="contact.title">Contact Us</h2>
-        <p data-translate="contact.description">We would love to hear from you. Send a message and our ministry team will follow up.</p>
-        <form class="contact-form" id="contact-form" novalidate>
-          <div class="form-field">
-            <label for="name" data-translate="contact.name">Name</label>
-            <input id="name" name="name" type="text" required>
-            <span class="error" data-for="name"></span>
-          </div>
-          <div class="form-field">
-            <label for="email" data-translate="contact.email">Email</label>
-            <input id="email" name="email" type="email" required>
-            <span class="error" data-for="email"></span>
-          </div>
-          <div class="form-field">
-            <label for="message" data-translate="contact.message">Message</label>
-            <textarea id="message" name="message" rows="4" required></textarea>
-            <span class="error" data-for="message"></span>
-          </div>
-          <button class="btn btn-primary" type="submit" data-translate="contact.sendMessage">Send Message</button>
-          <p class="form-status" role="status" aria-live="polite"></p>
-        </form>
+    <div class="container">
+      <div class="section-head">
+        <h2 data-translate="news.latestUpdates">Latest Updates</h2>
       </div>
-      <div class="card scripture">
-        <svg viewBox="0 0 48 48" aria-hidden="true" class="scripture-icon"><use href="assets/icons.svg#prayer"></use></svg>
-        <blockquote data-en="Call upon me and come and pray to me, and I will hear you. You will seek me and find me when you seek me with all your heart. I will be found by you, declares the Lord, and will bring you back from captivity." data-sw="Hapo ndipo mtakaponiita na kuniomba, nami nitawasikiliza. Mtanitafuta na kunipata. Mtakaponitafuta kwa moyo wote.">"Call upon me and come and pray to me, and I will hear you. You will seek me and find me when you seek me with all your heart. I will be found by you, declares the Lord, and will bring you back from captivity."</blockquote>
-        <figcaption data-en="Jeremiah 29:12" data-sw="Yeremia 29:12">Jeremiah 29:12</figcaption>
+      <div class="news-list">
+        <!-- News will be loaded dynamically from admin panel -->
+        <div class="loading-placeholder">
+          <p>Loading news...</p>
+        </div>
       </div>
     </div>
   </section>
@@ -136,39 +117,8 @@
 
 <script src="js/translations.js"></script>
 <script src="js/main.js"></script>
-<script>
-document.getElementById('year').textContent = new Date().getFullYear();
-
-// Contact form submission
-const contactForm = document.getElementById('contact-form');
-if (contactForm) {
-  contactForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const formData = {
-      name: document.getElementById('name').value,
-      email: document.getElementById('email').value,
-      message: document.getElementById('message').value,
-      timestamp: new Date().toISOString()
-    };
-    
-    // Store in localStorage for admin panel
-    const existingForms = JSON.parse(localStorage.getItem('contactForms') || '[]');
-    existingForms.push(formData);
-    localStorage.setItem('contactForms', JSON.stringify(existingForms));
-    
-    // Show success message
-    const statusElement = contactForm.querySelector('.form-status');
-    if (statusElement) {
-      statusElement.textContent = 'Thank you! Your message has been sent successfully.';
-      statusElement.style.color = '#10b981';
-    }
-    
-    // Reset form
-    contactForm.reset();
-  });
-}
-</script>
+<script src="js/admin-data-loader.js"></script>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
 
