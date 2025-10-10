@@ -180,12 +180,6 @@ body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,
                   <span data-translate="photos.ministry">Ministry</span>
                 </div>
               </div>
-              <div class="photo-item zebra-photo">
-                <img src="https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Beautiful Zebra in Tanzania" loading="lazy">
-                <div class="photo-overlay">
-                  <span>Tanzania Wildlife</span>
-                </div>
-              </div>
               <!-- Duplicate photos for seamless loop -->
               <div class="photo-item">
                 <img src="images/IMG_0812.JPG" alt="Church Service" loading="lazy">
@@ -265,30 +259,10 @@ body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,
           <h2 data-translate="home.latestSermon">Latest Sermon</h2>
           <a href="sermons.html" class="btn btn-small" data-translate="home.viewAll">View All Sermons</a>
         </div>
-        <div class="latest-sermon-content">
-          <div class="sermon-video">
-            <div class="video-wrapper">
-              <iframe 
-                id="latest-sermon-video"
-                src="" 
-                title="Latest Sermon" 
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen>
-              </iframe>
-            </div>
-          </div>
-          <div class="sermon-details">
-            <h3 class="sermon-title" id="latest-sermon-title" data-translate="home.sermonTitle">Loading Latest Sermon...</h3>
-            <p class="sermon-meta">
-              <span class="sermon-date">Prophet Baraka David Ogillo</span>
-              <span class="sermon-separator">•</span>
-              <span class="sermon-duration" id="latest-sermon-date">Loading...</span>
-            </p>
-            <p class="sermon-description" id="latest-sermon-description" data-translate="home.sermonDesc">
-              Loading the latest sermon details...
-            </p>
-            <a href="https://www.youtube.com/@ogillob" target="_blank" class="btn" data-translate="home.watchNow">Watch on YouTube</a>
+        <div class="latest-sermons-grid" id="latest-sermons-container">
+          <!-- Videos will be dynamically loaded here -->
+          <div class="loading-placeholder">
+            <p>Loading latest sermons...</p>
           </div>
         </div>
       </div>
@@ -433,31 +407,57 @@ body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,
       });
     }
 
-    // YouTube Channel ID for @ogillob
-    const YOUTUBE_CHANNEL_ID = 'UC8Q5JgR8zQ5JgR8zQ5JgR8zQ'; // This needs to be your actual channel ID
+    // YouTube Channel ID for @ogillob - We'll try to get this automatically
+    let YOUTUBE_CHANNEL_ID = null;
     
-    // Function to get YouTube channel ID from username
+    // Function to get YouTube channel ID from username using a public service
     async function getChannelIdFromUsername(username) {
       try {
-        // Using a public API to get channel ID from username
-        const response = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=id&forUsername=${username}&key=YOUR_API_KEY`);
+        // Use a CORS proxy to access YouTube data
+        const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(`https://www.youtube.com/@${username}`)}`);
         const data = await response.json();
-        return data.items[0]?.id;
+        const htmlContent = data.contents;
+        
+        // Extract channel ID from the HTML content
+        const channelIdMatch = htmlContent.match(/"channelId":"([^"]+)"/);
+        if (channelIdMatch) {
+          return channelIdMatch[1];
+        }
+        
+        // Alternative method using RSS
+        const rssResponse = await fetch(`https://www.youtube.com/feeds/videos.xml?user=${username}`);
+        if (rssResponse.ok) {
+          const rssText = await rssResponse.text();
+          const channelIdMatch = rssText.match(/<yt:channelId>([^<]+)<\/yt:channelId>/);
+          if (channelIdMatch) {
+            return channelIdMatch[1];
+          }
+        }
+        
+        return null;
       } catch (error) {
-        console.log('Could not fetch channel ID, using fallback method');
+        console.log('Could not fetch channel ID:', error);
         return null;
       }
     }
 
-    // Function to fetch latest video from YouTube channel
-    async function fetchLatestVideo() {
+    // Function to fetch latest videos from YouTube channel
+    async function fetchLatestVideos() {
       try {
-        // Method 1: Try using YouTube RSS feed (no API key needed)
-        const channelUrl = 'https://www.youtube.com/@ogillob/videos';
-        const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${YOUTUBE_CHANNEL_ID}`;
+        // First, try to get the channel ID if we don't have it
+        if (!YOUTUBE_CHANNEL_ID) {
+          YOUTUBE_CHANNEL_ID = await getChannelIdFromUsername('ogillob');
+        }
         
-        // Alternative: Use YouTube's public RSS feed
-        const response = await fetch(`https://www.youtube.com/feeds/videos.xml?channel_id=${YOUTUBE_CHANNEL_ID}`);
+        let response;
+        
+        if (YOUTUBE_CHANNEL_ID) {
+          // Method 1: Use RSS feed with channel ID
+          response = await fetch(`https://www.youtube.com/feeds/videos.xml?channel_id=${YOUTUBE_CHANNEL_ID}`);
+        } else {
+          // Method 2: Try using username-based RSS feed
+          response = await fetch(`https://www.youtube.com/feeds/videos.xml?user=ogillob`);
+        }
         
         if (!response.ok) {
           throw new Error('RSS feed not available');
@@ -467,51 +467,117 @@ body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,
         const parser = new DOMParser();
         const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
         
-        // Get the first video (latest)
-        const entry = xmlDoc.querySelector('entry');
-        if (!entry) {
+        // Get all video entries (limit to 3)
+        const entries = xmlDoc.querySelectorAll('entry');
+        if (entries.length === 0) {
           throw new Error('No videos found');
         }
         
-        const videoId = entry.querySelector('yt\\:videoId, videoId').textContent;
-        const title = entry.querySelector('title').textContent;
-        const published = entry.querySelector('published').textContent;
-        const author = entry.querySelector('author name').textContent;
+        const videos = [];
+        const maxVideos = Math.min(3, entries.length);
         
-        // Update the video iframe
-        const videoIframe = document.getElementById('latest-sermon-video');
-        if (videoIframe) {
-          videoIframe.src = `https://www.youtube.com/embed/${videoId}`;
+        for (let i = 0; i < maxVideos; i++) {
+          const entry = entries[i];
+          const videoId = entry.querySelector('yt\\:videoId, videoId').textContent;
+          const title = entry.querySelector('title').textContent;
+          const published = entry.querySelector('published').textContent;
+          const author = entry.querySelector('author name').textContent;
+          
+          videos.push({
+            id: videoId,
+            title: title,
+            published: published,
+            author: author,
+            embedUrl: `https://www.youtube.com/embed/${videoId}`,
+            watchUrl: `https://www.youtube.com/watch?v=${videoId}`
+          });
         }
         
-        // Update the content
-        document.getElementById('latest-sermon-title').textContent = title;
-        document.getElementById('latest-sermon-date').textContent = formatDate(published);
-        document.getElementById('latest-sermon-description').textContent = 
-          'Watch the latest prophetic message from Prophet Baraka David Ogillo. Experience divine direction and spiritual breakthrough.';
+        // Update the container with the videos
+        displayVideos(videos);
+        
+        console.log(`Successfully loaded ${videos.length} videos`);
         
       } catch (error) {
-        console.log('Could not fetch latest video:', error);
+        console.log('Could not fetch latest videos:', error);
         // Fallback to manual setup
-        setupManualVideo();
+        setupManualVideos();
       }
     }
 
-    // Fallback function for manual video setup
-    function setupManualVideo() {
-      // You can manually set your latest video ID here
-      const LATEST_VIDEO_ID = 'YOUR_LATEST_VIDEO_ID'; // Replace with actual video ID
+    // Function to display videos in the grid
+    function displayVideos(videos) {
+      const container = document.getElementById('latest-sermons-container');
       
-      const videoIframe = document.getElementById('latest-sermon-video');
-      if (videoIframe && LATEST_VIDEO_ID !== 'YOUR_LATEST_VIDEO_ID') {
-        videoIframe.src = `https://www.youtube.com/embed/${LATEST_VIDEO_ID}`;
-      }
+      if (!container) return;
       
-      // Reset to default content
-      document.getElementById('latest-sermon-title').textContent = 'Prophetic Word for This Season';
-      document.getElementById('latest-sermon-date').textContent = 'Latest Message';
-      document.getElementById('latest-sermon-description').textContent = 
-        'Experience the transformative power of prophetic ministry as Prophet Baraka delivers a timely word from God for this season. Join us as we explore divine direction and spiritual breakthrough.';
+      container.innerHTML = '';
+      
+      videos.forEach((video, index) => {
+        const videoCard = createVideoCard(video, index);
+        container.appendChild(videoCard);
+      });
+    }
+
+    // Function to create a video card
+    function createVideoCard(video, index) {
+      const card = document.createElement('div');
+      card.className = 'sermon-video-card';
+      
+      card.innerHTML = `
+        <div class="video-wrapper">
+          <iframe 
+            src="${video.embedUrl}" 
+            title="${video.title}" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+        </div>
+      `;
+      
+      return card;
+    }
+
+    // Manual video setup with your latest sermons
+    function setupManualVideos() {
+      const container = document.getElementById('latest-sermons-container');
+      if (!container) return;
+      
+      // Your latest three sermon video IDs
+      const latestVideos = [
+        {
+          id: '3YZYCHu7oiE',
+          title: 'Latest Prophetic Message',
+          published: new Date().toISOString(),
+          description: 'Watch the latest prophetic message from Prophet Baraka David Ogillo. Experience divine direction and spiritual breakthrough.'
+        },
+        {
+          id: 'vib8XlGQRKg',
+          title: 'Powerful Prophetic Service',
+          published: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(), // 1 week ago
+          description: 'Join us for this powerful prophetic service and spiritual guidance from Prophet Baraka David Ogillo.'
+        },
+        {
+          id: 'rFg_DxXJKzE',
+          title: 'Spirit-Filled Worship Service',
+          published: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString(), // 2 weeks ago
+          description: 'Experience Spirit-filled worship and prophetic ministry in this powerful service.'
+        }
+      ];
+      
+      // Display the videos
+      displayVideos(latestVideos.map(video => ({
+        id: video.id,
+        title: video.title,
+        published: video.published,
+        author: 'Prophet Baraka David Ogillo',
+        embedUrl: `https://www.youtube.com/embed/${video.id}`,
+        watchUrl: `https://www.youtube.com/watch?v=${video.id}`,
+        description: video.description
+      })));
+      
+      console.log('Loaded manual videos:', latestVideos.length);
     }
 
     // Helper function to format date
@@ -527,9 +593,16 @@ body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,
       return date.toLocaleDateString();
     }
 
-    // Load latest video when page loads
+    // Load latest videos when page loads
     document.addEventListener('DOMContentLoaded', function() {
-      fetchLatestVideo();
+      // Use manual setup with your latest sermons
+      setupManualVideos();
+      
+      // Optional: Still try to fetch from RSS as backup (but use manual as primary)
+      // fetchLatestVideos();
+      
+      // Set up periodic refresh (every 30 minutes) - using manual setup
+      setInterval(setupManualVideos, 30 * 60 * 1000);
     });
   </script>
   
