@@ -16,10 +16,11 @@
   to = "/admin/index.html"
   status = 200
 
+# Only redirect 404 errors to index.html (for any missing pages)
 [[redirects]]
   from = "/*"
   to = "/index.html"
-  status = 200
+  status = 404
 
 # Headers for security and performance
 [[headers]]
