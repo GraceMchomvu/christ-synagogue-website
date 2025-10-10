@@ -192,44 +192,6 @@ if (navToggle && navMenu) {
 // }
 
 
-// Voice Search
-const voiceSearchBtn = document.getElementById('voice-search');
-if (voiceSearchBtn && 'webkitSpeechRecognition' in window) {
-  const recognition = new webkitSpeechRecognition();
-  recognition.continuous = false;
-  recognition.interimResults = false;
-  recognition.lang = 'en-US';
-  
-  voiceSearchBtn.addEventListener('click', () => {
-    if (voiceSearchBtn.classList.contains('listening')) {
-      recognition.stop();
-      voiceSearchBtn.classList.remove('listening');
-    } else {
-      recognition.start();
-      voiceSearchBtn.classList.add('listening');
-    }
-  });
-  
-  recognition.onresult = (event) => {
-    const transcript = event.results[0][0].transcript.toLowerCase();
-    voiceSearchBtn.classList.remove('listening');
-    
-    // Simple search functionality
-    if (transcript.includes('sermon')) {
-      document.querySelector('#sermons').scrollIntoView({ behavior: 'smooth' });
-    } else if (transcript.includes('prayer')) {
-      document.querySelector('#prayer-scheduler').scrollIntoView({ behavior: 'smooth' });
-    } else if (transcript.includes('contact')) {
-      document.querySelector('#contact').scrollIntoView({ behavior: 'smooth' });
-    } else if (transcript.includes('about')) {
-      document.querySelector('#about').scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-  
-  recognition.onerror = () => {
-    voiceSearchBtn.classList.remove('listening');
-  };
-}
 
 // Prayer Scheduler Form
 const prayerForm = document.getElementById('prayer-scheduler-form');

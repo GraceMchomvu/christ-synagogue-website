@@ -306,37 +306,7 @@
   transform: translateY(-1px);
 }
 
-/* Voice Search */
-.voice-search {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  width: 60px;
-  height: 60px;
-  background: linear-gradient(135deg, var(--brand-500), var(--brand-600));
-  border: none;
-  border-radius: 50%;
-  color: white;
-  cursor: pointer;
-  box-shadow: 0 8px 24px rgba(99,102,241,0.3);
-  transition: all 0.3s ease;
-  z-index: 1000;
-}
 
-.voice-search:hover {
-  transform: scale(1.1);
-  box-shadow: 0 12px 32px rgba(99,102,241,0.4);
-}
-
-.voice-search svg {
-  width: 24px;
-  height: 24px;
-}
-
-.voice-search.listening {
-  animation: pulse 1s infinite;
-  background: linear-gradient(135deg, #ef4444, #dc2626);
-}
 
 /* Dark Theme - Use consistent variables from styles.css */
 [data-theme="dark"] {
@@ -414,17 +384,6 @@
     display: none;
   }
   
-  .voice-search {
-    bottom: 1rem;
-    right: 1rem;
-    width: 50px;
-    height: 50px;
-  }
-  
-  .voice-search svg {
-    width: 20px;
-    height: 20px;
-  }
 }
 
 /* PWA Styles */
