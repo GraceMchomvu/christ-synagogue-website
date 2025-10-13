@@ -30,6 +30,8 @@ function initializeThemeToggle() {
 
   const themeToggle = document.querySelector('.theme-toggle');
   const themeText = document.querySelector('.theme-text');
+  const sunIcon = document.querySelector('.sun-icon');
+  const moonIcon = document.querySelector('.moon-icon');
   const html = document.documentElement;
 
   console.log('🔍 Looking for theme toggle...', themeToggle);
@@ -39,10 +41,21 @@ function initializeThemeToggle() {
     console.log('✅ Theme toggle found:', themeToggle);
     themeToggleInitialized = true;
     
-    // Function to update theme text and meta tag
+    // Function to update theme text, icon, and meta tag
     function updateThemeText() {
       const currentTheme = html.getAttribute('data-theme') || 'light';
       themeText.textContent = currentTheme === 'dark' ? 'Dark' : 'Light';
+      
+      // Toggle icons
+      if (sunIcon && moonIcon) {
+        if (currentTheme === 'dark') {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'block';
+        } else {
+          sunIcon.style.display = 'block';
+          moonIcon.style.display = 'none';
+        }
+      }
       
       // Update theme-color meta tag
       const themeColorMeta = document.getElementById('theme-color-meta');
