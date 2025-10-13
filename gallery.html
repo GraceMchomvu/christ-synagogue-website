@@ -1,50 +1,833 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gallery - Christ Synagogue Ministries</title>
   <meta name="description" content="View photos from Christ Synagogue Ministries in Arusha, Tanzania.">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/header-enhanced.css">
   <link rel="stylesheet" href="css/mobile-first.css">
-  <link rel="stylesheet" href="css/gallery-enhancements.css">
   <style>
-    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Helvetica,Arial;color:#111827;background:#ffffff;line-height:1.6}
-    .site-header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,rgba(255,255,255,0.85),rgba(255,255,255,0.6));border-bottom:1px solid rgba(0,0,0,0.06)}
-    .container{width:min(1120px,92%);margin:0 auto}
-    .page-header{padding:80px 0 40px;text-align:center;background:linear-gradient(135deg,#1f2937 0%,#374151 100%);color:#fff}
-    .page-header h1{font-size:2.5rem;margin:0 0 1rem}
+    /* Beautiful Gallery Styles */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: radial-gradient(1200px 600px at 10% -10%, rgba(99,102,241,0.14), transparent 60%),
+                  radial-gradient(1000px 400px at 110% 10%, rgba(8,145,178,0.12), transparent 55%),
+                  #ffffff;
+      min-height: 100vh;
+    }
+
+    .page-header {
+      position: relative;
+      overflow: hidden;
+      height: 70vh;
+      max-height: 700px;
+      min-height: 500px;
+      background: radial-gradient(circle at 20% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                  radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%),
+                  linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .page-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, 
+        rgba(99,102,241,0.4) 0%, 
+        rgba(8,145,178,0.3) 30%,
+        rgba(99,102,241,0.2) 100%);
+      z-index: 1;
+    }
+
+    .page-header .container {
+      max-width: 1000px;
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 2rem;
+    }
+
+    .gallery-hero-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(15px);
+      padding: 12px 24px;
+      border-radius: 50px;
+      border: 1px solid rgba(255,255,255,0.3);
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: white;
+      animation: slideInUp 0.8s ease forwards;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .header-badge svg {
+      width: 20px;
+      height: 20px;
+      opacity: 0.9;
+    }
+
+    .gallery-church-name {
+      font-size: 1rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.8);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+      animation: slideInUp 0.8s ease 0.2s forwards;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .page-header h1 {
+      margin: 0 0 20px;
+      font-size: clamp(2.5rem, 6.5vw, 4rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: white;
+      text-shadow: 0 0 30px rgba(255,255,255,0.5);
+      animation: slideInUp 0.8s ease 0.4s forwards;
+      opacity: 0;
+      transform: translateY(50px);
+    }
+
+    .page-header p {
+      margin: 0 0 35px;
+      font-size: 1.2rem;
+      color: rgba(255,255,255,0.95);
+      line-height: 1.6;
+      max-width: 650px;
+      margin-left: auto;
+      margin-right: auto;
+      animation: slideInUp 0.8s ease 0.6s forwards;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .header-stats {
+      display: inline-flex;
+      align-items: center;
+      gap: 30px;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(15px);
+      padding: 20px 40px;
+      border-radius: 60px;
+      border: 1px solid rgba(255,255,255,0.25);
+      animation: slideInUp 0.8s ease 0.8s forwards;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .stat-item strong {
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      line-height: 1;
+      color: white;
+    }
+
+    .stat-item span {
+      font-size: 0.85rem;
+      opacity: 0.85;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .stat-divider {
+      width: 1px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    @keyframes slideInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Gallery Grid - Beautiful and Responsive */
+    .gallery-container {
+      max-width: 1600px;
+      margin: 60px auto;
+      padding: 0 30px 60px;
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 30px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .photo-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      opacity: 0;
+      animation: fadeInScale 0.6s ease forwards;
+      position: relative;
+    }
+
+    .photo-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .photo-card:hover::before {
+      opacity: 1;
+    }
+
+    /* Staggered animation */
+    .photo-card:nth-child(1) { animation-delay: 0.05s; }
+    .photo-card:nth-child(2) { animation-delay: 0.1s; }
+    .photo-card:nth-child(3) { animation-delay: 0.15s; }
+    .photo-card:nth-child(4) { animation-delay: 0.2s; }
+    .photo-card:nth-child(5) { animation-delay: 0.25s; }
+    .photo-card:nth-child(6) { animation-delay: 0.3s; }
+    .photo-card:nth-child(7) { animation-delay: 0.35s; }
+    .photo-card:nth-child(8) { animation-delay: 0.4s; }
+    .photo-card:nth-child(9) { animation-delay: 0.45s; }
+    .photo-card:nth-child(10) { animation-delay: 0.5s; }
+    .photo-card:nth-child(11) { animation-delay: 0.55s; }
+    .photo-card:nth-child(12) { animation-delay: 0.6s; }
+    .photo-card:nth-child(13) { animation-delay: 0.65s; }
+    .photo-card:nth-child(14) { animation-delay: 0.7s; }
+    .photo-card:nth-child(15) { animation-delay: 0.75s; }
+    .photo-card:nth-child(16) { animation-delay: 0.8s; }
+    .photo-card:nth-child(17) { animation-delay: 0.85s; }
+    .photo-card:nth-child(18) { animation-delay: 0.9s; }
+    .photo-card:nth-child(19) { animation-delay: 0.95s; }
+    .photo-card:nth-child(20) { animation-delay: 1.0s; }
+    .photo-card:nth-child(21) { animation-delay: 1.05s; }
+
+    @keyframes fadeInScale {
+      from {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .photo-card:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 20px 50px rgba(99, 102, 241, 0.3);
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      display: block;
+      cursor: pointer;
+      transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+      position: relative;
+      z-index: 0;
+    }
+
+    .photo-card:hover img {
+      transform: scale(1.08);
+    }
+
+    .photo-info {
+      padding: 20px 24px;
+      background: linear-gradient(to bottom, white 0%, #fafbfc 100%);
+      position: relative;
+      z-index: 2;
+    }
+
+    .photo-info h3 {
+      margin: 0 0 8px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      letter-spacing: -0.3px;
+      transition: color 0.3s ease;
+    }
+
+    .photo-card:hover .photo-info h3 {
+      color: #6366f1;
+    }
+
+    .photo-info p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #6c757d;
+      line-height: 1.5;
+      font-weight: 400;
+    }
+
+    .photo-info::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 24px;
+      right: 24px;
+      height: 3px;
+      background: linear-gradient(90deg, #6366f1 0%, #06b6d4 100%);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+      border-radius: 3px;
+    }
+
+    .photo-card:hover .photo-info::before {
+      transform: scaleX(1);
+    }
+
+    /* Premium Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.96);
+      z-index: 10000;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(10px);
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90vh;
+      animation: zoomIn 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    @keyframes zoomIn {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .lightbox img {
+      max-width: 100%;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: -50px;
+      right: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      font-size: 28px;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      cursor: pointer;
+      line-height: 1;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 300;
+    }
+
+    .lightbox-close:hover {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.2));
+      transform: rotate(90deg) scale(1.1);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(6, 182, 212, 0.3));
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      font-size: 32px;
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 300;
+      backdrop-filter: blur(5px);
+    }
+
+    .lightbox-nav:hover {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.5), rgba(6, 182, 212, 0.5));
+      transform: translateY(-50%) scale(1.15);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .lightbox-prev {
+      left: 30px;
+    }
+
+    .lightbox-next {
+      right: 30px;
+    }
+
+    .lightbox-caption {
+      position: absolute;
+      bottom: -70px;
+      left: 0;
+      right: 0;
+      color: white;
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: 500;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+      padding: 0 20px;
+      animation: fadeInUp 0.5s ease 0.2s both;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1200px) {
+      .photo-grid {
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 25px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .page-header {
+        height: 60vh;
+        min-height: 400px;
+        max-height: 500px;
+      }
+
+      .page-header .container {
+        padding: 0 1rem;
+      }
+
+      .gallery-hero-content {
+        gap: 1rem;
+      }
+
+      .gallery-church-name {
+        font-size: 0.9rem;
+        margin-bottom: 0.8rem;
+      }
+
+      .header-badge {
+        font-size: 0.8rem;
+        padding: 10px 20px;
+      }
+
+      .header-badge svg {
+        width: 18px;
+        height: 18px;
+      }
+
+      .page-header h1 {
+        font-size: clamp(2rem, 7vw, 3rem);
+        margin-bottom: 16px;
+      }
+
+      .page-header p {
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+        max-width: 500px;
+      }
+
+      .header-stats {
+        gap: 20px;
+        padding: 16px 30px;
+      }
+
+      .stat-item strong {
+        font-size: 1.5rem;
+      }
+
+      .stat-item span {
+        font-size: 0.75rem;
+      }
+
+      .stat-divider {
+        height: 35px;
+      }
+
+      .gallery-container {
+        margin: 40px auto;
+        padding: 0 20px 40px;
+      }
+
+      .photo-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+      }
+
+      .photo-card img {
+        height: 280px;
+      }
+
+      .photo-info {
+        padding: 18px 20px;
+      }
+
+      .photo-info h3 {
+        font-size: 1.15rem;
+      }
+
+      .photo-info p {
+        font-size: 0.9rem;
+      }
+
+      .lightbox-nav {
+        width: 45px;
+        height: 45px;
+        font-size: 24px;
+      }
+
+      .lightbox-prev {
+        left: 15px;
+      }
+
+      .lightbox-next {
+        right: 15px;
+      }
+
+      .lightbox-caption {
+        font-size: 1rem;
+        bottom: -60px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .page-header {
+        height: 50vh;
+        min-height: 350px;
+        max-height: 400px;
+      }
+
+      .gallery-church-name {
+        font-size: 0.8rem;
+        margin-bottom: 0.6rem;
+      }
+
+      .header-badge {
+        font-size: 0.75rem;
+        padding: 8px 16px;
+        gap: 6px;
+      }
+
+      .header-badge svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      .page-header h1 {
+        font-size: clamp(1.8rem, 8vw, 2.5rem);
+        margin-bottom: 14px;
+      }
+
+      .page-header p {
+        font-size: 1rem;
+        margin-bottom: 25px;
+        max-width: 400px;
+      }
+
+      .header-stats {
+        gap: 15px;
+        padding: 14px 24px;
+        flex-wrap: wrap;
+      }
+
+      .stat-item strong {
+        font-size: 1.3rem;
+      }
+
+      .stat-item span {
+        font-size: 0.7rem;
+      }
+
+      .stat-divider {
+        height: 30px;
+      }
+
+      .stat-divider:last-of-type {
+        display: none;
+      }
+
+      .gallery-container {
+        margin: 30px auto;
+        padding: 0 15px 30px;
+      }
+
+      .photo-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 15px;
+      }
+
+      .photo-card img {
+        height: 240px;
+      }
+
+      .photo-info {
+        padding: 15px 18px;
+      }
+
+      .photo-info h3 {
+        font-size: 1.05rem;
+      }
+
+      .photo-info p {
+        font-size: 0.85rem;
+      }
+
+      .lightbox-nav {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+      }
+
+      .lightbox-prev {
+        left: 10px;
+      }
+
+      .lightbox-next {
+        right: 10px;
+      }
+
+      .lightbox-close {
+        width: 40px;
+        height: 40px;
+        font-size: 24px;
+        top: -45px;
+      }
+
+      .lightbox-caption {
+        font-size: 0.95rem;
+        bottom: -55px;
+      }
+    }
+
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Selection color */
+    ::selection {
+      background: rgba(99, 102, 241, 0.3);
+      color: #1a1a1a;
+    }
+
+    /* Enhanced Navigation Styles */
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 12px;
+      text-decoration: none;
+      color: #6b7280;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(6, 182, 212, 0.1));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      border-radius: 12px;
+    }
+
+    .nav-link:hover::before {
+      opacity: 1;
+    }
+
+    .nav-link:hover {
+      color: #6366f1;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(99, 102, 241, 0.15);
+    }
+
+    .nav-link.active {
+      color: #6366f1;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(6, 182, 212, 0.1));
+      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.2);
+    }
+
+    .nav-link.active::before {
+      opacity: 1;
+    }
+
+    .nav-link svg {
+      transition: transform 0.3s ease;
+    }
+
+    .nav-link:hover svg {
+      transform: scale(1.1);
+    }
+
+    .nav-link span {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Responsive Navigation */
+    @media (max-width: 768px) {
+      .nav {
+        display: none;
+      }
+    }
   </style>
 </head>
 <body>
+
 <header class="site-header" id="top">
   <div class="container header-inner">
     <a class="brand" href="index.html" aria-label="Christ Synagogue Ministries home">
       <img src="assets/logo.svg" alt="Christ Synagogue Ministries logo" width="36" height="36">
-      <span>Christ Synagogue Ministries</span>
+      <span>Christ Synagogue</span>
     </a>
-    
-    <nav class="site-nav nav-menu" aria-label="Primary navigation">
-      <ul>
-        <li><a href="index.html" data-translate="nav.home">Home</a></li>
-        <li><a href="news.html" data-translate="nav.news">News</a></li>
-        <li><a href="sermons.html" data-translate="nav.sermons">Sermons</a></li>
-        <li><a href="testimonies.html" data-translate="nav.testimonies">Testimonies</a></li>
-        <li><a href="prayer.html" data-translate="nav.prayer">Prayer</a></li>
-        <li><a href="ministries.html" data-translate="nav.ministries">Ministries</a></li>
-        <li><a href="gallery.html" data-translate="nav.gallery">Gallery</a></li>
-        <li><a href="events.html" data-translate="nav.events">Events</a></li>
-        <li><a href="visit.html" data-translate="nav.visit">Visit</a></li>
-        <li><a href="give.html" class="btn btn-small" data-translate="nav.give">Give</a></li>
-        <li><a href="contact.html" data-translate="nav.contact">Contact</a></li>
-        <li><a href="admin/index.html" class="admin-link" title="Admin Panel">⚙️</a></li>
-      </ul>
+    <nav class="nav">
+      <a href="index.html" data-translate="nav.home" class="nav-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9,22 9,12 15,12 15,22"></polyline>
+        </svg>
+        <span>Home</span>
+      </a>
+      <a href="about.html" data-translate="nav.about" class="nav-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+          <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+        <span>About</span>
+      </a>
+      <a href="sermons.html" data-translate="nav.sermons" class="nav-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 18V5l12-2v13"></path>
+          <circle cx="6" cy="18" r="3"></circle>
+          <circle cx="18" cy="16" r="3"></circle>
+        </svg>
+        <span>Sermons</span>
+      </a>
+      <a href="gallery.html" class="active nav-link" data-translate="nav.gallery">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+          <circle cx="8.5" cy="8.5" r="1.5"></circle>
+          <polyline points="21 15 16 10 5 21"></polyline>
+        </svg>
+        <span>Gallery</span>
+      </a>
+      <a href="contact.html" data-translate="nav.contact" class="nav-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+          <polyline points="22,6 12,13 2,6"></polyline>
+        </svg>
+        <span>Contact</span>
+      </a>
     </nav>
-    
-    <div class="header-controls">
-      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+    <div class="header-actions">
+      <button class="menu-toggle" aria-label="Toggle menu" title="Toggle menu">
         <span></span>
         <span></span>
         <span></span>
@@ -61,63 +844,331 @@
 
 <div class="page-header">
   <div class="container">
+    <div class="gallery-hero-content">
+      <div class="gallery-church-name">
+        <span>Welcome to</span>
+      </div>
+      
+      <div class="header-badge">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+          <circle cx="8.5" cy="8.5" r="1.5"></circle>
+          <polyline points="21 15 16 10 5 21"></polyline>
+        </svg>
+        <span>Our Memories</span>
+      </div>
+      
     <h1 data-translate="gallery.title">Church Gallery</h1>
-    <p data-translate="gallery.subtitle">Capturing moments of worship, fellowship, and ministry</p>
+      <p data-translate="gallery.subtitle">Capturing moments of worship, fellowship, and ministry at Christ Synagogue Ministries in Arusha, Tanzania</p>
+      
+      <div class="header-stats">
+        <div class="stat-item">
+          <strong>21</strong>
+          <span>Photos</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <strong>2025</strong>
+          <span>Recent</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <strong>Arusha</strong>
+          <span>Tanzania</span>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
 <main id="main">
-  <section class="section">
-    <div class="container">
-      <div class="photo-grid">
-        <!-- Gallery images will be loaded dynamically from admin panel -->
-        <div class="loading-placeholder">
-          <p>Loading gallery...</p>
+  <div class="gallery-container">
+    <div class="photo-grid" id="photoGrid">
+      <!-- Photo 1 -->
+      <div class="photo-card">
+        <img src="images/IMG_0570.jpg" alt="Church Ministry" data-index="0">
+        <div class="photo-info">
+          <h3>Church Ministry</h3>
+          <p>Spreading God's word and love</p>
+        </div>
+      </div>
+
+      <!-- Photo 2 -->
+      <div class="photo-card">
+        <img src="images/IMG_0588.jpg" alt="Worship Service" data-index="1">
+        <div class="photo-info">
+          <h3>Worship Service</h3>
+          <p>Praising God together</p>
+        </div>
+      </div>
+
+      <!-- Photo 3 -->
+      <div class="photo-card">
+        <img src="images/IMG_0812.jpg" alt="Church Service" data-index="2">
+        <div class="photo-info">
+          <h3>Church Service</h3>
+          <p>Sunday worship gathering</p>
+        </div>
+      </div>
+
+      <!-- Photo 4 -->
+      <div class="photo-card">
+        <img src="images/IMG_1016.jpg" alt="Fellowship" data-index="3">
+        <div class="photo-info">
+          <h3>Fellowship</h3>
+          <p>Building community bonds</p>
+        </div>
+      </div>
+
+      <!-- Photo 5 -->
+      <div class="photo-card">
+        <img src="images/IMG_1527.jpg" alt="Community Gathering" data-index="4">
+        <div class="photo-info">
+          <h3>Community Gathering</h3>
+          <p>United in faith</p>
+        </div>
+      </div>
+
+      <!-- Photo 6 -->
+      <div class="photo-card">
+        <img src="images/IMG_1530.jpg" alt="Prayer Meeting" data-index="5">
+        <div class="photo-info">
+          <h3>Prayer Meeting</h3>
+          <p>Seeking God's guidance</p>
+        </div>
+      </div>
+
+      <!-- Photo 7 -->
+      <div class="photo-card">
+        <img src="images/IMG_1539.jpg" alt="Ministry Event" data-index="6">
+        <div class="photo-info">
+          <h3>Ministry Event</h3>
+          <p>Special church activities</p>
+        </div>
+      </div>
+
+      <!-- Photo 8 -->
+      <div class="photo-card">
+        <img src="images/IMG_1542.jpg" alt="Church Activity" data-index="7">
+        <div class="photo-info">
+          <h3>Church Activity</h3>
+          <p>Engaging the community</p>
+        </div>
+      </div>
+
+      <!-- Photo 9 -->
+      <div class="photo-card">
+        <img src="images/IMG_2136.jpg" alt="Ministry Outreach" data-index="8">
+        <div class="photo-info">
+          <h3>Ministry Outreach</h3>
+          <p>Reaching out to others</p>
+        </div>
+      </div>
+
+      <!-- Photo 10 -->
+      <div class="photo-card">
+        <img src="images/PROPHET1.jpg" alt="Prophet Baraka" data-index="9">
+        <div class="photo-info">
+          <h3>Prophet Baraka</h3>
+          <p>Spiritual leadership</p>
+        </div>
+      </div>
+
+      <!-- Photo 11 -->
+      <div class="photo-card">
+        <img src="images/PROPHET2.jpg" alt="Prophetic Ministry" data-index="10">
+        <div class="photo-info">
+          <h3>Prophetic Ministry</h3>
+          <p>Divine guidance and wisdom</p>
+        </div>
+      </div>
+
+      <!-- Photo 12 -->
+      <div class="photo-card">
+        <img src="images/IMG_4002.JPG" alt="Church Worship" data-index="11">
+        <div class="photo-info">
+          <h3>Church Worship</h3>
+          <p>Spirit-filled praise</p>
+        </div>
+      </div>
+
+      <!-- Photo 13 -->
+      <div class="photo-card">
+        <img src="images/IMG_4010.JPG" alt="Ministry Gathering" data-index="12">
+        <div class="photo-info">
+          <h3>Ministry Gathering</h3>
+          <p>Coming together in faith</p>
+        </div>
+      </div>
+
+      <!-- Photo 14 -->
+      <div class="photo-card">
+        <img src="images/IMG_4036.JPG" alt="Church Service" data-index="13">
+        <div class="photo-info">
+          <h3>Church Service</h3>
+          <p>Worship and fellowship</p>
+        </div>
+      </div>
+
+      <!-- Photo 15 -->
+      <div class="photo-card">
+        <img src="images/IMG_4041.JPG" alt="Prayer and Worship" data-index="14">
+        <div class="photo-info">
+          <h3>Prayer and Worship</h3>
+          <p>Connecting with God</p>
+        </div>
+      </div>
+
+      <!-- Photo 16 -->
+      <div class="photo-card">
+        <img src="images/IMG_4050.JPG" alt="Fellowship Time" data-index="15">
+        <div class="photo-info">
+          <h3>Fellowship Time</h3>
+          <p>Building relationships</p>
+        </div>
+      </div>
+
+      <!-- Photo 17 -->
+      <div class="photo-card">
+        <img src="images/IMG_4062.JPG" alt="Church Community" data-index="16">
+        <div class="photo-info">
+          <h3>Church Community</h3>
+          <p>United in Christ</p>
+        </div>
+      </div>
+
+      <!-- Photo 18 -->
+      <div class="photo-card">
+        <img src="images/IMG_4067.JPG" alt="Ministry Event" data-index="17">
+        <div class="photo-info">
+          <h3>Ministry Event</h3>
+          <p>Special church programs</p>
+        </div>
+      </div>
+
+      <!-- Photo 19 -->
+      <div class="photo-card">
+        <img src="images/IMG_4084.JPG" alt="Worship Service" data-index="18">
+        <div class="photo-info">
+          <h3>Worship Service</h3>
+          <p>Celebrating in song</p>
+        </div>
+      </div>
+
+      <!-- Photo 20 -->
+      <div class="photo-card">
+        <img src="images/IMG_4105.JPG" alt="Church Gathering" data-index="19">
+        <div class="photo-info">
+          <h3>Church Gathering</h3>
+          <p>Fellowship and prayer</p>
+        </div>
+      </div>
+
+      <!-- Photo 21 -->
+      <div class="photo-card">
+        <img src="images/IMG_4116.JPG" alt="Ministry Activities" data-index="20">
+        <div class="photo-info">
+          <h3>Ministry Activities</h3>
+          <p>Serving the community</p>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 </main>
 
-<footer class="site-footer">
-  <div class="container footer-inner">
-    <a class="brand" href="index.html">
+<!-- Lightbox Modal -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-content">
+    <img id="lightboxImage" src="" alt="">
+    <button class="lightbox-close" id="lightboxClose">&times;</button>
+    <button class="lightbox-nav lightbox-prev" id="lightboxPrev">‹</button>
+    <button class="lightbox-nav lightbox-next" id="lightboxNext">›</button>
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container footer-content">
+    <div class="footer-section">
       <img src="assets/logo.svg" alt="Christ Synagogue Ministries logo" width="28" height="28">
-      <span>Christ Synagogue Ministries</span>
-    </a>
-    <ul class="footer-links">
-      <li><a href="ministries.html" data-translate="nav.ministries">Ministries</a></li>
-      <li><a href="sermons.html" data-translate="nav.sermons">Sermons</a></li>
-      <li><a href="events.html" data-translate="nav.events">Events</a></li>
-      <li><a href="give.html" data-translate="nav.give">Give</a></li>
-      <li><a href="contact.html" data-translate="nav.contact">Contact</a></li>
-    </ul>
-    <div class="social">
-      <a href="https://web.facebook.com/Prophetbaraka.ogillo" target="_blank" rel="noopener" aria-label="Facebook" class="social-link">
-        <svg viewBox="0 0 24 24" aria-hidden="true" width="24" height="24">
-          <path d="M13 20v-7h2.3l.4-3H13V8.3c0-.9.3-1.5 1.6-1.5H16V4.1C15.7 4 14.9 4 14 4c-2.4 0-4 1.3-4 3.8V10H8v3h2v7h3z" fill="currentColor"/>
-        </svg>
-      </a>
-      <a href="https://www.youtube.com/@ogillob" target="_blank" rel="noopener" aria-label="YouTube" class="social-link">
-        <svg viewBox="0 0 24 24" aria-hidden="true" width="24" height="24">
-          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="currentColor"/>
-        </svg>
-      </a>
-      <a href="https://www.tiktok.com/@propheticpowertvp" target="_blank" rel="noopener" aria-label="TikTok" class="social-link">
-        <svg viewBox="0 0 24 24" aria-hidden="true" width="24" height="24">
-          <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" fill="currentColor"/>
-        </svg>
-      </a>
+      <p>&copy; <span id="year"></span> Christ Synagogue Ministries. All rights reserved.</p>
     </div>
-    <p class="muted" data-translate="footer.copyright">© <span id="year"></span> Christ Synagogue Ministries. All rights reserved.</p>
   </div>
 </footer>
 
 <script src="js/translations.js"></script>
 <script src="js/main.js"></script>
-<script src="js/gallery-enhancements.js"></script>
-<script src="js/admin-data-loader.js"></script>
-<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<script>
+  // Simple Gallery JavaScript
+  (function() {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
+    const lightboxCaption = document.getElementById('lightboxCaption');
+    const lightboxClose = document.getElementById('lightboxClose');
+    const lightboxPrev = document.getElementById('lightboxPrev');
+    const lightboxNext = document.getElementById('lightboxNext');
+    
+    const images = Array.from(document.querySelectorAll('.photo-card img'));
+    let currentIndex = 0;
+
+    // Open lightbox on image click
+    images.forEach((img) => {
+      img.addEventListener('click', function() {
+        currentIndex = parseInt(this.dataset.index);
+        showLightbox();
+      });
+    });
+
+    function showLightbox() {
+      const img = images[currentIndex];
+      lightboxImage.src = img.src;
+      lightboxImage.alt = img.alt;
+      lightboxCaption.textContent = img.alt;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % images.length;
+      showLightbox();
+    }
+
+    function prevImage() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      showLightbox();
+    }
+
+    // Event listeners
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxNext.addEventListener('click', nextImage);
+    lightboxPrev.addEventListener('click', prevImage);
+    
+    // Close on background click
+    lightbox.addEventListener('click', function(e) {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+      if (!lightbox.classList.contains('active')) return;
+      
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') nextImage();
+      if (e.key === 'ArrowLeft') prevImage();
+    });
+
+    // Log photo count
+    console.log('Gallery loaded with', images.length, 'photos');
+  })();
+
+  // Set year
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
 

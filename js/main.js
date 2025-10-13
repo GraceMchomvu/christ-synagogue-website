@@ -237,41 +237,7 @@ window.shareLocation = () => {
   }
 };
 
-// PWA Installation
-let deferredPrompt;
-const pwaBanner = document.getElementById('pwa-banner');
-const pwaInstallBtn = document.getElementById('pwa-install');
-const pwaDismissBtn = document.getElementById('pwa-dismiss');
 
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  pwaBanner.classList.add('show');
-});
-
-if (pwaInstallBtn) {
-  pwaInstallBtn.addEventListener('click', async () => {
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      console.log(`PWA installation: ${outcome}`);
-      deferredPrompt = null;
-      pwaBanner.classList.remove('show');
-    }
-  });
-}
-
-if (pwaDismissBtn) {
-  pwaDismissBtn.addEventListener('click', () => {
-    pwaBanner.classList.remove('show');
-    localStorage.setItem('pwa-dismissed', 'true');
-  });
-}
-
-// Check if PWA was already dismissed
-if (localStorage.getItem('pwa-dismissed') === 'true') {
-  pwaBanner.style.display = 'none';
-}
 
 // Offline Detection
 const offlineIndicator = document.getElementById('offline-indicator');

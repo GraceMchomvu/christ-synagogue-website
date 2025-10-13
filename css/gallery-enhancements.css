@@ -1,111 +1,166 @@
-/* Beautiful Church Gallery - Continuous Video-like Sequence */
+/* Simple Gallery Grid Layout */
 
-/* Gallery Container */
-.photo-grid {
-  position: relative;
-  width: 100%;
-  height: 400px;
-  min-height: 300px; /* Minimum height to ensure proper display */
-  max-height: 500px; /* Maximum height to prevent oversizing */
-  overflow: hidden;
-  border-radius: 20px;
-  margin-top: 2rem;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+/* Gallery Container - Override main styles.css */
+body.gallery-page .photo-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+  gap: 1.5rem !important;
+  padding: 2rem 1rem !important;
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+  justify-items: center !important;
 }
 
-/* Photo Container - Horizontal Layout */
-.photo-sequence {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 200%; /* Double width for seamless looping */
-  height: 100%;
-  display: flex;
-  animation: slideSequence 50s linear infinite;
-  animation-fill-mode: both; /* Ensure smooth looping */
-  gap: 2rem; /* Increased gap for better breaks */
-  padding: 0 1rem; /* Add padding to prevent edge cutting */
-  will-change: transform; /* Optimize for smooth animation */
+/* Override the 4-column grid from styles.css */
+body.gallery-page .photo-grid {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
 }
 
-/* Individual Photo Items */
-.photo-item {
-  position: relative;
-  width: 4.545%; /* 100% / 22 photos (11 original + 11 duplicates) */
-  height: 100%;
-  min-width: 180px; /* Adjusted minimum width for more photos */
-  max-width: 250px; /* Adjusted maximum width for more photos */
-  flex-shrink: 0;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  transition: transform 0.3s ease;
-  margin: 0 0.3rem; /* Adjusted margin for more photos */
+/* Override responsive styles from main styles.css */
+@media (max-width: 900px) {
+  body.gallery-page .photo-grid {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important;
+  }
 }
 
-/* Hover effect for better visibility */
-.photo-item:hover {
-  transform: scale(1.05);
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
-  z-index: 10;
+@media (max-width: 600px) {
+  body.gallery-page .photo-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)) !important;
+  }
 }
 
-.photo-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain; /* Changed from cover to contain for full display */
-  object-position: center;
-  display: block;
-  background: #f8f9fa; /* Background color for letterboxing */
+/* Remove photo-sequence container */
+.gallery-page .photo-sequence {
+  display: contents !important;
 }
 
-/* Photo Overlay */
-.photo-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+/* Individual Photo Items - Override main styles.css */
+body.gallery-page .photo-item {
+  position: relative !important;
+  border-radius: 15px !important;
+  overflow: hidden !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+  transition: transform 0.3s ease !important;
+  background: white !important;
+  width: 100% !important;
+  max-width: 320px !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  grid-column: unset !important;
+  grid-row: unset !important;
+}
+
+/* Hover effect - Override main styles.css */
+body.gallery-page .photo-item:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25) !important;
+}
+
+body.gallery-page .photo-item img {
+  width: 100% !important;
+  height: 220px !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  display: block !important;
+}
+
+/* Photo Overlay - Override main styles.css */
+body.gallery-page .photo-overlay {
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
   background: linear-gradient(
     180deg,
     transparent 0%,
-    rgba(0, 0, 0, 0.3) 30%,
-    rgba(0, 0, 0, 0.8) 100%
-  );
-  color: white;
-  padding: 2rem 1.5rem 1.5rem;
-  backdrop-filter: blur(10px);
+    rgba(0, 0, 0, 0.7) 100%
+  ) !important;
+  color: white !important;
+  padding: 1.5rem !important;
+  transform: translateY(100%) !important;
+  transition: transform 0.3s ease !important;
 }
 
-.photo-overlay h3 {
-  margin: 0 0 0.5rem;
-  font-size: 1.8rem;
-  font-weight: 700;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-  letter-spacing: -0.02em;
+body.gallery-page .photo-item:hover .photo-overlay {
+  transform: translateY(0) !important;
 }
 
-.photo-overlay p {
-  margin: 0;
-  font-size: 1.1rem;
-  opacity: 0.95;
-  line-height: 1.5;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+body.gallery-page .photo-overlay h3 {
+  margin: 0 0 0.5rem !important;
+  font-size: 1.2rem !important;
+  font-weight: 600 !important;
 }
 
-/* Continuous Sliding Animation */
-@keyframes slideSequence {
-  0% {
-    transform: translateX(0);
+body.gallery-page .photo-overlay p {
+  margin: 0 !important;
+  font-size: 0.9rem !important;
+  opacity: 0.9 !important;
+}
+
+/* Responsive Design - Override main styles.css */
+@media (max-width: 1200px) {
+  body.gallery-page .photo-grid {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important;
+    gap: 1.2rem !important;
+    padding: 1.5rem 1rem !important;
   }
-  100% {
-    transform: translateX(-50%); /* Move exactly 11 photos to create perfect loop */
+}
+
+@media (max-width: 768px) {
+  body.gallery-page .photo-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)) !important;
+    gap: 1rem !important;
+    padding: 1rem 0.5rem !important;
+  }
+  
+  body.gallery-page .photo-item {
+    max-width: 280px !important;
+  }
+  
+  body.gallery-page .photo-item img {
+    height: 200px !important;
+  }
+  
+  body.gallery-page .photo-overlay {
+    padding: 1rem !important;
+  }
+  
+  body.gallery-page .photo-overlay h3 {
+    font-size: 1rem !important;
+  }
+  
+  body.gallery-page .photo-overlay p {
+    font-size: 0.8rem !important;
   }
 }
 
-/* Pause on Hover */
-.photo-grid:hover .photo-sequence {
-  animation-play-state: paused;
+@media (max-width: 480px) {
+  body.gallery-page .photo-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+    gap: 0.8rem !important;
+    padding: 1rem 0.5rem !important;
+  }
+  
+  body.gallery-page .photo-item {
+    max-width: 250px !important;
+  }
+  
+  body.gallery-page .photo-item img {
+    height: 180px !important;
+  }
+  
+  body.gallery-page .photo-overlay {
+    padding: 0.8rem !important;
+  }
+  
+  body.gallery-page .photo-overlay h3 {
+    font-size: 0.9rem !important;
+  }
+  
+  body.gallery-page .photo-overlay p {
+    font-size: 0.75rem !important;
+  }
 }
 
 /* Enhanced Section Head */
