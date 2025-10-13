@@ -961,6 +961,80 @@ body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,
   <div class="offline-indicator" id="offline-indicator">
     <span data-translate="pwa.offline">You're offline. Some features may not be available.</span>
   </div>
+
+  <!-- Immediate Theme Toggle Script -->
+  <script>
+    (function() {
+      // Load saved theme immediately
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      
+      // Wait for DOM to be ready
+      function initTheme() {
+        const themeToggle = document.querySelector('.theme-toggle');
+        const themeText = document.querySelector('.theme-text');
+        const sunIcon = document.querySelector('.sun-icon');
+        const moonIcon = document.querySelector('.moon-icon');
+        
+        if (!themeToggle || !themeText) {
+          console.error('Theme toggle button not found!');
+          return;
+        }
+        
+        console.log('✅ Theme toggle initialized');
+        
+        // Update UI based on current theme
+        function updateThemeUI() {
+          const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+          themeText.textContent = currentTheme === 'dark' ? 'Dark' : 'Light';
+          
+          if (sunIcon && moonIcon) {
+            if (currentTheme === 'dark') {
+              sunIcon.style.display = 'none';
+              moonIcon.style.display = 'block';
+            } else {
+              sunIcon.style.display = 'block';
+              moonIcon.style.display = 'none';
+            }
+          }
+          
+          // Update theme-color meta tag
+          const meta = document.getElementById('theme-color-meta');
+          if (meta) {
+            meta.content = currentTheme === 'dark' ? '#1f2937' : '#6366f1';
+          }
+        }
+        
+        // Initial update
+        updateThemeUI();
+        
+        // Click handler
+        themeToggle.addEventListener('click', function(e) {
+          e.preventDefault();
+          console.log('🖱️ Theme button clicked!');
+          
+          const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+          const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+          
+          console.log('Switching from', currentTheme, 'to', newTheme);
+          
+          document.documentElement.setAttribute('data-theme', newTheme);
+          localStorage.setItem('theme', newTheme);
+          
+          updateThemeUI();
+          
+          console.log('✅ Theme changed to:', newTheme);
+        });
+      }
+      
+      // Initialize when DOM is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initTheme);
+      } else {
+        initTheme();
+      }
+    })();
+  </script>
 </body>
 </html>
 
